@@ -503,6 +503,11 @@
       "sha256": "69932a2d26280492f3fc8578964506334481ffbfc13085818949200803feac87"
     },
     {
+      "path": "docs/v2/git-change-summary.txt",
+      "bytes": 2890,
+      "sha256": "c295ab43c451fc31ff9ad23b582491f5c4e17e9cc6f09a9085bcce1247c13c4b"
+    },
+    {
       "path": "docs/v2/legacy-browser-verification.json",
       "bytes": 1479,
       "sha256": "081447d06c2e49d90e24d7275da6df4642f3c404b0ad2ca52a9499e6a2c753a9"
@@ -1079,8 +1084,8 @@
     },
     {
       "path": "scripts/setup.ps1",
-      "bytes": 1015,
-      "sha256": "867021844ae7efd3aa376dfc4b382742dea5aeefd89b82741a028e851bb12e65"
+      "bytes": 1111,
+      "sha256": "402d04dbc59025fc8b31315b466a1c7953a9a3daed48633f37c4bbedbe03ab00"
     },
     {
       "path": "scripts/setup.sh",
