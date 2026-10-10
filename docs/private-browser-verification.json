@@ -1,0 +1,34 @@
+{
+  "checked_at": "2026-10-10T08:03:48.651Z",
+  "browser": "156.0.8078.4",
+  "note": "Dedicated test server; synthetic sentinel key is not a production secret. Pre-login 401 responses are expected.",
+  "checks": [
+    {
+      "name": "Private endpoint rejects missing and query-string keys",
+      "status": "passed"
+    },
+    {
+      "name": "Private map tiles receive the application header",
+      "status": "passed"
+    },
+    {
+      "name": "Private model report receives the application header",
+      "status": "passed"
+    },
+    {
+      "name": "Location view restores the report, not just the camera",
+      "status": "passed"
+    },
+    {
+      "name": "Access key is not written to local storage or normal request URLs",
+      "status": "passed"
+    },
+    {
+      "name": "Private operator snapshot uses authenticated blob fetching",
+      "status": "passed"
+    }
+  ],
+  "uncaught_errors": [],
+  "authorized_map_requests": 34,
+  "authorized_image_requests": 1
+}

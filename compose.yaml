@@ -1,0 +1,25 @@
+services:
+  atlas:
+    build: .
+    ports:
+      - "${ATLAS_BIND:-127.0.0.1}:${ATLAS_PORT:-7860}:7860"
+    environment:
+      ATLAS_AUTH_REQUIRED: "${ATLAS_AUTH_REQUIRED:-false}"
+      ATLAS_API_KEY: "${ATLAS_API_KEY:-}"
+      ATLAS_FIRMS_MAP_KEY: "${ATLAS_FIRMS_MAP_KEY:-}"
+      ATLAS_RATE_LIMIT_PER_MINUTE: "${ATLAS_RATE_LIMIT_PER_MINUTE:-120}"
+    volumes:
+      - atlas-cache:/data
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /tmp:size=16m,noexec,nosuid
+    cap_drop: [ALL]
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 768m
+    cpus: 2
+    pids_limit: 128
+    stop_grace_period: 30s
+volumes:
+  atlas-cache:

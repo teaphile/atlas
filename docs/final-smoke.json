@@ -1,0 +1,104 @@
+{
+  "checked_at": "2026-10-10T08:15:02.249254+00:00",
+  "health": {
+    "status": "ok",
+    "service": "atlas",
+    "version": "1.0.0",
+    "uptime_seconds": 104,
+    "read_only": true
+  },
+  "ready": {
+    "ready": true,
+    "upstream_availability_is_not_readiness": true
+  },
+  "frontend_http": 200,
+  "api_reference_http": 200,
+  "content_security_policy": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; worker-src 'self' blob:; object-src 'none'; base-uri 'self'",
+  "source_definitions": 23,
+  "snapshot_summary": {
+    "record_count": 1900,
+    "mapped_count": 1673,
+    "by_kind": {
+      "earthquake": 368,
+      "storm": 9,
+      "fire": 1251,
+      "volcano": 1,
+      "flood": 8,
+      "weather": 135,
+      "space": 32,
+      "satellite": 1,
+      "news": 35,
+      "cyber": 60
+    },
+    "fresh_feeds": 10,
+    "loaded_feeds": 10
+  },
+  "rural_soil": {
+    "status": "fresh",
+    "record_count": 27,
+    "analysis": {
+      "ph": 8.3,
+      "ph_interpretation": "Alkaline",
+      "texture_description": "Mixed texture",
+      "carbon_stock_0_30cm_t_ha": 27.71,
+      "carbon_method": "Sum of SOC \u00d7 bulk density \u00d7 depth \u00d7 (1 \u2212 coarse-fragment volume fraction), with explicit SI conversion.",
+      "crop_ph_screen": [
+        {
+          "crop": "Millet",
+          "ph_fit": "Within general pH range",
+          "range": [
+            5.5,
+            8.5
+          ],
+          "distance": 0
+        },
+        {
+          "crop": "Wheat",
+          "ph_fit": "Outside general pH range",
+          "range": [
+            6,
+            8
+          ],
+          "distance": 0.3
+        },
+        {
+          "crop": "Maize",
+          "ph_fit": "Outside general pH range",
+          "range": [
+            5.5,
+            7.5
+          ],
+          "distance": 0.8
+        },
+        {
+          "crop": "Rice",
+          "ph_fit": "Outside general pH range",
+          "range": [
+            5.5,
+            7.5
+          ],
+          "distance": 0.8
+        },
+        {
+          "crop": "Soybean",
+          "ph_fit": "Outside general pH range",
+          "range": [
+            6,
+            7.5
+          ],
+          "distance": 0.8
+        },
+        {
+          "crop": "Potato",
+          "ph_fit": "Outside general pH range",
+          "range": [
+            5,
+            6.5
+          ],
+          "distance": 1.8
+        }
+      ],
+      "caveat": "Regional-context soil model, not a lab test or field diagnosis. Derived stock is not the separately modeled SoilGrids stock product. pH compatibility alone is not crop suitability, yield or fertilizer advice. Carbon stock is not sequestration potential."
+    }
+  }
+}

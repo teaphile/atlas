@@ -1,0 +1,1314 @@
+{
+  "scope": "ATLAS first-party source and tests, not a clone of the upstream projects",
+  "files": [
+    {
+      "path": "backend/atlas_app/__init__.py",
+      "lines": 3,
+      "bytes": 76,
+      "sha256": "fa4baca32c9fe80df051299de2286295a6f2264e06ea4ebc29a8d700383f7ef4",
+      "functions": []
+    },
+    {
+      "path": "backend/atlas_app/analytics.py",
+      "lines": 278,
+      "bytes": 10258,
+      "sha256": "4b764ce074f7d2c0046243d6826bb5fc69a5153bfea9d0ffebb06720ed4a6e4e",
+      "functions": [
+        {
+          "name": "ffwi",
+          "line": 14
+        },
+        {
+          "name": "linear",
+          "line": 31
+        },
+        {
+          "name": "rainfall_24h",
+          "line": 40
+        },
+        {
+          "name": "_usable",
+          "line": 56
+        },
+        {
+          "name": "environment_screen",
+          "line": 68
+        },
+        {
+          "name": "soil_summary",
+          "line": 189
+        },
+        {
+          "name": "erosion_scenario",
+          "line": 255
+        },
+        {
+          "name": "aggregate",
+          "line": 147
+        },
+        {
+          "name": "get",
+          "line": 192
+        }
+      ]
+    },
+    {
+      "path": "backend/atlas_app/config.py",
+      "lines": 39,
+      "bytes": 1486,
+      "sha256": "eff6260dbf91d62b8bb2e3ba563138390907085231e5cf1c59963f89a35164ed",
+      "functions": [
+        {
+          "name": "settings",
+          "line": 38
+        },
+        {
+          "name": "valid_auth",
+          "line": 26
+        }
+      ]
+    },
+    {
+      "path": "backend/atlas_app/engine.py",
+      "lines": 328,
+      "bytes": 12927,
+      "sha256": "307b708e986e468f536b822c6b7a88a2532573c0a89cc4136232a13a444799fd",
+      "functions": [
+        {
+          "name": "__init__",
+          "line": 17
+        },
+        {
+          "name": "publish",
+          "line": 22
+        },
+        {
+          "name": "subscribe",
+          "line": 34
+        },
+        {
+          "name": "unsubscribe",
+          "line": 41
+        },
+        {
+          "name": "__init__",
+          "line": 46
+        },
+        {
+          "name": "start",
+          "line": 65
+        },
+        {
+          "name": "close",
+          "line": 70
+        },
+        {
+          "name": "key",
+          "line": 79
+        },
+        {
+          "name": "view",
+          "line": 94
+        },
+        {
+          "name": "get",
+          "line": 118
+        },
+        {
+          "name": "_load_refresh",
+          "line": 167
+        },
+        {
+          "name": "_served",
+          "line": 262
+        },
+        {
+          "name": "_remember",
+          "line": 270
+        },
+        {
+          "name": "_poll",
+          "line": 281
+        },
+        {
+          "name": "peek",
+          "line": 292
+        },
+        {
+          "name": "catalog",
+          "line": 303
+        },
+        {
+          "name": "snapshot",
+          "line": 318
+        },
+        {
+          "name": "done",
+          "line": 159
+        }
+      ]
+    },
+    {
+      "path": "backend/atlas_app/geo.py",
+      "lines": 199,
+      "bytes": 7612,
+      "sha256": "8c87fc3ba6c447e7dc3d5ac39dd09c9ddd0563509e2eb15f92b11f9d5bb32080",
+      "functions": [
+        {
+          "name": "haversine",
+          "line": 14
+        },
+        {
+          "name": "ecef",
+          "line": 21
+        },
+        {
+          "name": "polygon_aoi",
+          "line": 26
+        },
+        {
+          "name": "in_aoi",
+          "line": 66
+        },
+        {
+          "name": "aoi_area_km2",
+          "line": 73
+        },
+        {
+          "name": "filter_events",
+          "line": 84
+        },
+        {
+          "name": "proximity_groups",
+          "line": 116
+        },
+        {
+          "name": "ring_area",
+          "line": 74
+        },
+        {
+          "name": "find",
+          "line": 133
+        },
+        {
+          "name": "union",
+          "line": 139
+        }
+      ]
+    },
+    {
+      "path": "backend/atlas_app/main.py",
+      "lines": 503,
+      "bytes": 22110,
+      "sha256": "b5075a67dd7f090bb0365fe2a5234f9778117df91d237c6ce9e16c9f44869686",
+      "functions": [
+        {
+          "name": "create_app",
+          "line": 27
+        },
+        {
+          "name": "lifespan",
+          "line": 34
+        },
+        {
+          "name": "health",
+          "line": 60
+        },
+        {
+          "name": "ready",
+          "line": 70
+        },
+        {
+          "name": "sources",
+          "line": 74
+        },
+        {
+          "name": "snapshot",
+          "line": 83
+        },
+        {
+          "name": "source_data",
+          "line": 109
+        },
+        {
+          "name": "geocode",
+          "line": 129
+        },
+        {
+          "name": "location",
+          "line": 138
+        },
+        {
+          "name": "fusion",
+          "line": 171
+        },
+        {
+          "name": "aoi",
+          "line": 177
+        },
+        {
+          "name": "scenario",
+          "line": 198
+        },
+        {
+          "name": "export",
+          "line": 202
+        },
+        {
+          "name": "stream",
+          "line": 284
+        },
+        {
+          "name": "image_bytes",
+          "line": 311
+        },
+        {
+          "name": "map_asset",
+          "line": 351
+        },
+        {
+          "name": "vector_tile",
+          "line": 384
+        },
+        {
+          "name": "map_font",
+          "line": 411
+        },
+        {
+          "name": "tile",
+          "line": 429
+        },
+        {
+          "name": "camera_snapshot",
+          "line": 440
+        },
+        {
+          "name": "metrics",
+          "line": 454
+        },
+        {
+          "name": "api_docs",
+          "line": 471
+        },
+        {
+          "name": "frontend",
+          "line": 488
+        },
+        {
+          "name": "safe",
+          "line": 252
+        },
+        {
+          "name": "generate",
+          "line": 290
+        },
+        {
+          "name": "load",
+          "line": 319
+        },
+        {
+          "name": "load",
+          "line": 357
+        },
+        {
+          "name": "done",
+          "line": 334
+        },
+        {
+          "name": "done",
+          "line": 372
+        }
+      ]
+    },
+    {
+      "path": "backend/atlas_app/parsers.py",
+      "lines": 636,
+      "bytes": 22162,
+      "sha256": "9e476c9a063b693d108df6fcb93bff0d5a8dc1d51c0e706c9b1a6c06e84217ed",
+      "functions": [
+        {
+          "name": "number",
+          "line": 13
+        },
+        {
+          "name": "timestamp",
+          "line": 23
+        },
+        {
+          "name": "text",
+          "line": 39
+        },
+        {
+          "name": "point",
+          "line": 43
+        },
+        {
+          "name": "records",
+          "line": 52
+        },
+        {
+          "name": "event",
+          "line": 58
+        },
+        {
+          "name": "finished",
+          "line": 69
+        },
+        {
+          "name": "usgs",
+          "line": 83
+        },
+        {
+          "name": "eonet",
+          "line": 136
+        },
+        {
+          "name": "gdacs",
+          "line": 181
+        },
+        {
+          "name": "nws",
+          "line": 234
+        },
+        {
+          "name": "firms",
+          "line": 283
+        },
+        {
+          "name": "kp",
+          "line": 331
+        },
+        {
+          "name": "space_alerts",
+          "line": 356
+        },
+        {
+          "name": "iss",
+          "line": 390
+        },
+        {
+          "name": "rss",
+          "line": 421
+        },
+        {
+          "name": "cisa",
+          "line": 451
+        },
+        {
+          "name": "aviation",
+          "line": 490
+        },
+        {
+          "name": "cameras",
+          "line": 533
+        },
+        {
+          "name": "soil",
+          "line": 584
+        },
+        {
+          "name": "value",
+          "line": 188
+        }
+      ]
+    },
+    {
+      "path": "backend/atlas_app/providers.py",
+      "lines": 339,
+      "bytes": 15606,
+      "sha256": "220c0c14d189edcd60e4f536d8f21331e6cbe120d2fd88fb312e05206e972eb1",
+      "functions": [
+        {
+          "name": "__init__",
+          "line": 11
+        },
+        {
+          "name": "fetch",
+          "line": 15
+        }
+      ]
+    },
+    {
+      "path": "backend/atlas_app/registry.py",
+      "lines": 387,
+      "bytes": 14048,
+      "sha256": "b5e5eb94823f89028d8ddd3a57a56a1f4b0948f90b8b764a9ec3c961ecc83be8",
+      "functions": [
+        {
+          "name": "source",
+          "line": 8
+        }
+      ]
+    },
+    {
+      "path": "backend/atlas_app/schemas.py",
+      "lines": 126,
+      "bytes": 3888,
+      "sha256": "bbd6d7554e598a9eeb23404e828d9cacd6e75e7fe534805752cfe94b3bd3725b",
+      "functions": [
+        {
+          "name": "utcnow",
+          "line": 8
+        },
+        {
+          "name": "safe_url",
+          "line": 54
+        },
+        {
+          "name": "utc_date",
+          "line": 69
+        }
+      ]
+    },
+    {
+      "path": "backend/atlas_app/security.py",
+      "lines": 116,
+      "bytes": 5366,
+      "sha256": "83cfd1da4601d499c6d1bababf6e9f1eb1479dbcd4efbefc6dd54585c4178878",
+      "functions": [
+        {
+          "name": "__init__",
+          "line": 21
+        },
+        {
+          "name": "reject",
+          "line": 27
+        },
+        {
+          "name": "__call__",
+          "line": 34
+        },
+        {
+          "name": "secured_send",
+          "line": 38
+        },
+        {
+          "name": "buffered_receive",
+          "line": 106
+        }
+      ]
+    },
+    {
+      "path": "backend/atlas_app/storage.py",
+      "lines": 78,
+      "bytes": 3106,
+      "sha256": "48534aadbc32bc6adf408d39a7c07cd613418eef9f05844ecfdc45133fd4c892",
+      "functions": [
+        {
+          "name": "__init__",
+          "line": 10
+        },
+        {
+          "name": "open",
+          "line": 16
+        },
+        {
+          "name": "load",
+          "line": 32
+        },
+        {
+          "name": "save",
+          "line": 42
+        },
+        {
+          "name": "close",
+          "line": 71
+        },
+        {
+          "name": "work",
+          "line": 17
+        },
+        {
+          "name": "work",
+          "line": 33
+        },
+        {
+          "name": "work",
+          "line": 46
+        },
+        {
+          "name": "work",
+          "line": 72
+        }
+      ]
+    },
+    {
+      "path": "backend/atlas_app/transport.py",
+      "lines": 191,
+      "bytes": 8338,
+      "sha256": "842724293cdacfe4d770bab43bdea21c0969344f496275a55c9132710db297dd",
+      "functions": [
+        {
+          "name": "__init__",
+          "line": 44
+        },
+        {
+          "name": "__init__",
+          "line": 50
+        },
+        {
+          "name": "validate_url",
+          "line": 67
+        },
+        {
+          "name": "_admit",
+          "line": 83
+        },
+        {
+          "name": "get_bytes",
+          "line": 103
+        },
+        {
+          "name": "_failure",
+          "line": 167
+        },
+        {
+          "name": "json",
+          "line": 176
+        },
+        {
+          "name": "text",
+          "line": 183
+        },
+        {
+          "name": "close",
+          "line": 190
+        }
+      ]
+    },
+    {
+      "path": "backend/tests/conftest.py",
+      "lines": 58,
+      "bytes": 1547,
+      "sha256": "984d74c730ec8ba14b41a27f6418f1a0e4033ebca7ff95ef62f990c06ab1b7f3",
+      "functions": [
+        {
+          "name": "make_event",
+          "line": 10
+        },
+        {
+          "name": "fake_providers",
+          "line": 57
+        },
+        {
+          "name": "make",
+          "line": 11
+        },
+        {
+          "name": "__init__",
+          "line": 27
+        },
+        {
+          "name": "fetch",
+          "line": 33
+        }
+      ]
+    },
+    {
+      "path": "backend/tests/test_analytics.py",
+      "lines": 132,
+      "bytes": 4481,
+      "sha256": "a6aea55c89ede0e2d946a197fe2c8284021dbcd096c05bf20a180e6af3f9152d",
+      "functions": [
+        {
+          "name": "test_precipitation_uses_24_completed_hourly_endpoints",
+          "line": 9
+        },
+        {
+          "name": "test_missing_rain_hour_is_unknown_not_zero",
+          "line": 15
+        },
+        {
+          "name": "test_future_rain_not_used_as_past",
+          "line": 22
+        },
+        {
+          "name": "test_ffwi_bounded",
+          "line": 28
+        },
+        {
+          "name": "test_ffwi_wind_monotonicity",
+          "line": 32
+        },
+        {
+          "name": "test_ffwi_humidity_direction",
+          "line": 36
+        },
+        {
+          "name": "test_ffwi_invalid_input",
+          "line": 40
+        },
+        {
+          "name": "test_all_missing_screen_is_not_safe_score",
+          "line": 45
+        },
+        {
+          "name": "test_stale_model_excluded_from_screening",
+          "line": 51
+        },
+        {
+          "name": "test_old_observation_in_fresh_http_response_not_fresh_condition",
+          "line": 63
+        },
+        {
+          "name": "test_zero_aqi_is_valid_and_bounds_describe_missing_inputs",
+          "line": 73
+        },
+        {
+          "name": "test_carbon_stock_units_and_coarse_fragments",
+          "line": 84
+        },
+        {
+          "name": "test_soil_unknown_never_gets_fictitious_crop_fit",
+          "line": 95
+        },
+        {
+          "name": "test_erosion_cover_reduction_scales_linearly",
+          "line": 100
+        },
+        {
+          "name": "test_zero_erosion_baseline_ratio_not_division_error",
+          "line": 115
+        },
+        {
+          "name": "test_missing_observation_time_cannot_become_current_attention",
+          "line": 128
+        }
+      ]
+    },
+    {
+      "path": "backend/tests/test_api_security.py",
+      "lines": 142,
+      "bytes": 5275,
+      "sha256": "b1e666f895e9465e22eec387a8277e7ed900c82d07f3508c6fb7e5ad845f08f3",
+      "functions": [
+        {
+          "name": "client",
+          "line": 13
+        },
+        {
+          "name": "test_invalid_auth_configuration_fails_closed",
+          "line": 21
+        },
+        {
+          "name": "test_secrets_not_in_settings_repr",
+          "line": 26
+        },
+        {
+          "name": "test_health_and_response_security_headers",
+          "line": 30
+        },
+        {
+          "name": "test_nonfinite_and_out_of_range_query",
+          "line": 39
+        },
+        {
+          "name": "test_unknown_provider_not_dynamic_egress",
+          "line": 43
+        },
+        {
+          "name": "test_invalid_aoi_and_body_limits",
+          "line": 47
+        },
+        {
+          "name": "test_erosion_schema_rejects_negative_soil_loss_inputs",
+          "line": 56
+        },
+        {
+          "name": "test_header_auth_only_not_query_auth",
+          "line": 60
+        },
+        {
+          "name": "test_forwarded_headers_do_not_reset_peer_budget",
+          "line": 72
+        },
+        {
+          "name": "test_slow_body_counts_toward_inflight",
+          "line": 79
+        },
+        {
+          "name": "test_chunked_oversize_releases_reservation",
+          "line": 113
+        },
+        {
+          "name": "test_csv_formula_injection_is_escaped",
+          "line": 135
+        },
+        {
+          "name": "app",
+          "line": 84
+        },
+        {
+          "name": "receive",
+          "line": 91
+        },
+        {
+          "name": "send",
+          "line": 96
+        },
+        {
+          "name": "app",
+          "line": 117
+        },
+        {
+          "name": "receive",
+          "line": 120
+        },
+        {
+          "name": "send",
+          "line": 123
+        }
+      ]
+    },
+    {
+      "path": "backend/tests/test_engine.py",
+      "lines": 182,
+      "bytes": 6444,
+      "sha256": "e1584836f804875a3952638de088d1f7716a2800f50051ee4a38f0006cceeaab",
+      "functions": [
+        {
+          "name": "engine",
+          "line": 11
+        },
+        {
+          "name": "test_singleflight_includes_disk_lookup",
+          "line": 20
+        },
+        {
+          "name": "test_disconnect_does_not_cancel_shared_ingestion",
+          "line": 25
+        },
+        {
+          "name": "test_valid_empty_replaces_old_nonempty",
+          "line": 35
+        },
+        {
+          "name": "test_failure_retains_original_age",
+          "line": 45
+        },
+        {
+          "name": "test_negative_cache_stops_refresh_storm",
+          "line": 55
+        },
+        {
+          "name": "test_expired_last_good_never_escapes",
+          "line": 62
+        },
+        {
+          "name": "test_persistence_roundtrip_without_provider_refetch",
+          "line": 71
+        },
+        {
+          "name": "test_cache_write_failure_does_not_discard_good_data",
+          "line": 86
+        },
+        {
+          "name": "test_cache_read_failure_falls_back_to_provider",
+          "line": 96
+        },
+        {
+          "name": "test_corrupt_persisted_envelope_does_not_block_refresh",
+          "line": 104
+        },
+        {
+          "name": "test_absent_key_is_disabled_not_zero",
+          "line": 109
+        },
+        {
+          "name": "test_coordinate_cache_not_two_decimal_alias",
+          "line": 113
+        },
+        {
+          "name": "test_source_identity_keys_are_query_specific",
+          "line": 119
+        },
+        {
+          "name": "test_bus_has_backpressure_and_latest_revision",
+          "line": 123
+        },
+        {
+          "name": "test_stream_capacity_is_bounded",
+          "line": 136
+        },
+        {
+          "name": "test_restart_poll_does_not_grant_cached_data_a_second_ttl",
+          "line": 144
+        },
+        {
+          "name": "test_memory_cache_has_byte_limit_not_only_entry_limit",
+          "line": 163
+        },
+        {
+          "name": "test_query_cache_hit_updates_last_served_health",
+          "line": 176
+        },
+        {
+          "name": "broken",
+          "line": 87
+        },
+        {
+          "name": "broken",
+          "line": 97
+        },
+        {
+          "name": "get",
+          "line": 149
+        },
+        {
+          "name": "sleep",
+          "line": 152
+        }
+      ]
+    },
+    {
+      "path": "backend/tests/test_geo.py",
+      "lines": 96,
+      "bytes": 3460,
+      "sha256": "e658f758e9639ebafe2d633cc4286329e6f2cdb8c5e4999c7e0d1bf549f495b6",
+      "functions": [
+        {
+          "name": "test_haversine_antimeridian",
+          "line": 7
+        },
+        {
+          "name": "test_haversine_coincident_and_antipodal",
+          "line": 11
+        },
+        {
+          "name": "test_aoi_dateline_not_greenwich",
+          "line": 16
+        },
+        {
+          "name": "test_aoi_hole_and_boundary",
+          "line": 25
+        },
+        {
+          "name": "test_invalid_aoi_rejected",
+          "line": 49
+        },
+        {
+          "name": "test_area_is_spherical_and_hole_subtracted",
+          "line": 54
+        },
+        {
+          "name": "test_proximity_across_dateline",
+          "line": 59
+        },
+        {
+          "name": "test_proximity_handles_poles",
+          "line": 64
+        },
+        {
+          "name": "test_proximity_does_not_join_different_hazards",
+          "line": 69
+        },
+        {
+          "name": "test_proximity_has_dense_work_budget",
+          "line": 73
+        },
+        {
+          "name": "test_expired_warnings_removed",
+          "line": 78
+        },
+        {
+          "name": "test_active_warning_survives_old_onset",
+          "line": 83
+        },
+        {
+          "name": "test_old_catalog_is_reference_not_event_window",
+          "line": 88
+        },
+        {
+          "name": "test_unknown_location_not_inside_bbox",
+          "line": 93
+        }
+      ]
+    },
+    {
+      "path": "backend/tests/test_parsers.py",
+      "lines": 227,
+      "bytes": 7295,
+      "sha256": "0c8992c906a596a5a136995aab4653f4b5e7efb66cc0dd7439f5eb81b30794d9",
+      "functions": [
+        {
+          "name": "test_finite_numbers",
+          "line": 21
+        },
+        {
+          "name": "test_timestamp_formats_have_utc",
+          "line": 28
+        },
+        {
+          "name": "test_bad_positions_are_not_zeroed",
+          "line": 34
+        },
+        {
+          "name": "test_usgs_identity_time_and_units",
+          "line": 38
+        },
+        {
+          "name": "test_valid_empty_usgs_not_outage",
+          "line": 60
+        },
+        {
+          "name": "test_schema_drift_is_not_empty_success",
+          "line": 64
+        },
+        {
+          "name": "test_source_links_cannot_be_javascript",
+          "line": 69
+        },
+        {
+          "name": "test_soil_conversion_and_nulls",
+          "line": 74
+        },
+        {
+          "name": "test_soil_requires_metadata_unit_factor",
+          "line": 102
+        },
+        {
+          "name": "test_no_soil_cell_preserves_unknown",
+          "line": 107
+        },
+        {
+          "name": "test_inverted_soil_interval_is_rejected",
+          "line": 125
+        },
+        {
+          "name": "test_firms_deduplicates_exact_identity_not_nearby_points",
+          "line": 142
+        },
+        {
+          "name": "test_invalid_firms_message_does_not_become_healthy_empty",
+          "line": 149
+        },
+        {
+          "name": "test_kp_accepts_both_provider_schema_variants",
+          "line": 154
+        },
+        {
+          "name": "test_nws_null_geometry_stays_unlocated",
+          "line": 160
+        },
+        {
+          "name": "test_nws_representative_point_within_official_polygon",
+          "line": 179
+        },
+        {
+          "name": "test_xml_entity_expansion_blocked",
+          "line": 192
+        },
+        {
+          "name": "test_aviation_filters_stale_and_missing_positions",
+          "line": 199
+        },
+        {
+          "name": "test_rss_strips_markup_and_keeps_publication_time",
+          "line": 213
+        },
+        {
+          "name": "test_unclosed_html_like_text_has_linear_bounded_processing",
+          "line": 224
+        },
+        {
+          "name": "layer",
+          "line": 75
+        }
+      ]
+    },
+    {
+      "path": "backend/tests/test_soil_provider.py",
+      "lines": 75,
+      "bytes": 2899,
+      "sha256": "a6d239917b1e71eb61c91ec5d0447a19a1f16438bd16a92c8e1639407ab7b1be",
+      "functions": [
+        {
+          "name": "profile",
+          "line": 19
+        },
+        {
+          "name": "test_surface_preserved_when_means_fail",
+          "line": 44
+        },
+        {
+          "name": "test_means_preserved_when_quantiles_fail",
+          "line": 52
+        },
+        {
+          "name": "test_soil_split_merge_no_deeper_interval_fabrication",
+          "line": 58
+        },
+        {
+          "name": "test_mismatched_surface_means_do_not_get_paired_quantiles",
+          "line": 65
+        },
+        {
+          "name": "test_both_profiles_fail_is_unavailable_not_empty",
+          "line": 72
+        },
+        {
+          "name": "__init__",
+          "line": 8
+        },
+        {
+          "name": "json",
+          "line": 12
+        }
+      ]
+    },
+    {
+      "path": "backend/tests/test_transport.py",
+      "lines": 152,
+      "bytes": 4705,
+      "sha256": "9b37d74cab376a76eb223f0e7615712c37b83e0f3b1970bc04cc34b5d69bbe3a",
+      "functions": [
+        {
+          "name": "gateway",
+          "line": 9
+        },
+        {
+          "name": "test_egress_allowlist",
+          "line": 30
+        },
+        {
+          "name": "test_redirect_is_not_followed",
+          "line": 39
+        },
+        {
+          "name": "test_declared_and_actual_size_limits",
+          "line": 55
+        },
+        {
+          "name": "test_json_nonfinite_numbers_rejected",
+          "line": 64
+        },
+        {
+          "name": "test_retry_after_not_shortened_by_circuit_breaker",
+          "line": 73
+        },
+        {
+          "name": "test_provider_quota_shared_across_open_meteo_products",
+          "line": 88
+        },
+        {
+          "name": "test_soil_cold_queries_get_one_longer_bounded_attempt",
+          "line": 99
+        },
+        {
+          "name": "test_isric_fair_use_pacing_is_at_most_five_per_minute",
+          "line": 115
+        },
+        {
+          "name": "test_same_host_backlog_does_not_consume_other_host_global_slots",
+          "line": 125
+        },
+        {
+          "name": "h",
+          "line": 42
+        },
+        {
+          "name": "h",
+          "line": 102
+        },
+        {
+          "name": "h",
+          "line": 130
+        },
+        {
+          "name": "admit",
+          "line": 141
+        }
+      ]
+    },
+    {
+      "path": "frontend/src/App.tsx",
+      "lines": 1238,
+      "bytes": 40246,
+      "sha256": "33ac5d46cd45c763e533c9db890165ecbe07b7aa10ad55bcb8a4bdc4bc33d348"
+    },
+    {
+      "path": "frontend/src/api.test.ts",
+      "lines": 60,
+      "bytes": 1922,
+      "sha256": "66ef84f3a7830131030758f2d7ceff0c8682a6adbff6bca68347aff979c4369c"
+    },
+    {
+      "path": "frontend/src/api.ts",
+      "lines": 72,
+      "bytes": 2259,
+      "sha256": "5360b5f642b3f424d14bdf55bc7a5feac8d787ad1790c7ed0a72b97161738335"
+    },
+    {
+      "path": "frontend/src/components/Intelligence.tsx",
+      "lines": 1154,
+      "bytes": 42711,
+      "sha256": "c7d7bb697494a84943684ddcbdb9b302ba126ec6f85a89ad959414f81abe2886"
+    },
+    {
+      "path": "frontend/src/components/MapView.tsx",
+      "lines": 613,
+      "bytes": 17415,
+      "sha256": "9b852aa251c29989390fe81c9c4bcf57adc23db8e25a9eff9a8faf1c120b556c"
+    },
+    {
+      "path": "frontend/src/components/RightPanel.tsx",
+      "lines": 501,
+      "bytes": 15132,
+      "sha256": "015cf8dd16979d7a2a0187b9538a829fd0e22f86b5acb9b1090a3723e23c18ff"
+    },
+    {
+      "path": "frontend/src/components/Search.tsx",
+      "lines": 212,
+      "bytes": 5706,
+      "sha256": "c2f3131674eeef710732e90df0a9fe03dd1f0a9a1c7bdbd8b558e37ee1d4fa8c"
+    },
+    {
+      "path": "frontend/src/components/Sidebar.tsx",
+      "lines": 292,
+      "bytes": 8214,
+      "sha256": "c07427e27267f8d235830488133818c10690871624275577bea928df6887adca"
+    },
+    {
+      "path": "frontend/src/components/Sources.tsx",
+      "lines": 344,
+      "bytes": 10430,
+      "sha256": "1ad518e702eb06b2a66c055c4740a1c74c5b44c85ac4c832742f5a9c9baed6df"
+    },
+    {
+      "path": "frontend/src/components/Timeline.tsx",
+      "lines": 134,
+      "bytes": 4047,
+      "sha256": "29674c1a4a0c5b2e012da80fd27d9377359519f654edbbb680082057ee529212"
+    },
+    {
+      "path": "frontend/src/components/UI.tsx",
+      "lines": 219,
+      "bytes": 4981,
+      "sha256": "4f6f425470927e46ad9885728e96123d9c92438db6a74ef1e63828e62b33fd58"
+    },
+    {
+      "path": "frontend/src/main.tsx",
+      "lines": 40,
+      "bytes": 1086,
+      "sha256": "f84bbb549c0459d120f8c99bb6f4d51219fac2147f8ca0c10d471989dcd61d01"
+    },
+    {
+      "path": "frontend/src/styles.css",
+      "lines": 6286,
+      "bytes": 108320,
+      "sha256": "8add5c4b3243de0dfad98afc10d887ca280a33ff26a743d7910f43ba6a68c6b9"
+    },
+    {
+      "path": "frontend/src/types.ts",
+      "lines": 192,
+      "bytes": 4008,
+      "sha256": "e374f49e027c8c07064e4c978e996198d2a3d02bffafdc7ec0363b2ef2e0067c"
+    },
+    {
+      "path": "frontend/src/utils.test.ts",
+      "lines": 187,
+      "bytes": 5056,
+      "sha256": "e9555bfead100a344ab918101572750057c29f8276eaf21f5744bdadac5cc347"
+    },
+    {
+      "path": "frontend/src/utils.ts",
+      "lines": 238,
+      "bytes": 6545,
+      "sha256": "e7f415923b1f59f534508e284a3f9fbd0459113b188f1c0a5f8089aa47ff1ca7"
+    },
+    {
+      "path": "frontend/src/vite-env.d.ts",
+      "lines": 1,
+      "bytes": 38,
+      "sha256": "65996936fbb042915f7b74a200fcdde7e410f32a669b1ab9597cfaa4b0faddb5"
+    },
+    {
+      "path": "frontend/scripts/review-preview.mjs",
+      "lines": 51,
+      "bytes": 1434,
+      "sha256": "f54d3dabdf753122b2b968043b4ed3eb98f049bf1da8edb251b6f5f11d48d3b5"
+    },
+    {
+      "path": "frontend/scripts/verify-browser.mjs",
+      "lines": 214,
+      "bytes": 8303,
+      "sha256": "5e090fc1e73b727d9faff4c30069bdd48837f64f3b3ee50e6bc56fefb6348a99"
+    },
+    {
+      "path": "frontend/scripts/verify-private.mjs",
+      "lines": 212,
+      "bytes": 7348,
+      "sha256": "6fb4fe2a7fff7fbd7a049f17da64ed5aaecffe25841db04194b01cdb0b6b71d1"
+    },
+    {
+      "path": "scripts/check.sh",
+      "lines": 9,
+      "bytes": 279,
+      "sha256": "4641e3d45093855ac4f0b27093226e647089cc16e8d47139ddf6a99782f09a6e"
+    },
+    {
+      "path": "scripts/create_handover.py",
+      "lines": 62,
+      "bytes": 12550,
+      "sha256": "1ffe1b174ecb9830d26b4fd36af6452863ae426840f4c5113afda86b4a24c433",
+      "functions": [
+        {
+          "name": "image_uri",
+          "line": 23
+        },
+        {
+          "name": "main",
+          "line": 30
+        }
+      ]
+    },
+    {
+      "path": "scripts/package_release.py",
+      "lines": 43,
+      "bytes": 2315,
+      "sha256": "224c024ff46ef145566f8be0f426bf5d34e39cb52018e3f16669c079a67efe70",
+      "functions": [
+        {
+          "name": "included",
+          "line": 13
+        },
+        {
+          "name": "main",
+          "line": 23
+        }
+      ]
+    },
+    {
+      "path": "scripts/read_only_review.py",
+      "lines": 157,
+      "bytes": 5746,
+      "sha256": "9d0310c86cf8baf459213f882b77417e16f7c3ecf37667364fbb17546de25306",
+      "functions": [
+        {
+          "name": "read",
+          "line": 13
+        },
+        {
+          "name": "scan",
+          "line": 24
+        },
+        {
+          "name": "one",
+          "line": 91
+        }
+      ]
+    },
+    {
+      "path": "scripts/run.sh",
+      "lines": 8,
+      "bytes": 529,
+      "sha256": "c0dce4ccf4b0a0ca79956589fb242967fe742e0cf996398b4afe4967612f3f45"
+    },
+    {
+      "path": "scripts/setup.sh",
+      "lines": 12,
+      "bytes": 567,
+      "sha256": "152a367ffb1f6b73503e66acd298d5314d6fba2831b0af1682e0baeeff44e3db"
+    }
+  ]
+}
