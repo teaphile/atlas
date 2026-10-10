@@ -19,7 +19,7 @@ No repository was cloned. Neither upstream source tree, dataset, generated camer
 
 ## Application libraries and fonts
 
-React (MIT), MapLibre GL JS (BSD-3-Clause), Lucide (ISC), Inter (SIL OFL 1.1), IBM Plex Mono (SIL OFL 1.1), FastAPI (MIT), Uvicorn (BSD-3-Clause), HTTPX (BSD-3-Clause), Pydantic (MIT), defusedxml (PSF), and Shapely (BSD-3-Clause). Binary wheels may bundle GEOS under its own LGPL terms. Preserve dependency licenses when redistributing compiled images. Dependency packages retain their own license files; additional frontend distribution notices are in `docs/licenses/frontend-libraries.txt` and `/licenses/frontend-libraries.txt`.
+React (MIT), MapLibre GL JS (BSD-3-Clause), Lucide (ISC), Inter (SIL OFL 1.1), IBM Plex Mono (SIL OFL 1.1), FastAPI (MIT), Uvicorn (BSD-3-Clause), HTTPX (BSD-3-Clause), Pydantic (MIT), defusedxml (PSF), Shapely (BSD-3-Clause), and NumPy (BSD-3-Clause; directly used by the small numerical models). Binary wheels may bundle GEOS under its own LGPL terms. Preserve dependency licenses when redistributing compiled images. Dependency packages retain their own license files; additional frontend distribution notices are in `docs/licenses/frontend-libraries.txt` and `/licenses/frontend-libraries.txt`.
 
 ## API data
 

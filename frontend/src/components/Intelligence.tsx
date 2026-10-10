@@ -17,15 +17,54 @@ import {
   Check,
   ArrowRight,
   Layers3,
+  ChartNoAxesCombined,
+  ArrowRightLeft,
+  BarChart3,
 } from "lucide-react";
-import type { Envelope, Fusion, LocationData, Place, Snapshot } from "../types";
+import type {
+  Envelope,
+  Fusion,
+  LocationData,
+  Place,
+  Snapshot,
+  SavedArea,
+  AtlasEvent,
+} from "../types";
 import { api, isAbort } from "../api";
-import { num, dateLabel, download, ago } from "../utils";
-import { ExternalLink, Note, Sparkline, Spinner, Status } from "./UI";
+import {
+  num,
+  dateLabel,
+  download,
+  ago,
+  utcMillis,
+  weatherLabel,
+} from "../utils";
+import {
+  ExternalLink,
+  Note,
+  Sparkline,
+  Spinner,
+  Status,
+  WeatherGlyph,
+} from "./UI";
+import { SignalLab } from "./SignalLab";
+import { Compare } from "./Compare";
+import { Observatory } from "./Observatory";
 export type IntelligenceTab =
-  "brief" | "soil" | "water" | "ecosystem" | "scenario" | "cyber";
+  | "brief"
+  | "signals"
+  | "compare"
+  | "records"
+  | "soil"
+  | "water"
+  | "ecosystem"
+  | "scenario"
+  | "cyber";
 const TABS: [IntelligenceTab, string, typeof FileText][] = [
   ["brief", "Evidence brief", FileText],
+  ["signals", "Signal Lab", ChartNoAxesCombined],
+  ["compare", "Compare places", ArrowRightLeft],
+  ["records", "Record explorer", BarChart3],
   ["soil", "Soil profile", Layers3],
   ["water", "Weather & water", Waves],
   ["ecosystem", "Environmental context", Leaf],
@@ -41,6 +80,11 @@ export function Intelligence({
   onLocation,
   onSource,
   onMessage,
+  saved,
+  filteredEvents,
+  hours,
+  now,
+  onEvent,
 }: {
   tab: IntelligenceTab;
   onTab: (t: IntelligenceTab) => void;
@@ -50,19 +94,29 @@ export function Intelligence({
   onLocation: () => void;
   onSource: (id: string) => void;
   onMessage: (s: string) => void;
+  saved: SavedArea[];
+  filteredEvents: AtlasEvent[];
+  hours: number;
+  now: number;
+  onEvent: (e: AtlasEvent) => void;
 }) {
   const [depth, setDepth] = useState("0-5cm");
   const [fusion, setFusion] = useState<Fusion | null>(null);
   const [fusionLoading, setFusionLoading] = useState(false);
   const [contexts, setContexts] = useState<Record<string, Envelope>>({});
-  const [contextLoading, setContextLoading] = useState("");
+  const [contextLoading, setContextLoading] = useState<Set<string>>(new Set());
+  const controllers = useRef(new Map<string, AbortController>());
   const mounted = useRef(true);
   useEffect(() => {
     mounted.current = true;
+    setContexts({});
+    setContextLoading(new Set());
     return () => {
       mounted.current = false;
+      for (const ac of controllers.current.values()) ac.abort();
+      controllers.current.clear();
     };
-  }, []);
+  }, [place.lat, place.lon, place.countryCode]);
   async function loadContext(id: string) {
     if (id === "worldbank" && !place.countryCode) {
       onMessage(
@@ -70,30 +124,47 @@ export function Intelligence({
       );
       return;
     }
-    setContextLoading(id);
+    if (controllers.current.has(id)) return;
+    const ac = new AbortController();
+    controllers.current.set(id, ac);
+    setContextLoading((old) => new Set([...old, id]));
     try {
       const d = await api<Envelope>(
         `/api/v1/sources/${id}?lat=${place.lat}&lon=${place.lon}&country=${place.countryCode || "IN"}`,
+        { signal: ac.signal },
       );
-      if (mounted.current) setContexts((c) => ({ ...c, [id]: d }));
+      if (!ac.signal.aborted && mounted.current)
+        setContexts((old) => ({ ...old, [id]: d }));
     } catch (e) {
-      if (!isAbort(e))
+      if (!ac.signal.aborted && !isAbort(e))
         onMessage(
           "Context source could not be reached. No substitute data was created.",
         );
     } finally {
-      if (mounted.current) setContextLoading("");
+      if (!ac.signal.aborted && mounted.current) {
+        controllers.current.delete(id);
+        setContextLoading((old) => new Set([...old].filter((k) => k !== id)));
+      }
     }
   }
   async function loadFusion() {
+    if (controllers.current.has("fusion")) return;
+    const ac = new AbortController();
+    controllers.current.set("fusion", ac);
     setFusionLoading(true);
     try {
-      const r = await api<Fusion>("/api/v1/fusion?hours=72");
-      if (mounted.current) setFusion(r);
-    } catch {
-      onMessage("Could not compute proximity groups.");
+      const r = await api<Fusion>("/api/v1/fusion?hours=72", {
+        signal: ac.signal,
+      });
+      if (!ac.signal.aborted && mounted.current) setFusion(r);
+    } catch (e) {
+      if (!ac.signal.aborted && !isAbort(e))
+        onMessage("Could not compute proximity groups.");
     } finally {
-      if (mounted.current) setFusionLoading(false);
+      if (!ac.signal.aborted && mounted.current) {
+        controllers.current.delete("fusion");
+        setFusionLoading(false);
+      }
     }
   }
   const soil = location?.sources.soil;
@@ -111,13 +182,27 @@ export function Intelligence({
   const news = snapshot?.events.filter((e) => e.kind === "news") ?? [];
   return (
     <main className="workspace-page intelligence-page">
-      <div className="page-heading">
+      <div
+        className={
+          ["signals", "compare", "records"].includes(tab)
+            ? "page-heading page-heading-compact"
+            : "page-heading"
+        }
+      >
         <div>
           <div className="eyebrow">
             <i className="live-dot" />
             CONNECTED INTELLIGENCE
           </div>
-          <h1>Go beyond the map.</h1>
+          <h1>
+            {tab === "signals"
+              ? "Signal Lab."
+              : tab === "compare"
+                ? "Compare places."
+                : tab === "records"
+                  ? "Record explorer."
+                  : "Go beyond the map."}
+          </h1>
           <p>
             Understand the environment. Inspect the evidence. Keep the
             uncertainty.
@@ -146,9 +231,10 @@ export function Intelligence({
           Export report
         </button>
       </div>
-      <div className="workspace-tabs">
+      <nav className="workspace-tabs" aria-label="Intelligence tools">
         {TABS.map(([id, label, Icon]) => (
           <button
+            aria-current={tab === id ? "page" : undefined}
             className={tab === id ? "active" : ""}
             onClick={() => onTab(id)}
             key={id}
@@ -157,8 +243,19 @@ export function Intelligence({
             {label}
           </button>
         ))}
-      </div>
+      </nav>
       <div className="workspace-content">
+        {tab === "signals" && <SignalLab place={place} />}
+        {tab === "compare" && <Compare place={place} saved={saved} />}
+        {tab === "records" && (
+          <Observatory
+            events={filteredEvents}
+            snapshot={snapshot}
+            hours={hours}
+            now={now}
+            onEvent={onEvent}
+          />
+        )}
         {tab === "brief" && (
           <>
             <div className="brief-hero">
@@ -611,33 +708,42 @@ export function Intelligence({
                 <CloudSun size={20} />
               </div>
               <div className="forecast-grid">
-                {forecast?.time?.map((t: string, i: number) => (
-                  <div key={t}>
-                    <span>
-                      {new Date(t + "T12:00:00Z").toLocaleDateString("en-GB", {
-                        weekday: "short",
-                        day: "numeric",
-                        timeZone: "UTC",
-                      })}
-                    </span>
-                    <Sun size={25} />
-                    <b>
-                      {num(forecast.temperature_2m_max?.[i])}°{" "}
-                      <small>{num(forecast.temperature_2m_min?.[i])}°</small>
-                    </b>
-                    <p>
-                      {num(forecast.precipitation_sum?.[i])} mm total
-                      precipitation
-                    </p>
-                    <span>
-                      {num(forecast.precipitation_probability_max?.[i], 0)}%
-                      model precipitation probability
-                    </span>
-                  </div>
-                ))}
+                {forecast?.time?.map((t: string, i: number) =>
+                  t >= new Date().toISOString().slice(0, 10) ? (
+                    <div key={t}>
+                      <span>
+                        {new Date(t + "T12:00:00Z").toLocaleDateString(
+                          "en-GB",
+                          {
+                            weekday: "short",
+                            day: "numeric",
+                            timeZone: "UTC",
+                          },
+                        )}
+                      </span>
+                      <WeatherGlyph
+                        code={forecast.weather_code?.[i]}
+                        size={25}
+                      />
+                      <small>{weatherLabel(forecast.weather_code?.[i])}</small>
+                      <b>
+                        {num(forecast.temperature_2m_max?.[i])}°{" "}
+                        <small>{num(forecast.temperature_2m_min?.[i])}°</small>
+                      </b>
+                      <p>
+                        {num(forecast.precipitation_sum?.[i])} mm total
+                        precipitation
+                      </p>
+                      <span>
+                        {num(forecast.precipitation_probability_max?.[i], 0)}%
+                        model precipitation probability
+                      </span>
+                    </div>
+                  ) : null,
+                )}
               </div>
               <p className="muted small">
-                Includes the requested previous-day context. Probability here is
+                Today and the next four UTC calendar days. Probability here is
                 the provider’s precipitation forecast, not a disaster
                 probability.
               </p>
@@ -664,8 +770,7 @@ export function Intelligence({
                   const ts = w?.hourly?.time as string[] | undefined;
                   const i =
                     ts?.reduce(
-                      (best, t, n) =>
-                        Date.parse(t + "Z") <= Date.now() ? n : best,
+                      (best, t, n) => (utcMillis(t) <= Date.now() ? n : best),
                       -1,
                     ) ?? -1;
                   const v = w?.hourly?.[`soil_moisture_${id}cm`]?.[i];
@@ -733,10 +838,10 @@ export function Intelligence({
                     <p className="muted">{String(desc)}</p>
                     <button
                       className="button"
-                      disabled={!!contextLoading}
+                      disabled={contextLoading.has(String(id))}
                       onClick={() => loadContext(String(id))}
                     >
-                      {contextLoading === id ? (
+                      {contextLoading.has(String(id)) ? (
                         <Spinner label="Fetching…" />
                       ) : (
                         <>

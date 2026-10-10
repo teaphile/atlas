@@ -1,3 +1,22 @@
+# ATLAS 2.0 architecture additions
+
+The original architecture below remains the base; v2 adds the following first-party modules without adopting an upstream runtime or downloading model weights.
+
+| Layer | Modules / responsibility |
+|---|---|
+| Model-data contract | `model_data.py`: bounded 336-hour unit/range/time/null/duplicate normalization, exact WMO codes and quality metadata |
+| Analysis | `insights.py`: canonical UTC grid, complete windows, transparent derivatives, tiny robust novelty, trends/correlations and attribution; NumPy, no SciPy/ML service |
+| API | `/insights` and bounded `/compare`; weather/AQI cache reuse, one comparison clock, CPU work off the event loop; no soil fan-out |
+| Client data ownership | `hooks/useSnapshot.ts`, `hooks/useLocation.ts`; generation-owned AbortControllers, single-flight, queued refresh and independent soil merge |
+| Analytical UI | `Charts.tsx`, `SignalLab.tsx`, `Compare.tsx`, `Observatory.tsx`; null-preserving SVG, keyboard inspection, table alternatives and canonical exports |
+| Portable state | `workspace.ts`, `Preferences.tsx`; allowlisted 64-KiB v2 JSON, ≤6 saved views, active polygons, unit/density/motion preferences; never keys/provider snapshots |
+| Map authoring | `MapView.tsx`; bounded drawing/import, parent-owned AOI state, dateline-aware camera bounds and server-side topology/membership |
+| Bundling / layout | Lazy map/analysis chunks; container-query cards, mobile tool rail and safe-area handling. Specific map-host positioning survives lazy vendor CSS ordering |
+
+A comparison captures its clock before concurrent source retrieval. Per-query provider single-flight still prevents duplicate ingestion. A missing/stale/ineligible source produces explicit unknown derived fields, not zero. The derivation layer does not bypass gateway quotas or create persistent forecast/history archives.
+
+Application state distinguishes selected point, map viewport/analysis polygon, provider envelope, analysis clock and user preferences. A saved polygon does not imply that the point weather/soil report is an area average. The user must explicitly invoke analysis after changing filters; existing report clocks/filter echoes remain attached to the report.
+
 # ATLAS architecture
 
 ## 1. Product boundary

@@ -5,6 +5,7 @@ from . import parsers as P
 from .schemas import Payload, utcnow
 from .transport import HttpGateway, UpstreamError
 from .config import Settings
+from .model_data import normalize_model
 
 
 class Providers:
@@ -34,11 +35,7 @@ class Providers:
         if id == "gdacs":
             return P.gdacs(await h.text("https://www.gdacs.org/xml/rss.xml"))
         if id == "nws":
-            return P.nws(
-                await h.json(
-                    "https://api.weather.gov/alerts/active", {"status": "actual", "message_type": "alert"}
-                )
-            )
+            return P.nws(await h.json("https://api.weather.gov/alerts/active", {"status": "actual"}))
         if id == "firms":
             return P.firms(
                 await h.text(
@@ -143,28 +140,26 @@ class Providers:
                 "https://api.open-meteo.com/v1/forecast",
                 {
                     **params,
-                    "current": "temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,wind_speed_10m,wind_gusts_10m,weather_code",
-                    "hourly": "temperature_2m,relative_humidity_2m,precipitation,precipitation_probability,wind_speed_10m,soil_moisture_0_to_1cm,soil_moisture_1_to_3cm,soil_moisture_3_to_9cm,soil_moisture_9_to_27cm,soil_moisture_27_to_81cm",
-                    "daily": "temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max",
-                    "past_days": 1,
-                    "forecast_days": 3,
+                    "current": "temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,wind_speed_10m,wind_gusts_10m,wind_direction_10m,surface_pressure,weather_code",
+                    "hourly": "temperature_2m,relative_humidity_2m,precipitation,precipitation_probability,wind_speed_10m,wind_gusts_10m,wind_direction_10m,surface_pressure,et0_fao_evapotranspiration,shortwave_radiation,soil_moisture_0_to_1cm,soil_moisture_1_to_3cm,soil_moisture_3_to_9cm,soil_moisture_9_to_27cm,soil_moisture_27_to_81cm",
+                    "daily": "temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max,weather_code",
+                    "past_days": 7,
+                    "forecast_days": 5,
                     "timezone": "UTC",
                     "temperature_unit": "celsius",
                     "wind_speed_unit": "kmh",
                     "precipitation_unit": "mm",
                 },
             )
-            if (
-                not isinstance(d, dict)
-                or not P.timestamp(d.get("current", {}).get("time"))
-                or not isinstance(d.get("hourly", {}).get("time"), list)
-            ):
-                raise UpstreamError("schema_drift")
+            d, warnings = normalize_model(d, id)
             return Payload(
                 data=d,
                 record_count=len(d["hourly"]["time"]),
                 upstream_time=P.timestamp(d["current"]["time"]),
-                warnings=["Weather and soil moisture are numerical model values, not in-situ observations."],
+                warnings=warnings
+                + [
+                    "Weather and soil moisture are numerical model values, not in-situ observations. Past values are a short modeled baseline, not a climate record."
+                ],
             )
         if id == "air_quality":
             d = await h.json(
@@ -173,24 +168,28 @@ class Providers:
                     **params,
                     "current": "us_aqi,pm2_5,pm10,ozone,nitrogen_dioxide",
                     "hourly": "us_aqi,pm2_5",
-                    "forecast_days": 2,
+                    "past_days": 7,
+                    "forecast_days": 5,
                     "timezone": "UTC",
                 },
             )
-            if not isinstance(d, dict) or not P.timestamp(d.get("current", {}).get("time")):
-                raise UpstreamError("schema_drift")
+            d, warnings = normalize_model(d, id)
             return Payload(
                 data=d,
-                record_count=1,
+                record_count=len(d["hourly"]["time"]),
                 upstream_time=P.timestamp(d["current"]["time"]),
-                warnings=["CAMS model grid; US AQI scale, not India NAQI or a monitoring-station reading."],
+                warnings=warnings
+                + ["CAMS model grid; US AQI scale, not India NAQI or a monitoring-station reading."],
             )
         if id == "flood":
             d = await h.json(
                 "https://flood-api.open-meteo.com/v1/flood",
                 {**params, "daily": "river_discharge", "forecast_days": 7},
             )
-            if not isinstance(d, dict) or not isinstance(d.get("daily", {}).get("river_discharge"), list):
+            if not isinstance(d, dict) or (
+                not isinstance(d.get("daily"), dict)
+                or not isinstance(d["daily"].get("river_discharge"), list)
+            ):
                 raise UpstreamError("schema_drift")
             return Payload(
                 data=d,

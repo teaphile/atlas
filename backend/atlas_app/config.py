@@ -20,13 +20,14 @@ class Settings(BaseSettings):
     max_response_bytes: int = Field(4_000_000, ge=1000, le=10_000_000)
     max_cache_entries: int = Field(384, ge=10, le=2000)
     rate_limit_per_minute: int = Field(120, ge=1, le=1000)
-    user_agent: str = "ATLAS-Earth-Intelligence/1.0 (public environmental research dashboard)"
+    user_agent: str = "ATLAS-Earth-Intelligence/2.0 (public environmental research dashboard)"
 
     @model_validator(mode="after")
     def valid_auth(self):
         if self.auth_required and (
             not 32 <= len(self.api_key) <= 256
             or not self.api_key.isascii()
+            or any(ord(c)<33 or ord(c)>126 for c in self.api_key)
             or self.api_key.strip() != self.api_key
             or self.api_key.lower() in {"change-me", "secret"}
         ):

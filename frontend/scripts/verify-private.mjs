@@ -76,6 +76,16 @@ try {
         throw Error("Missing authorized location request");
     },
   );
+  await check("Private Signal Lab and comparison endpoints require header authentication",async()=>{
+    expect((await page.request.get(base+'/api/v1/insights?lat=27.1&lon=78.15')).status()).toBe(401);
+    expect((await page.request.post(base+'/api/v1/compare',{data:{points:[{lat:27.1,lon:78.15},{lat:28.6,lon:77.2}]}})).status()).toBe(401);
+    await page.getByRole('button',{name:'Intelligence',exact:true}).click();
+    await page.getByRole('button',{name:'Signal Lab',exact:true}).click();
+    await page.locator('.derived-metrics').waitFor({timeout:45000});
+    expect(requests.some(r=>r.has_key&&r.url.includes('/api/v1/insights?'))).toBe(true);
+    await page.getByRole('button',{name:'Overview',exact:true}).click();
+    await page.waitForSelector('[data-map-ready="true"]',{timeout:45000});
+  });
   await check(
     "Location view restores the report, not just the camera",
     async () => {
@@ -176,7 +186,7 @@ try {
         throw Error("Missing image auth header");
     },
   );
-  await page.screenshot({ path: "../docs/previews/private-camera.png" });
+  await page.screenshot({ path: "../docs/v2/screenshots/private-camera.png" });
   if (errors.length) throw Error(JSON.stringify(errors));
 } catch (e) {
   checks.push({
@@ -186,10 +196,10 @@ try {
   });
   console.error(e);
   process.exitCode = 1;
-  await page.screenshot({ path: "../docs/previews/private-failure.png" });
+  await page.screenshot({ path: "../docs/v2/private-failure.png" });
 } finally {
   await fs.writeFile(
-    "../docs/private-browser-verification.json",
+    "../docs/v2/private-browser-verification.json",
     JSON.stringify(
       {
         checked_at: new Date().toISOString(),

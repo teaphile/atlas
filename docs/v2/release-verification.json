@@ -1,0 +1,45 @@
+{
+  "release": "2.0.0",
+  "backend_tests": 225,
+  "frontend_tests": 78,
+  "browser_flow_checks": 36,
+  "viewport_samples": 72,
+  "automated_a11y_states": 8,
+  "automated_a11y_violations": 0,
+  "engines": [
+    {
+      "name": "chromium",
+      "version": "156.0.8078.4",
+      "mode": "headless",
+      "map": "rendered",
+      "errors": [],
+      "httpFailures": []
+    },
+    {
+      "name": "firefox",
+      "version": "157.0",
+      "mode": "headed virtual display",
+      "map": "rendered",
+      "errors": [],
+      "httpFailures": []
+    },
+    {
+      "name": "webkit",
+      "version": "27.2",
+      "mode": "headless",
+      "map": "rendered",
+      "errors": [],
+      "httpFailures": []
+    }
+  ],
+  "publication": {
+    "remote_pushed": false,
+    "reason": "Unsupported connector and no authenticated destination; local source/publication helper prepared"
+  },
+  "limitations": [
+    "Native Windows/macOS and physical devices not executed",
+    "Docker daemon unavailable; container/remote CI not executed",
+    "No production load/soak, penetration test or full accessibility certification",
+    "No empirical hazard/crop/forecast-skill calibration"
+  ]
+}

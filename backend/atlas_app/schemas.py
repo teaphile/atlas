@@ -26,7 +26,18 @@ class Kind(StrEnum):
     other = "other"
 
 
-class Point(BaseModel):
+class ScientificInput(BaseModel):
+    model_config = ConfigDict(allow_inf_nan=False, extra="forbid")
+
+    @field_validator("*", mode="before")
+    @classmethod
+    def reject_booleans(cls, value):
+        if isinstance(value, bool):
+            raise ValueError("Boolean is not a numeric scientific input")
+        return value
+
+
+class Point(ScientificInput):
     model_config = ConfigDict(allow_inf_nan=False)
     lat: float = Field(ge=-90, le=90)
     lon: float = Field(ge=-180, le=180)
@@ -109,13 +120,22 @@ class Envelope(BaseModel):
     payload: Payload = Field(default_factory=Payload)
 
 
-class AOIRequest(BaseModel):
+class AOIRequest(ScientificInput):
     geometry: dict[str, Any]
-    kinds: list[Kind] = Field(default_factory=list, max_length=20)
+    kinds: list[Kind] | None = Field(default=None, max_length=20)
     hours: int = Field(default=168, ge=1, le=720)
+    minimum_priority: int = Field(default=0, ge=0, le=5)
+    end: datetime | None = None
+
+    @field_validator("end")
+    @classmethod
+    def require_timezone(cls, value):
+        if value is not None and value.tzinfo is None:
+            raise ValueError("Use a timezone-aware cutoff")
+        return value
 
 
-class ErosionScenario(BaseModel):
+class ErosionScenario(ScientificInput):
     rainfall_erosivity: float = Field(ge=0, le=20000, description="R: MJ·mm/(ha·h·year)")
     soil_erodibility: float = Field(ge=0, le=1, description="K: t·h/(MJ·mm)")
     slope_percent: float = Field(ge=0, le=100)
@@ -124,3 +144,9 @@ class ErosionScenario(BaseModel):
     practice_factor: float = Field(ge=0, le=1)
     alternative_cover_factor: float = Field(ge=0, le=1)
     model_config = ConfigDict(allow_inf_nan=False)
+
+
+class ComparisonRequest(ScientificInput):
+    points: list[Point] = Field(min_length=2, max_length=3)
+    base_c: float = Field(default=10, ge=-10, le=49)
+    cap_c: float = Field(default=30, ge=-9, le=50)

@@ -2,7 +2,7 @@ from __future__ import annotations
 import asyncio, csv, html, io, json, logging, re, time
 from collections import OrderedDict, Counter
 from contextlib import asynccontextmanager
-from datetime import timedelta
+from datetime import timedelta, datetime
 from pathlib import Path
 from typing import Annotated, Literal
 from fastapi import FastAPI, Query, Request, HTTPException
@@ -12,8 +12,9 @@ from starlette.middleware.gzip import GZipMiddleware
 from .config import Settings, settings
 from .engine import Engine
 from .registry import SOURCES
-from .schemas import AOIRequest, ErosionScenario, utcnow
+from .schemas import AOIRequest, ErosionScenario, ComparisonRequest, utcnow
 from .analytics import environment_screen, soil_summary, erosion_scenario
+from .insights import analyze_environment
 from .geo import filter_events, proximity_groups, polygon_aoi, in_aoi, aoi_area_km2, haversine
 from .security import SecurityMiddleware
 from .transport import UpstreamError
@@ -45,7 +46,7 @@ def create_app(config: Settings | None = None, engine: Engine | None = None):
 
     app = FastAPI(
         title="ATLAS Earth Intelligence",
-        version="1.0.0",
+        version="2.0.0",
         description="Provenance-first public geospatial intelligence. Not an emergency warning service.",
         docs_url=None,
         redoc_url=None,
@@ -61,14 +62,17 @@ def create_app(config: Settings | None = None, engine: Engine | None = None):
         return {
             "status": "ok",
             "service": "atlas",
-            "version": "1.0.0",
+            "version": "2.0.0",
             "uptime_seconds": round((utcnow() - eng.started_at).total_seconds()),
             "read_only": True,
         }
 
     @app.get("/api/v1/ready")
     async def ready():
-        return {"ready": eng.store.db is not None, "upstream_availability_is_not_readiness": True}
+        return JSONResponse(
+            {"ready": eng.store.db is not None, "upstream_availability_is_not_readiness": True},
+            status_code=200 if eng.store.db is not None else 503,
+        )
 
     @app.get("/api/v1/sources")
     async def sources():
@@ -167,6 +171,56 @@ def create_app(config: Settings | None = None, engine: Engine | None = None):
             "nearby_method": "Great-circle distance from point to provider point/representative geometry; not a hazard impact radius.",
         }
 
+    @app.get("/api/v1/insights")
+    async def insights(
+        lat: Lat,
+        lon: Lon,
+        base_c: Annotated[float, Query(ge=-10, le=49, allow_inf_nan=False)] = 10.0,
+        cap_c: Annotated[float, Query(ge=-9, le=50, allow_inf_nan=False)] = 30.0,
+        as_of: datetime | None = None,
+    ):
+        analysis_time = utcnow()
+        if base_c >= cap_c:
+            raise HTTPException(422, "Thermal base must be below cap")
+        if as_of is not None:
+            if as_of.tzinfo is None or not -60 <= (analysis_time - as_of).total_seconds() <= 600:
+                raise HTTPException(
+                    422,
+                    "as_of must include a timezone and be within the last ten minutes (not historical replay)",
+                )
+            analysis_time = as_of
+        ids = ["weather", "air_quality"]
+        result = await asyncio.gather(*(eng.get(id, lat=lat, lon=lon) for id in ids))
+        report = await asyncio.to_thread(
+            analyze_environment, dict(zip(ids, result)), analysis_time, base_c, cap_c
+        )
+        report["point"] = {"lat": round(lat, 4), "lon": round(lon, 4)}
+        report["generated_at"] = utcnow().isoformat()
+        return report
+
+    @app.post("/api/v1/compare")
+    async def compare(body: ComparisonRequest):
+        if body.base_c >= body.cap_c:
+            raise HTTPException(422, "Thermal base must be below cap")
+        as_of = utcnow()
+
+        async def one(point):
+            ids = ["weather", "air_quality"]
+            values = await asyncio.gather(*(eng.get(id, lat=point.lat, lon=point.lon) for id in ids))
+            report = await asyncio.to_thread(
+                analyze_environment, dict(zip(ids, values)), as_of, body.base_c, body.cap_c
+            )
+            report["point"] = {"lat": round(point.lat, 4), "lon": round(point.lon, 4)}
+            return report
+
+        reports = await asyncio.gather(*(one(point) for point in body.points))
+        return {
+            "as_of": as_of.isoformat(),
+            "generated_at": utcnow().isoformat(),
+            "reports": reports,
+            "scope": "Same UTC forecast window; provider-model comparison, not a place safety ranking. Soil and other slow providers are not queried.",
+        }
+
     @app.get("/api/v1/fusion")
     async def fusion(hours: Annotated[int, Query(ge=1, le=168)] = 72):
         _, events = eng.snapshot()
@@ -180,10 +234,18 @@ def create_app(config: Settings | None = None, engine: Engine | None = None):
         except (ValueError, TypeError) as e:
             raise HTTPException(422, str(e)) from None
         envelopes, events = eng.snapshot(True)
-        candidates = filter_events(events, body.hours, kinds=body.kinds)
+        candidates = filter_events(
+            events, body.hours, kinds=body.kinds, minimum_priority=body.minimum_priority, end=body.end
+        )
         inside = [e for e in candidates if in_aoi(e, p, anchor)]
         return {
             "geometry": body.geometry,
+            "filters": {
+                "kinds": body.kinds,
+                "hours": body.hours,
+                "minimum_priority": body.minimum_priority,
+                "end": body.end.isoformat() if body.end else None,
+            },
             "area_km2_spherical": aoi_area_km2(p),
             "event_count": len(inside),
             "by_kind": dict(Counter(e.kind for e in inside)),

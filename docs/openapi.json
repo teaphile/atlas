@@ -3,7 +3,7 @@
   "info": {
     "title": "ATLAS Earth Intelligence",
     "description": "Provenance-first public geospatial intelligence. Not an emergency warning service.",
-    "version": "1.0.0"
+    "version": "2.0.0"
   },
   "paths": {
     "/api/v1/health": {
@@ -264,6 +264,133 @@
             }
           }
         ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/insights": {
+      "get": {
+        "summary": "Insights",
+        "operationId": "insights_api_v1_insights_get",
+        "parameters": [
+          {
+            "name": "lat",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "maximum": 90,
+              "minimum": -90,
+              "title": "Lat"
+            }
+          },
+          {
+            "name": "lon",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "maximum": 180,
+              "minimum": -180,
+              "title": "Lon"
+            }
+          },
+          {
+            "name": "base_c",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "maximum": 49,
+              "minimum": -10,
+              "default": 10.0,
+              "title": "Base C"
+            }
+          },
+          {
+            "name": "cap_c",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "maximum": 50,
+              "minimum": -9,
+              "default": 30.0,
+              "title": "Cap C"
+            }
+          },
+          {
+            "name": "as_of",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "As Of"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/compare": {
+      "post": {
+        "summary": "Compare",
+        "operationId": "compare_api_v1_compare_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ComparisonRequest"
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -616,11 +743,18 @@
             "title": "Geometry"
           },
           "kinds": {
-            "items": {
-              "$ref": "#/components/schemas/Kind"
-            },
-            "type": "array",
-            "maxItems": 20,
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/Kind"
+                },
+                "type": "array",
+                "maxItems": 20
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Kinds"
           },
           "hours": {
@@ -629,13 +763,66 @@
             "minimum": 1.0,
             "title": "Hours",
             "default": 168
+          },
+          "minimum_priority": {
+            "type": "integer",
+            "maximum": 5.0,
+            "minimum": 0.0,
+            "title": "Minimum Priority",
+            "default": 0
+          },
+          "end": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "End"
           }
         },
+        "additionalProperties": false,
         "type": "object",
         "required": [
           "geometry"
         ],
         "title": "AOIRequest"
+      },
+      "ComparisonRequest": {
+        "properties": {
+          "points": {
+            "items": {
+              "$ref": "#/components/schemas/Point"
+            },
+            "type": "array",
+            "maxItems": 3,
+            "minItems": 2,
+            "title": "Points"
+          },
+          "base_c": {
+            "type": "number",
+            "maximum": 49.0,
+            "minimum": -10.0,
+            "title": "Base C",
+            "default": 10
+          },
+          "cap_c": {
+            "type": "number",
+            "maximum": 50.0,
+            "minimum": -9.0,
+            "title": "Cap C",
+            "default": 30
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "points"
+        ],
+        "title": "ComparisonRequest"
       },
       "ErosionScenario": {
         "properties": {
@@ -684,6 +871,7 @@
             "title": "Alternative Cover Factor"
           }
         },
+        "additionalProperties": false,
         "type": "object",
         "required": [
           "rainfall_erosivity",
@@ -728,6 +916,29 @@
           "other"
         ],
         "title": "Kind"
+      },
+      "Point": {
+        "properties": {
+          "lat": {
+            "type": "number",
+            "maximum": 90.0,
+            "minimum": -90.0,
+            "title": "Lat"
+          },
+          "lon": {
+            "type": "number",
+            "maximum": 180.0,
+            "minimum": -180.0,
+            "title": "Lon"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "lat",
+          "lon"
+        ],
+        "title": "Point"
       },
       "ValidationError": {
         "properties": {

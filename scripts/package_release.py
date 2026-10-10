@@ -7,7 +7,7 @@ import json
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-DEST = ROOT.parent / "ATLAS-project.zip"
+DEST = ROOT.parent / "ATLAS-2.0-project.zip"
 EXCLUDED = {".git", "node_modules", ".venv", ".runtime", "__pycache__", ".pytest_cache", ".ruff_cache", ".cache", ".arena"}
 
 def included(path):
@@ -26,7 +26,7 @@ def main():
     files = sorted(p for p in ROOT.rglob('*') if included(p))
     manifest = [{'path': str(p.relative_to(ROOT)), 'bytes': p.stat().st_size, 'sha256': hashlib.sha256(p.read_bytes()).hexdigest()} for p in files]
     metadata = ROOT / 'docs/release-file-manifest.json'
-    metadata.write_text(json.dumps({'project':'ATLAS 1.0.0','note':'Source + compiled UI; excludes runtime data, secrets, dependencies and the two reviewed source trees.','files':manifest},indent=2))
+    metadata.write_text(json.dumps({'project':'ATLAS 2.0.0','note':'Source + compiled UI; excludes runtime data, secrets, dependencies and the two reviewed source trees.','files':manifest},indent=2))
     with zipfile.ZipFile(DEST, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
         for p in files + [metadata]:
             archive.write(p, 'atlas/' + str(p.relative_to(ROOT)))

@@ -89,7 +89,8 @@ class Engine:
             clean = {}
         else:
             clean = {k: round(params[k], 4) for k in ("lat", "lon") if params.get(k) is not None}
-        return f"v1:{id}:" + json.dumps(clean, sort_keys=True, separators=(",", ":"))
+        version = "v2" if id in ("weather", "air_quality") else "v1"
+        return f"{version}:{id}:" + json.dumps(clean, sort_keys=True, separators=(",", ":"))
 
     def view(self, env: Envelope, id: str, error: Envelope | None = None):
         age = max(0, (utcnow() - env.fetched_at).total_seconds()) if env.fetched_at else None
@@ -175,7 +176,14 @@ class Engine:
             if saved:
                 try:
                     cached = Envelope.model_validate_json(saved)
-                    if cached.source_id != id or cached.fetched_at is None:
+                    if (
+                        cached.source_id != id
+                        or cached.fetched_at is None
+                        or cached.fetched_at.tzinfo is None
+                        or (cached.fetched_at - utcnow()).total_seconds() > 60
+                        or cached.status not in ("fresh", "empty")
+                        or (cached.upstream_time is not None and cached.upstream_time.tzinfo is None)
+                    ):
                         raise ValueError("invalid cached envelope")
                     self._remember(key, cached)
                     if (utcnow() - cached.fetched_at).total_seconds() < SOURCES[id].ttl_seconds:
@@ -203,12 +211,19 @@ class Engine:
             self._remember(key, env)
             self.failures.pop(key, None)
             try:
-                await self.store.save(key, env.model_dump_json(), SOURCES[id].max_stale_seconds)
+                persisted = await self.store.save(key, env.model_dump_json(), SOURCES[id].max_stale_seconds)
+                if persisted is False:
+                    env.payload.warnings.append(
+                        "Snapshot exceeds persistent entry budget; retained in memory only."
+                    )
+                    env.warnings = list(env.payload.warnings)
+                    self._remember(key, env)
             except Exception:
                 env.payload.warnings.append(
                     "Persistent cache unavailable; this result is retained in memory only."
                 )
                 env.warnings = list(env.payload.warnings)
+                self._remember(key, env)
                 log.warning(json.dumps({"event": "cache_write_failed", "source": id}))
             self.last[id] = env
             self.bus.publish(id)

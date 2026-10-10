@@ -186,6 +186,10 @@ export interface Fusion {
   }[];
   comparisons: number;
   budget_exhausted: boolean;
+  candidate_count: number;
+  eligible_count: number;
+  candidates_truncated: boolean;
+  groups_truncated: boolean;
   radius_km: number;
   window_seconds: number;
   meaning: string;

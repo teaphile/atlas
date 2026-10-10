@@ -17,8 +17,14 @@ import {
   Layers3,
   Compass,
   Maximize2,
+  Pentagon,
+  Upload,
+  Undo2,
+  Check,
+  X,
 } from "lucide-react";
-import { IconButton } from "./UI";
+import { IconButton, Modal, Note } from "./UI";
+import { parsePolygon, polygonCameraBounds } from "../workspace";
 import type { AtlasEvent, GeoPolygon, Place } from "../types";
 import { COLORS, severityRank, num } from "../utils";
 import "maplibre-gl/dist/maplibre-gl.css";
@@ -105,6 +111,7 @@ const style: StyleSpecification = {
     },
     selected: { type: "geojson", data: EMPTY },
     focused: { type: "geojson", data: EMPTY },
+    aoi: { type: "geojson", data: EMPTY },
   },
   layers: [
     {
@@ -129,6 +136,36 @@ const style: StyleSpecification = {
       },
     },
     ...baseLayers,
+    {
+      id: "aoi-fill",
+      type: "fill",
+      source: "aoi",
+      filter: ["==", ["geometry-type"], "Polygon"],
+      paint: { "fill-color": "#91e7c4", "fill-opacity": 0.12 },
+    },
+    {
+      id: "aoi-line",
+      type: "line",
+      source: "aoi",
+      filter: ["!=", ["geometry-type"], "Point"],
+      paint: {
+        "line-color": "#91e7c4",
+        "line-width": 2,
+        "line-dasharray": [3, 2],
+      },
+    },
+    {
+      id: "aoi-vertices",
+      type: "circle",
+      source: "aoi",
+      filter: ["==", ["geometry-type"], "Point"],
+      paint: {
+        "circle-radius": 4,
+        "circle-color": "#bcebd4",
+        "circle-stroke-color": "#142831",
+        "circle-stroke-width": 2,
+      },
+    },
     {
       id: "satellite-map",
       type: "raster",
@@ -247,6 +284,7 @@ const style: StyleSpecification = {
   ],
 };
 export interface MapPreset {
+  geometry?: GeoPolygon | null;
   center: [number, number];
   zoom: number;
   id: number;
@@ -260,6 +298,8 @@ export function MapView({
   onEvent,
   onArea,
   onMessage,
+  aoi,
+  onAoiChange,
 }: {
   events: AtlasEvent[];
   place: Place;
@@ -269,9 +309,12 @@ export function MapView({
   onEvent: (e: AtlasEvent) => void;
   onArea: (p: GeoPolygon) => void;
   onMessage: (s: string) => void;
+  aoi: GeoPolygon | null;
+  onAoiChange: (p: GeoPolygon | null) => void;
 }) {
   const root = useRef<HTMLDivElement>(null);
   const mapRef = useRef<LibreMap | null>(null);
+  const loadedRef = useRef(false);
   const eventsRef = useRef(events);
   const actions = useRef({ onPoint, onEvent, onArea, onMessage });
   const [baseWarning, setBaseWarning] = useState("");
@@ -280,6 +323,16 @@ export function MapView({
   const [base, setBase] = useState<"dark" | "satellite">("dark");
   const [globe, setGlobe] = useState(false);
   const [coords, setCoords] = useState<[number, number]>([25, 22]);
+  const [drawing, setDrawing] = useState(false);
+  const [vertices, setVertices] = useState<number[][]>([]);
+  const setAoi = onAoiChange;
+  const [importOpen, setImportOpen] = useState(false),
+    [importText, setImportText] = useState(""),
+    [importError, setImportError] = useState("");
+  const drawRef = useRef(false),
+    verticesRef = useRef<number[][]>([]);
+  drawRef.current = drawing;
+  verticesRef.current = vertices;
   eventsRef.current = events;
   actions.current = { onPoint, onEvent, onArea, onMessage };
   useEffect(() => {
@@ -316,7 +369,12 @@ export function MapView({
       new maplibregl.AttributionControl({ compact: true }),
       "bottom-right",
     );
-    map.on("load", () => setReady(true));
+    map.on("load", () => {
+      loadedRef.current = true;
+      setReady(true);
+      for (const id of ["aoi-fill", "aoi-line", "aoi-vertices"])
+        map.moveLayer(id);
+    });
     map.on("error", (e) => {
       if (e.error?.message?.toLowerCase().includes("worker"))
         setMapError(
@@ -332,6 +390,24 @@ export function MapView({
       setCoords([c.lng, c.lat]);
     });
     map.on("click", async (e) => {
+      if (!loadedRef.current) return;
+      if (drawRef.current) {
+        if (verticesRef.current.length >= 199) {
+          actions.current.onMessage(
+            "Maximum 199 drawing vertices plus the closing point. Undo a point or finish.",
+          );
+          return;
+        }
+        if (e.originalEvent.detail > 1) return;
+        const p = [
+          Number(
+            (((((e.lngLat.lng + 180) % 360) + 360) % 360) - 180).toFixed(6),
+          ),
+          Number(e.lngLat.lat.toFixed(6)),
+        ];
+        setVertices((old) => [...old, p]);
+        return;
+      }
       const features = map.queryRenderedFeatures(e.point, {
         layers: ["clusters", "event-points"],
       });
@@ -347,6 +423,8 @@ export function MapView({
             map.easeTo({
               center: g.coordinates as [number, number],
               zoom: Math.min(9, zoom + 0.2),
+              duration:
+                document.documentElement.dataset.motion === "reduce" ? 0 : 500,
             });
           } catch {
             /* map removed */
@@ -371,6 +449,7 @@ export function MapView({
       });
     }
     return () => {
+      loadedRef.current = false;
       map.remove();
       mapRef.current = null;
     };
@@ -444,17 +523,134 @@ export function MapView({
       map.easeTo({
         center: [focus.point.lon, focus.point.lat],
         zoom: Math.max(map.getZoom(), 3.5),
-        duration: 900,
+        duration:
+          document.documentElement.dataset.motion === "reduce" ? 0 : 900,
       });
   }, [focus, ready]);
   useEffect(() => {
+    if (preset && ready && preset.geometry) {
+      fitArea(preset.geometry);
+      return;
+    }
     if (preset && ready)
       mapRef.current?.flyTo({
         center: preset.center,
         zoom: preset.zoom,
-        duration: 1400,
+        duration:
+          document.documentElement.dataset.motion === "reduce" ? 0 : 1400,
       });
   }, [preset, ready]);
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !ready) return;
+    if (drawing) map.doubleClickZoom.disable();
+    else map.doubleClickZoom.enable();
+    map.getCanvas().style.cursor = drawing ? "crosshair" : "";
+    const points = drawing ? vertices : [];
+    const features: GeoJSON.Feature<Geometry>[] = [];
+    const unwrap = (ring: number[][]) => {
+      let prev: number | undefined;
+      return ring.map((p) => {
+        const lon =
+          p[0] +
+          (prev === undefined ? 0 : 360 * Math.round((prev - p[0]) / 360));
+        prev = lon;
+        return [lon, p[1]];
+      });
+    };
+    if (aoi)
+      features.push({
+        type: "Feature",
+        properties: {},
+        geometry: { type: "Polygon", coordinates: aoi.coordinates.map(unwrap) },
+      });
+    if (points.length >= 3)
+      features.push({
+        type: "Feature",
+        properties: {},
+        geometry: {
+          type: "Polygon",
+          coordinates: [unwrap([...points, points[0]])],
+        },
+      });
+    else if (points.length >= 2)
+      features.push({
+        type: "Feature",
+        properties: {},
+        geometry: { type: "LineString", coordinates: unwrap(points) },
+      });
+    points.forEach((p) =>
+      features.push({
+        type: "Feature",
+        properties: {},
+        geometry: { type: "Point", coordinates: p },
+      }),
+    );
+    (map.getSource("aoi") as GeoJSONSource).setData({
+      type: "FeatureCollection",
+      features,
+    });
+  }, [vertices, aoi, drawing, ready]);
+  useEffect(() => {
+    const stop = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setDrawing(false);
+        setVertices([]);
+      }
+    };
+    window.addEventListener("keydown", stop);
+    return () => window.removeEventListener("keydown", stop);
+  }, []);
+  function startDraw() {
+    if (!ready) return;
+    setAoi(null);
+    setVertices([]);
+    setDrawing(true);
+    setGlobe(false);
+    mapRef.current?.setProjection({ type: "mercator" });
+    onMessage(
+      "Tap or click three or more points, then Finish. Pan/zoom as needed. GeoJSON import is the keyboard-accessible alternative.",
+    );
+  }
+  function finishDraw() {
+    try {
+      const p = parsePolygon({
+        type: "Polygon",
+        coordinates: [[...vertices, vertices[0]]],
+      });
+      setAoi(p);
+      setDrawing(false);
+      setVertices([]);
+      onArea(p);
+    } catch (e) {
+      onMessage(e instanceof Error ? e.message : "Invalid polygon");
+    }
+  }
+  function fitArea(p: GeoPolygon) {
+    if (!mapRef.current || !ready) return;
+    setGlobe(false);
+    mapRef.current.setProjection({ type: "mercator" });
+    mapRef.current.fitBounds(polygonCameraBounds(p), {
+      padding: 55,
+      maxZoom: 12,
+      duration: document.documentElement.dataset.motion === "reduce" ? 0 : 700,
+    });
+  }
+  function importGeometry() {
+    try {
+      if (new TextEncoder().encode(importText).length > 65536)
+        throw new Error("GeoJSON exceeds 64 KiB");
+      const p = parsePolygon(JSON.parse(importText));
+      setAoi(p);
+      setDrawing(false);
+      setVertices([]);
+      setImportOpen(false);
+      fitArea(p);
+      onArea(p);
+    } catch (e) {
+      setImportError(e instanceof Error ? e.message : "Invalid GeoJSON");
+    }
+  }
   function toggleBase() {
     const next = base === "dark" ? "satellite" : "dark";
     setBase(next);
@@ -540,7 +736,12 @@ export function MapView({
         <IconButton
           label="Fly to selected location"
           onClick={() =>
-            mapRef.current?.flyTo({ center: [place.lon, place.lat], zoom: 7 })
+            mapRef.current?.flyTo({
+              center: [place.lon, place.lat],
+              zoom: 7,
+              duration:
+                document.documentElement.dataset.motion === "reduce" ? 0 : 900,
+            })
           }
         >
           <LocateFixed size={17} />
@@ -548,20 +749,146 @@ export function MapView({
         <IconButton
           label="Toggle 3D globe"
           active={globe}
+          disabled={drawing}
           onClick={toggleGlobe}
         >
           <Globe2 size={17} />
         </IconButton>
         <IconButton
           label="Reset bearing"
-          onClick={() => mapRef.current?.easeTo({ bearing: 0, pitch: 0 })}
+          onClick={() =>
+            mapRef.current?.easeTo({
+              bearing: 0,
+              pitch: 0,
+              duration:
+                document.documentElement.dataset.motion === "reduce" ? 0 : 400,
+            })
+          }
         >
           <Compass size={17} />
         </IconButton>
-        <IconButton label="Analyze visible area" onClick={analyzeView}>
+        <IconButton
+          label="Analyze visible area"
+          onClick={analyzeView}
+          disabled={!ready || drawing}
+        >
           <SquareDashedMousePointer size={17} />
         </IconButton>
+        <IconButton
+          label="Draw analysis polygon"
+          active={drawing}
+          onClick={startDraw}
+          disabled={!ready}
+        >
+          <Pentagon size={17} />
+        </IconButton>
+        <IconButton
+          label="Import GeoJSON polygon"
+          onClick={() => {
+            setImportError("");
+            setImportOpen(true);
+          }}
+        >
+          <Upload size={17} />
+        </IconButton>
       </div>
+      {drawing && (
+        <div
+          className="drawing-toolbar"
+          role="region"
+          aria-label="Polygon drawing controls"
+        >
+          <span>{vertices.length} vertices · tap map</span>
+          <button
+            className="button"
+            onClick={() => setVertices((old) => old.slice(0, -1))}
+            disabled={!vertices.length}
+          >
+            <Undo2 size={14} />
+            Undo
+          </button>
+          <button
+            className="button primary"
+            disabled={vertices.length < 3}
+            onClick={finishDraw}
+          >
+            <Check size={14} />
+            Finish
+          </button>
+          <button
+            className="button"
+            onClick={() => {
+              setDrawing(false);
+              setVertices([]);
+            }}
+          >
+            <X size={14} />
+            Cancel
+          </button>
+        </div>
+      )}
+      {!drawing && aoi && (
+        <button className="clear-aoi button" onClick={() => setAoi(null)}>
+          <X size={13} />
+          Clear polygon
+        </button>
+      )}
+      {importOpen && (
+        <Modal title="Bring your own area" onClose={() => setImportOpen(false)}>
+          <p className="muted">
+            One WGS84 GeoJSON Polygon or Polygon Feature. At most 200 vertices,
+            three holes, and less than 180° longitude. The server verifies
+            topology before counting records.
+          </p>
+          <label className="geojson-label">
+            Polygon GeoJSON
+            <textarea
+              className="text-input geojson-input"
+              rows={9}
+              maxLength={65536}
+              value={importText}
+              onChange={(e) => setImportText(e.target.value)}
+              placeholder={
+                '{ "type": "Polygon", "coordinates": [[[77,27],[79,27],[79,28],[77,28],[77,27]]] }'
+              }
+            />
+          </label>
+          <label className="button file-button">
+            Read a GeoJSON file
+            <input
+              type="file"
+              accept=".json,.geojson,application/geo+json,application/json"
+              aria-label="Read polygon file"
+              onChange={async (e) => {
+                const file = e.target.files?.[0];
+                e.target.value = "";
+                if (!file) return;
+                try {
+                  if (file.size > 65536)
+                    throw new Error("GeoJSON exceeds 64 KiB");
+                  setImportText(await file.text());
+                  setImportError("");
+                } catch (err) {
+                  setImportError(
+                    err instanceof Error ? err.message : "File unreadable",
+                  );
+                }
+              }}
+            />
+          </label>
+          {importError && <Note tone="warning">{importError}</Note>}
+          <div className="button-row">
+            <button className="button primary" onClick={importGeometry}>
+              Validate & analyze polygon
+            </button>
+          </div>
+          <Note>
+            Selected map layers, priority threshold and event-time cutoff are
+            applied. Boundaries count as inside; hole interiors are excluded.
+            This is record membership, not risk or population exposure.
+          </Note>
+        </Modal>
+      )}
       <div className="map-bottom-tools">
         <div className="map-legend">
           <span>
@@ -590,6 +917,10 @@ export function MapView({
             label="Global extent"
             onClick={() =>
               mapRef.current?.flyTo({
+                duration:
+                  document.documentElement.dataset.motion === "reduce"
+                    ? 0
+                    : 900,
                 center: [28, 20],
                 zoom: 1.7,
                 pitch: 0,

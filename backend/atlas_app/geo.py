@@ -81,12 +81,31 @@ def aoi_area_km2(polygon):
     return round(max(0, ring_area(polygon.exterior) - sum(ring_area(h) for h in polygon.interiors)), 2)
 
 
-def filter_events(events: list[Event], hours: int = 168, now: datetime | None = None, kinds=None, bbox=None):
+def filter_events(
+    events: list[Event],
+    hours: int = 168,
+    now: datetime | None = None,
+    kinds=None,
+    bbox=None,
+    minimum_priority=0,
+    end=None,
+):
     now = now or datetime.now(timezone.utc)
     cutoff = now.timestamp() - hours * 3600
     out = []
     for e in events:
-        if kinds and e.kind not in kinds:
+        if kinds is not None and e.kind not in kinds:
+            continue
+        if {"critical": 5, "high": 4, "moderate": 3, "low": 2, "info": 1, "unknown": 0}.get(
+            e.severity, 0
+        ) < minimum_priority:
+            continue
+        if end is not None and e.occurred_at and e.occurred_at > end:
+            continue
+        if e.kind in ("aircraft", "satellite") and (
+            not e.occurred_at
+            or (now - e.occurred_at).total_seconds() > (180 if e.kind == "aircraft" else 120)
+        ):
             continue
         if e.expires_at and e.expires_at <= now:
             continue
@@ -118,11 +137,32 @@ def proximity_groups(events: list[Event], radius_km=40.0, window_seconds=21600, 
     3-D Earth-centered cells avoid longitude/polar artifacts. Exact great-circle distance
     follows broad-phase neighbor lookup. Worst-case dense neighborhoods have an explicit cap.
     """
-    candidates = [
+    if (
+        isinstance(radius_km, bool)
+        or not isinstance(radius_km, (int, float))
+        or not math.isfinite(radius_km)
+        or not 0.1 <= radius_km <= 1000
+    ):
+        raise ValueError("radius_km must be 0.1–1000")
+    if (
+        isinstance(window_seconds, bool)
+        or not isinstance(window_seconds, (int, float))
+        or not math.isfinite(window_seconds)
+        or not 1 <= window_seconds <= 604800
+    ):
+        raise ValueError("window_seconds must be 1–604800")
+    if (
+        isinstance(max_comparisons, bool)
+        or not isinstance(max_comparisons, int)
+        or not 1 <= max_comparisons <= 60000
+    ):
+        raise ValueError("max_comparisons must be an integer 1–60000")
+    eligible = [
         e
         for e in events
         if e.point and e.occurred_at and e.kind in {"earthquake", "fire", "flood", "storm", "volcano"}
-    ][:3500]
+    ]
+    candidates = sorted(eligible, key=lambda e: e.occurred_at, reverse=True)[:3500]
     n = len(candidates)
     parent = list(range(n))
     sizes = [1] * n
@@ -193,6 +233,10 @@ def proximity_groups(events: list[Event], radius_km=40.0, window_seconds=21600, 
         "groups": out[:40],
         "comparisons": min(comparisons, max_comparisons),
         "budget_exhausted": capped,
+        "candidate_count": n,
+        "eligible_count": len(eligible),
+        "candidates_truncated": len(eligible) > 3500,
+        "groups_truncated": len(out) > 40,
         "radius_km": radius_km,
         "window_seconds": window_seconds,
         "meaning": "Proximity groups, including transitive links. Not unique disasters, causal connections or independent corroboration.",

@@ -220,19 +220,46 @@ export function aqiLabel(v: unknown) {
             : "Hazardous";
 }
 export function weatherLabel(code: unknown) {
-  if (code === 0) return "Clear skies";
-  if (
-    typeof code !== "number" ||
-    !Number.isInteger(code) ||
-    code < 0 ||
-    code > 99
-  )
-    return "Model unavailable";
-  if (code <= 3) return "Partly cloudy";
-  if (code <= 48) return "Foggy";
-  if (code <= 57) return "Drizzle";
-  if (code <= 67) return "Rain";
-  if (code <= 77) return "Snow";
-  if (code <= 86) return "Showers";
-  return "Thunderstorms";
+  const labels: Record<number, string> = {
+    0: "Clear skies",
+    1: "Mainly clear",
+    2: "Partly cloudy",
+    3: "Overcast",
+    45: "Foggy",
+    48: "Rime fog",
+    51: "Light drizzle",
+    53: "Drizzle",
+    55: "Dense drizzle",
+    56: "Freezing drizzle",
+    57: "Freezing drizzle",
+    61: "Light rain",
+    63: "Rain",
+    65: "Heavy rain",
+    66: "Freezing rain",
+    67: "Freezing rain",
+    71: "Light snow",
+    73: "Snow",
+    75: "Heavy snow",
+    77: "Snow grains",
+    80: "Rain showers",
+    81: "Rain showers",
+    82: "Heavy showers",
+    85: "Snow showers",
+    86: "Snow showers",
+    95: "Thunderstorms",
+    96: "Thunderstorms with hail",
+    99: "Thunderstorms with hail",
+  };
+  return typeof code === "number" && Number.isInteger(code)
+    ? (labels[code] ?? "Model unavailable")
+    : "Model unavailable";
+}
+
+/** Provider UTC strings may already have Z/offsets. Never blindly append Z. */
+export function utcMillis(value: unknown): number {
+  if (typeof value !== "string" || !value.trim()) return NaN;
+  const s = value.trim();
+  return Date.parse(
+    /T/.test(s) && !/(Z|[+-]\d{2}:?\d{2})$/i.test(s) ? s + "Z" : s,
+  );
 }

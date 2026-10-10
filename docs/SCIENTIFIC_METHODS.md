@@ -1,3 +1,9 @@
+# Scientific methods — ATLAS 2.0
+
+## New in v2: dedicated method cards
+
+See [Signal Lab model cards](v2/MODEL_CARDS.md) for the exact normalization/time contract, Tetens dew point/VPD, complete-window P−ET₀, configurable hourly thermal accumulation, wind direction, small diurnal/MAD/shrinkage novelty model, bounded Theil–Sen trends and aligned Spearman association. These are descriptive/derived quantities, not calibrated hazard or agronomic probabilities. Existing methods below remain in use.
+
 # Scientific methods and model card
 
 **Version:** `screening-1.0.0` · **Validation class:** research screening / explicit scenarios, not calibrated disaster prediction.

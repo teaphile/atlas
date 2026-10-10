@@ -1,3 +1,4 @@
+import { utcMillis } from "../utils";
 import { useEffect, useState } from "react";
 import { imageBlob } from "../api";
 import {
@@ -9,8 +10,6 @@ import {
   Wind,
   Thermometer,
   Droplets,
-  Sun,
-  Cloud,
   ChevronRight,
   ArrowLeft,
   Radio,
@@ -28,7 +27,7 @@ import {
   weatherLabel,
   dateLabel,
 } from "../utils";
-import { ExternalLink, Note, Sparkline, Spinner } from "./UI";
+import { ExternalLink, Note, Sparkline, Spinner, WeatherGlyph } from "./UI";
 function EventIcon({ kind, size = 16 }: { kind: string; size?: number }) {
   return kind === "earthquake" ? (
     <Activity size={size} />
@@ -258,6 +257,7 @@ export function RightPanel({
   onBack,
   onAnalyzeEvent,
   onReport,
+  onRetry,
   snapshot,
 }: {
   place: Place;
@@ -270,6 +270,7 @@ export function RightPanel({
   onBack: () => void;
   onAnalyzeEvent: () => void;
   onReport: () => void;
+  onRetry: () => void;
   snapshot: Snapshot | null;
 }) {
   const w = location?.sources.weather?.payload.data;
@@ -279,7 +280,7 @@ export function RightPanel({
   const now = Date.now();
   const currentHour =
     (hourly?.time as string[] | undefined)?.reduce(
-      (best, t, i) => (Date.parse(t + "Z") <= now ? i : best),
+      (best, t, i) => (utcMillis(t) <= now ? i : best),
       -1,
     ) ?? -1;
   const moisture =
@@ -290,7 +291,6 @@ export function RightPanel({
       Math.max(0, currentHour) + 25,
     ) ?? [];
   const score = location?.screening.score;
-  const WeatherSymbol = current?.weather_code === 0 ? Sun : Cloud;
   const kp = snapshot?.context.space_kp?.current;
   return (
     <aside className={`right-panel ${focus ? "has-focus" : ""}`}>
@@ -328,9 +328,22 @@ export function RightPanel({
                 <div className="skeleton-row" />
               </div>
             ) : error && !location ? (
-              <Note tone="warning">{error}</Note>
+              <Note tone="warning">
+                {error}{" "}
+                <button className="text-link" onClick={onRetry}>
+                  Retry environmental data
+                </button>
+              </Note>
             ) : (
               <>
+                {error && (
+                  <Note tone="warning">
+                    {error}{" "}
+                    <button className="text-link" onClick={onRetry}>
+                      Retry environmental data
+                    </button>
+                  </Note>
+                )}
                 {location &&
                   ["weather", "air_quality"].some(
                     (id) =>
@@ -344,7 +357,7 @@ export function RightPanel({
                     </Note>
                   )}
                 <div className="current-weather">
-                  <WeatherSymbol size={27} strokeWidth={1.25} />
+                  <WeatherGlyph code={current?.weather_code} size={27} />
                   <strong>
                     {num(current?.temperature_2m, 1)}
                     <span>°</span>
@@ -353,7 +366,11 @@ export function RightPanel({
                     {weatherLabel(current?.weather_code)}
                     <small>
                       Weather model ·{" "}
-                      {ago(w?.current?.time ? w.current.time + "Z" : null)}
+                      {ago(
+                        Number.isFinite(utcMillis(w?.current?.time))
+                          ? new Date(utcMillis(w?.current?.time)).toISOString()
+                          : null,
+                      )}
                     </small>
                   </div>
                 </div>
@@ -432,6 +449,15 @@ export function RightPanel({
                     </button>
                   </p>
                 </div>
+                {location && (
+                  <p
+                    className="screen-time"
+                    title={dateLabel(location.generated_at)}
+                  >
+                    Summary calculated {ago(location.generated_at)}. Not
+                    continuous monitoring.
+                  </p>
+                )}
                 <button className="location-report-button" onClick={onReport}>
                   Explore location report
                   <ArrowUpRight size={14} />

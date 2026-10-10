@@ -1,0 +1,5410 @@
+{
+  "started": "2026-10-10T11:31:12.187Z",
+  "base": "http://127.0.0.1:7860",
+  "browsers": [
+    {
+      "name": "chromium",
+      "version": "156.0.8078.4",
+      "mode": "headless",
+      "map": "rendered",
+      "errors": [],
+      "httpFailures": []
+    },
+    {
+      "name": "firefox",
+      "version": "157.0",
+      "mode": "headed virtual display",
+      "map": "rendered",
+      "errors": [],
+      "httpFailures": []
+    },
+    {
+      "name": "webkit",
+      "version": "27.2",
+      "mode": "headless",
+      "map": "rendered",
+      "errors": [],
+      "httpFailures": []
+    }
+  ],
+  "checks": [
+    {
+      "name": "chromium chart keyboard inspection, table and baseline toggle",
+      "status": "passed"
+    },
+    {
+      "name": "Scientific CSV includes location, source clocks and canonical units",
+      "status": "passed"
+    },
+    {
+      "name": "Thermal sandbox recalculation preserves explicit parameters",
+      "status": "passed"
+    },
+    {
+      "name": "Two/three-place comparison uses a shared UTC window",
+      "status": "passed"
+    },
+    {
+      "name": "Record explorer search, empty state and pagination",
+      "status": "passed"
+    },
+    {
+      "name": "Workspace settings and portable JSON contain no credentials",
+      "status": "passed"
+    },
+    {
+      "name": "GeoJSON import honors empty layer filters, validates topology and exports",
+      "status": "passed"
+    },
+    {
+      "name": "Active polygon survives workspace export and saved-view restoration",
+      "status": "passed"
+    },
+    {
+      "name": "Polygon drawing, undo, finish and cancellation",
+      "status": "passed"
+    },
+    {
+      "name": "Phone layer drawer, dismissal, dialog and reduced-motion preference",
+      "status": "passed"
+    },
+    {
+      "name": "Keyboard skip link reaches the main workspace",
+      "status": "passed"
+    },
+    {
+      "name": "firefox chart keyboard inspection, table and baseline toggle",
+      "status": "passed"
+    },
+    {
+      "name": "webkit chart keyboard inspection, table and baseline toggle",
+      "status": "passed"
+    }
+  ],
+  "failures": [],
+  "screens": [
+    {
+      "name": "chromium-overview-320x568",
+      "viewport": [
+        320,
+        568
+      ],
+      "documentWidth": 320,
+      "bodyWidth": 320,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 320,
+        "height": 104,
+        "right": 320,
+        "bottom": 104,
+        "scroll": 320,
+        "client": 320
+      },
+      "workspace": {
+        "x": 0,
+        "y": 104,
+        "width": 320,
+        "height": 408,
+        "right": 320,
+        "bottom": 512,
+        "scroll": 320,
+        "client": 320
+      },
+      "page": null,
+      "content": null,
+      "map": {
+        "x": 0,
+        "y": 201,
+        "width": 320,
+        "height": 180,
+        "right": 320,
+        "bottom": 381,
+        "scroll": 320,
+        "client": 320
+      },
+      "canvas": {
+        "x": 0,
+        "y": 201,
+        "width": 320,
+        "height": 180,
+        "right": 320,
+        "bottom": 381,
+        "scroll": 320,
+        "client": 320
+      },
+      "label": {
+        "x": 12,
+        "y": 214,
+        "width": 237.109375,
+        "height": 34.5,
+        "right": 249.109375,
+        "bottom": 248.5,
+        "scroll": 235,
+        "client": 235
+      },
+      "chart": null,
+      "footer": {
+        "x": 0,
+        "y": 485,
+        "width": 320,
+        "height": 27,
+        "right": 320,
+        "bottom": 512,
+        "scroll": 320,
+        "client": 320
+      },
+      "issues": []
+    },
+    {
+      "name": "chromium-overview-360x800",
+      "viewport": [
+        360,
+        800
+      ],
+      "documentWidth": 360,
+      "bodyWidth": 360,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 360,
+        "height": 104,
+        "right": 360,
+        "bottom": 104,
+        "scroll": 360,
+        "client": 360
+      },
+      "workspace": {
+        "x": 0,
+        "y": 104,
+        "width": 360,
+        "height": 640,
+        "right": 360,
+        "bottom": 744,
+        "scroll": 360,
+        "client": 360
+      },
+      "page": null,
+      "content": null,
+      "map": {
+        "x": 0,
+        "y": 201,
+        "width": 360,
+        "height": 403,
+        "right": 360,
+        "bottom": 604,
+        "scroll": 360,
+        "client": 360
+      },
+      "canvas": {
+        "x": 0,
+        "y": 201,
+        "width": 360,
+        "height": 403,
+        "right": 360,
+        "bottom": 604,
+        "scroll": 360,
+        "client": 360
+      },
+      "label": {
+        "x": 12,
+        "y": 214,
+        "width": 237.109375,
+        "height": 34.5,
+        "right": 249.109375,
+        "bottom": 248.5,
+        "scroll": 235,
+        "client": 235
+      },
+      "chart": null,
+      "footer": {
+        "x": 0,
+        "y": 717,
+        "width": 360,
+        "height": 27,
+        "right": 360,
+        "bottom": 744,
+        "scroll": 360,
+        "client": 360
+      },
+      "issues": []
+    },
+    {
+      "name": "chromium-overview-390x844",
+      "viewport": [
+        390,
+        844
+      ],
+      "documentWidth": 390,
+      "bodyWidth": 390,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 104,
+        "right": 390,
+        "bottom": 104,
+        "scroll": 390,
+        "client": 390
+      },
+      "workspace": {
+        "x": 0,
+        "y": 104,
+        "width": 390,
+        "height": 684,
+        "right": 390,
+        "bottom": 788,
+        "scroll": 390,
+        "client": 390
+      },
+      "page": null,
+      "content": null,
+      "map": {
+        "x": 0,
+        "y": 201,
+        "width": 390,
+        "height": 447,
+        "right": 390,
+        "bottom": 648,
+        "scroll": 390,
+        "client": 390
+      },
+      "canvas": {
+        "x": 0,
+        "y": 201,
+        "width": 390,
+        "height": 447,
+        "right": 390,
+        "bottom": 648,
+        "scroll": 390,
+        "client": 390
+      },
+      "label": {
+        "x": 12,
+        "y": 214,
+        "width": 237.109375,
+        "height": 34.5,
+        "right": 249.109375,
+        "bottom": 248.5,
+        "scroll": 235,
+        "client": 235
+      },
+      "chart": null,
+      "footer": {
+        "x": 0,
+        "y": 761,
+        "width": 390,
+        "height": 27,
+        "right": 390,
+        "bottom": 788,
+        "scroll": 390,
+        "client": 390
+      },
+      "issues": []
+    },
+    {
+      "name": "chromium-overview-430x932",
+      "viewport": [
+        430,
+        932
+      ],
+      "documentWidth": 430,
+      "bodyWidth": 430,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 430,
+        "height": 104,
+        "right": 430,
+        "bottom": 104,
+        "scroll": 430,
+        "client": 430
+      },
+      "workspace": {
+        "x": 0,
+        "y": 104,
+        "width": 430,
+        "height": 772,
+        "right": 430,
+        "bottom": 876,
+        "scroll": 430,
+        "client": 430
+      },
+      "page": null,
+      "content": null,
+      "map": {
+        "x": 0,
+        "y": 201,
+        "width": 430,
+        "height": 535,
+        "right": 430,
+        "bottom": 736,
+        "scroll": 430,
+        "client": 430
+      },
+      "canvas": {
+        "x": 0,
+        "y": 201,
+        "width": 430,
+        "height": 535,
+        "right": 430,
+        "bottom": 736,
+        "scroll": 430,
+        "client": 430
+      },
+      "label": {
+        "x": 12,
+        "y": 214,
+        "width": 237.109375,
+        "height": 34.5,
+        "right": 249.109375,
+        "bottom": 248.5,
+        "scroll": 235,
+        "client": 235
+      },
+      "chart": null,
+      "footer": {
+        "x": 0,
+        "y": 849,
+        "width": 430,
+        "height": 27,
+        "right": 430,
+        "bottom": 876,
+        "scroll": 430,
+        "client": 430
+      },
+      "issues": []
+    },
+    {
+      "name": "chromium-overview-768x1024",
+      "viewport": [
+        768,
+        1024
+      ],
+      "documentWidth": 768,
+      "bodyWidth": 768,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 768,
+        "height": 68,
+        "right": 768,
+        "bottom": 68,
+        "scroll": 768,
+        "client": 768
+      },
+      "workspace": {
+        "x": 60,
+        "y": 68,
+        "width": 708,
+        "height": 956,
+        "right": 768,
+        "bottom": 1024,
+        "scroll": 708,
+        "client": 708
+      },
+      "page": null,
+      "content": null,
+      "map": {
+        "x": 60,
+        "y": 163,
+        "width": 430,
+        "height": 725,
+        "right": 490,
+        "bottom": 888,
+        "scroll": 430,
+        "client": 430
+      },
+      "canvas": {
+        "x": 60,
+        "y": 163,
+        "width": 430,
+        "height": 725,
+        "right": 490,
+        "bottom": 888,
+        "scroll": 430,
+        "client": 430
+      },
+      "label": {
+        "x": 72,
+        "y": 178,
+        "width": 237.109375,
+        "height": 32,
+        "right": 309.109375,
+        "bottom": 210,
+        "scroll": 235,
+        "client": 235
+      },
+      "chart": null,
+      "footer": {
+        "x": 60,
+        "y": 996,
+        "width": 708,
+        "height": 28,
+        "right": 768,
+        "bottom": 1024,
+        "scroll": 708,
+        "client": 708
+      },
+      "issues": []
+    },
+    {
+      "name": "chromium-overview-1024x768",
+      "viewport": [
+        1024,
+        768
+      ],
+      "documentWidth": 1024,
+      "bodyWidth": 1024,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1024,
+        "height": 68,
+        "right": 1024,
+        "bottom": 68,
+        "scroll": 1024,
+        "client": 1024
+      },
+      "workspace": {
+        "x": 60,
+        "y": 68,
+        "width": 964,
+        "height": 700,
+        "right": 1024,
+        "bottom": 768,
+        "scroll": 964,
+        "client": 964
+      },
+      "page": null,
+      "content": null,
+      "map": {
+        "x": 60,
+        "y": 163,
+        "width": 672,
+        "height": 469,
+        "right": 732,
+        "bottom": 632,
+        "scroll": 672,
+        "client": 672
+      },
+      "canvas": {
+        "x": 60,
+        "y": 163,
+        "width": 672,
+        "height": 469,
+        "right": 732,
+        "bottom": 632,
+        "scroll": 672,
+        "client": 672
+      },
+      "label": {
+        "x": 81,
+        "y": 533,
+        "width": 241.109375,
+        "height": 32,
+        "right": 322.109375,
+        "bottom": 565,
+        "scroll": 239,
+        "client": 239
+      },
+      "chart": null,
+      "footer": {
+        "x": 60,
+        "y": 740,
+        "width": 964,
+        "height": 28,
+        "right": 1024,
+        "bottom": 768,
+        "scroll": 964,
+        "client": 964
+      },
+      "issues": []
+    },
+    {
+      "name": "chromium-overview-1280x800",
+      "viewport": [
+        1280,
+        800
+      ],
+      "documentWidth": 1280,
+      "bodyWidth": 1280,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 68,
+        "right": 1280,
+        "bottom": 68,
+        "scroll": 1280,
+        "client": 1280
+      },
+      "workspace": {
+        "x": 280,
+        "y": 68,
+        "width": 1000,
+        "height": 732,
+        "right": 1280,
+        "bottom": 800,
+        "scroll": 1000,
+        "client": 1000
+      },
+      "page": null,
+      "content": null,
+      "map": {
+        "x": 280,
+        "y": 163,
+        "width": 720,
+        "height": 501,
+        "right": 1000,
+        "bottom": 664,
+        "scroll": 720,
+        "client": 720
+      },
+      "canvas": {
+        "x": 280,
+        "y": 163,
+        "width": 720,
+        "height": 501,
+        "right": 1000,
+        "bottom": 664,
+        "scroll": 720,
+        "client": 720
+      },
+      "label": {
+        "x": 301,
+        "y": 565,
+        "width": 241.109375,
+        "height": 32,
+        "right": 542.109375,
+        "bottom": 597,
+        "scroll": 239,
+        "client": 239
+      },
+      "chart": null,
+      "footer": {
+        "x": 280,
+        "y": 772,
+        "width": 1000,
+        "height": 28,
+        "right": 1280,
+        "bottom": 800,
+        "scroll": 1000,
+        "client": 1000
+      },
+      "issues": []
+    },
+    {
+      "name": "chromium-overview-1440x960",
+      "viewport": [
+        1440,
+        960
+      ],
+      "documentWidth": 1440,
+      "bodyWidth": 1440,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 68,
+        "right": 1440,
+        "bottom": 68,
+        "scroll": 1440,
+        "client": 1440
+      },
+      "workspace": {
+        "x": 324,
+        "y": 68,
+        "width": 1116,
+        "height": 892,
+        "right": 1440,
+        "bottom": 960,
+        "scroll": 1116,
+        "client": 1116
+      },
+      "page": null,
+      "content": null,
+      "map": {
+        "x": 324,
+        "y": 163,
+        "width": 812,
+        "height": 661,
+        "right": 1136,
+        "bottom": 824,
+        "scroll": 812,
+        "client": 812
+      },
+      "canvas": {
+        "x": 324,
+        "y": 163,
+        "width": 812,
+        "height": 661,
+        "right": 1136,
+        "bottom": 824,
+        "scroll": 812,
+        "client": 812
+      },
+      "label": {
+        "x": 345,
+        "y": 725,
+        "width": 241.109375,
+        "height": 32,
+        "right": 586.109375,
+        "bottom": 757,
+        "scroll": 239,
+        "client": 239
+      },
+      "chart": null,
+      "footer": {
+        "x": 324,
+        "y": 932,
+        "width": 1116,
+        "height": 28,
+        "right": 1440,
+        "bottom": 960,
+        "scroll": 1116,
+        "client": 1116
+      },
+      "issues": []
+    },
+    {
+      "name": "chromium-overview-1920x1080",
+      "viewport": [
+        1920,
+        1080
+      ],
+      "documentWidth": 1920,
+      "bodyWidth": 1920,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1920,
+        "height": 68,
+        "right": 1920,
+        "bottom": 68,
+        "scroll": 1920,
+        "client": 1920
+      },
+      "workspace": {
+        "x": 334,
+        "y": 68,
+        "width": 1586,
+        "height": 1012,
+        "right": 1920,
+        "bottom": 1080,
+        "scroll": 1586,
+        "client": 1586
+      },
+      "page": null,
+      "content": null,
+      "map": {
+        "x": 334,
+        "y": 165,
+        "width": 1246,
+        "height": 776,
+        "right": 1580,
+        "bottom": 941,
+        "scroll": 1246,
+        "client": 1246
+      },
+      "canvas": {
+        "x": 334,
+        "y": 165,
+        "width": 1246,
+        "height": 776,
+        "right": 1580,
+        "bottom": 941,
+        "scroll": 1246,
+        "client": 1246
+      },
+      "label": {
+        "x": 355,
+        "y": 840,
+        "width": 245.109375,
+        "height": 34,
+        "right": 600.109375,
+        "bottom": 874,
+        "scroll": 243,
+        "client": 243
+      },
+      "chart": null,
+      "footer": {
+        "x": 334,
+        "y": 1052,
+        "width": 1586,
+        "height": 28,
+        "right": 1920,
+        "bottom": 1080,
+        "scroll": 1586,
+        "client": 1586
+      },
+      "issues": []
+    },
+    {
+      "name": "chromium-overview-2560x1440",
+      "viewport": [
+        2560,
+        1440
+      ],
+      "documentWidth": 2560,
+      "bodyWidth": 2560,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 2560,
+        "height": 68,
+        "right": 2560,
+        "bottom": 68,
+        "scroll": 2560,
+        "client": 2560
+      },
+      "workspace": {
+        "x": 334,
+        "y": 68,
+        "width": 2226,
+        "height": 1372,
+        "right": 2560,
+        "bottom": 1440,
+        "scroll": 2226,
+        "client": 2226
+      },
+      "page": null,
+      "content": null,
+      "map": {
+        "x": 334,
+        "y": 165,
+        "width": 1886,
+        "height": 1136,
+        "right": 2220,
+        "bottom": 1301,
+        "scroll": 1886,
+        "client": 1886
+      },
+      "canvas": {
+        "x": 334,
+        "y": 165,
+        "width": 1886,
+        "height": 1136,
+        "right": 2220,
+        "bottom": 1301,
+        "scroll": 1886,
+        "client": 1886
+      },
+      "label": {
+        "x": 355,
+        "y": 1200,
+        "width": 245.109375,
+        "height": 34,
+        "right": 600.109375,
+        "bottom": 1234,
+        "scroll": 243,
+        "client": 243
+      },
+      "chart": null,
+      "footer": {
+        "x": 334,
+        "y": 1412,
+        "width": 2226,
+        "height": 28,
+        "right": 2560,
+        "bottom": 1440,
+        "scroll": 2226,
+        "client": 2226
+      },
+      "issues": []
+    },
+    {
+      "name": "chromium-overview-844x390",
+      "viewport": [
+        844,
+        390
+      ],
+      "documentWidth": 844,
+      "bodyWidth": 844,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 844,
+        "height": 54,
+        "right": 844,
+        "bottom": 54,
+        "scroll": 844,
+        "client": 844
+      },
+      "workspace": {
+        "x": 60,
+        "y": 54,
+        "width": 784,
+        "height": 336,
+        "right": 844,
+        "bottom": 390,
+        "scroll": 784,
+        "client": 784
+      },
+      "page": null,
+      "content": null,
+      "map": {
+        "x": 60,
+        "y": 127,
+        "width": 506,
+        "height": 180,
+        "right": 566,
+        "bottom": 307,
+        "scroll": 506,
+        "client": 506
+      },
+      "canvas": {
+        "x": 60,
+        "y": 127,
+        "width": 506,
+        "height": 180,
+        "right": 566,
+        "bottom": 307,
+        "scroll": 506,
+        "client": 506
+      },
+      "label": null,
+      "chart": null,
+      "footer": {
+        "x": 60,
+        "y": 362,
+        "width": 784,
+        "height": 28,
+        "right": 844,
+        "bottom": 390,
+        "scroll": 784,
+        "client": 784
+      },
+      "issues": []
+    },
+    {
+      "name": "chromium-overview-1024x600",
+      "viewport": [
+        1024,
+        600
+      ],
+      "documentWidth": 1024,
+      "bodyWidth": 1024,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1024,
+        "height": 68,
+        "right": 1024,
+        "bottom": 68,
+        "scroll": 1024,
+        "client": 1024
+      },
+      "workspace": {
+        "x": 60,
+        "y": 68,
+        "width": 964,
+        "height": 532,
+        "right": 1024,
+        "bottom": 600,
+        "scroll": 964,
+        "client": 964
+      },
+      "page": null,
+      "content": null,
+      "map": {
+        "x": 60,
+        "y": 163,
+        "width": 672,
+        "height": 301,
+        "right": 732,
+        "bottom": 464,
+        "scroll": 672,
+        "client": 672
+      },
+      "canvas": {
+        "x": 60,
+        "y": 163,
+        "width": 672,
+        "height": 301,
+        "right": 732,
+        "bottom": 464,
+        "scroll": 672,
+        "client": 672
+      },
+      "label": {
+        "x": 81,
+        "y": 365,
+        "width": 241.109375,
+        "height": 32,
+        "right": 322.109375,
+        "bottom": 397,
+        "scroll": 239,
+        "client": 239
+      },
+      "chart": null,
+      "footer": {
+        "x": 60,
+        "y": 572,
+        "width": 964,
+        "height": 28,
+        "right": 1024,
+        "bottom": 600,
+        "scroll": 964,
+        "client": 964
+      },
+      "issues": []
+    },
+    {
+      "name": "chromium-signals-320x568",
+      "viewport": [
+        320,
+        568
+      ],
+      "documentWidth": 320,
+      "bodyWidth": 320,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 320,
+        "height": 104,
+        "right": 320,
+        "bottom": 104,
+        "scroll": 320,
+        "client": 320
+      },
+      "workspace": {
+        "x": 0,
+        "y": 104,
+        "width": 320,
+        "height": 408,
+        "right": 320,
+        "bottom": 512,
+        "scroll": 320,
+        "client": 320
+      },
+      "page": {
+        "x": 0,
+        "y": 104,
+        "width": 320,
+        "height": 381,
+        "right": 320,
+        "bottom": 485,
+        "scroll": 316,
+        "client": 316
+      },
+      "content": {
+        "x": 12,
+        "y": 239.25,
+        "width": 292,
+        "height": 6102.15625,
+        "right": 304,
+        "bottom": 6341.40625,
+        "scroll": 292,
+        "client": 292
+      },
+      "map": null,
+      "canvas": null,
+      "label": null,
+      "chart": {
+        "x": 12,
+        "y": 1483.65625,
+        "width": 292,
+        "height": 324.875,
+        "right": 304,
+        "bottom": 1808.53125,
+        "scroll": 290,
+        "client": 290
+      },
+      "footer": {
+        "x": 0,
+        "y": 485,
+        "width": 320,
+        "height": 27,
+        "right": 320,
+        "bottom": 512,
+        "scroll": 320,
+        "client": 320
+      },
+      "issues": []
+    },
+    {
+      "name": "chromium-signals-360x800",
+      "viewport": [
+        360,
+        800
+      ],
+      "documentWidth": 360,
+      "bodyWidth": 360,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 360,
+        "height": 104,
+        "right": 360,
+        "bottom": 104,
+        "scroll": 360,
+        "client": 360
+      },
+      "workspace": {
+        "x": 0,
+        "y": 104,
+        "width": 360,
+        "height": 640,
+        "right": 360,
+        "bottom": 744,
+        "scroll": 360,
+        "client": 360
+      },
+      "page": {
+        "x": 0,
+        "y": 104,
+        "width": 360,
+        "height": 613,
+        "right": 360,
+        "bottom": 717,
+        "scroll": 356,
+        "client": 356
+      },
+      "content": {
+        "x": 12,
+        "y": 239.25,
+        "width": 332,
+        "height": 5903.34375,
+        "right": 344,
+        "bottom": 6142.59375,
+        "scroll": 332,
+        "client": 332
+      },
+      "map": null,
+      "canvas": null,
+      "label": null,
+      "chart": {
+        "x": 12,
+        "y": 1410.953125,
+        "width": 332,
+        "height": 319.46875,
+        "right": 344,
+        "bottom": 1730.421875,
+        "scroll": 330,
+        "client": 330
+      },
+      "footer": {
+        "x": 0,
+        "y": 717,
+        "width": 360,
+        "height": 27,
+        "right": 360,
+        "bottom": 744,
+        "scroll": 360,
+        "client": 360
+      },
+      "issues": []
+    },
+    {
+      "name": "chromium-signals-390x844",
+      "viewport": [
+        390,
+        844
+      ],
+      "documentWidth": 390,
+      "bodyWidth": 390,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 104,
+        "right": 390,
+        "bottom": 104,
+        "scroll": 390,
+        "client": 390
+      },
+      "workspace": {
+        "x": 0,
+        "y": 104,
+        "width": 390,
+        "height": 684,
+        "right": 390,
+        "bottom": 788,
+        "scroll": 390,
+        "client": 390
+      },
+      "page": {
+        "x": 0,
+        "y": 104,
+        "width": 390,
+        "height": 657,
+        "right": 390,
+        "bottom": 761,
+        "scroll": 386,
+        "client": 386
+      },
+      "content": {
+        "x": 12,
+        "y": 239.25,
+        "width": 362,
+        "height": 5678.84375,
+        "right": 374,
+        "bottom": 5918.09375,
+        "scroll": 362,
+        "client": 362
+      },
+      "map": null,
+      "canvas": null,
+      "label": null,
+      "chart": {
+        "x": 12,
+        "y": 1410.953125,
+        "width": 362,
+        "height": 318.078125,
+        "right": 374,
+        "bottom": 1729.03125,
+        "scroll": 360,
+        "client": 360
+      },
+      "footer": {
+        "x": 0,
+        "y": 761,
+        "width": 390,
+        "height": 27,
+        "right": 390,
+        "bottom": 788,
+        "scroll": 390,
+        "client": 390
+      },
+      "issues": []
+    },
+    {
+      "name": "chromium-signals-430x932",
+      "viewport": [
+        430,
+        932
+      ],
+      "documentWidth": 430,
+      "bodyWidth": 430,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 430,
+        "height": 104,
+        "right": 430,
+        "bottom": 104,
+        "scroll": 430,
+        "client": 430
+      },
+      "workspace": {
+        "x": 0,
+        "y": 104,
+        "width": 430,
+        "height": 772,
+        "right": 430,
+        "bottom": 876,
+        "scroll": 430,
+        "client": 430
+      },
+      "page": {
+        "x": 0,
+        "y": 104,
+        "width": 430,
+        "height": 745,
+        "right": 430,
+        "bottom": 849,
+        "scroll": 426,
+        "client": 426
+      },
+      "content": {
+        "x": 16,
+        "y": 239.25,
+        "width": 394,
+        "height": 5368.796875,
+        "right": 410,
+        "bottom": 5608.046875,
+        "scroll": 394,
+        "client": 394
+      },
+      "map": null,
+      "canvas": null,
+      "label": null,
+      "chart": {
+        "x": 16,
+        "y": 1310.890625,
+        "width": 394,
+        "height": 327.375,
+        "right": 410,
+        "bottom": 1638.265625,
+        "scroll": 392,
+        "client": 392
+      },
+      "footer": {
+        "x": 0,
+        "y": 849,
+        "width": 430,
+        "height": 27,
+        "right": 430,
+        "bottom": 876,
+        "scroll": 430,
+        "client": 430
+      },
+      "issues": []
+    },
+    {
+      "name": "chromium-signals-768x1024",
+      "viewport": [
+        768,
+        1024
+      ],
+      "documentWidth": 768,
+      "bodyWidth": 768,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 768,
+        "height": 68,
+        "right": 768,
+        "bottom": 68,
+        "scroll": 768,
+        "client": 768
+      },
+      "workspace": {
+        "x": 60,
+        "y": 68,
+        "width": 708,
+        "height": 956,
+        "right": 768,
+        "bottom": 1024,
+        "scroll": 708,
+        "client": 708
+      },
+      "page": {
+        "x": 60,
+        "y": 68,
+        "width": 708,
+        "height": 928,
+        "right": 768,
+        "bottom": 996,
+        "scroll": 704,
+        "client": 704
+      },
+      "content": {
+        "x": 89,
+        "y": 217.25,
+        "width": 646,
+        "height": 5461.265625,
+        "right": 735,
+        "bottom": 5678.515625,
+        "scroll": 646,
+        "client": 646
+      },
+      "map": null,
+      "canvas": null,
+      "label": null,
+      "chart": {
+        "x": 89,
+        "y": 998.515625,
+        "width": 646,
+        "height": 415.21875,
+        "right": 735,
+        "bottom": 1413.734375,
+        "scroll": 644,
+        "client": 644
+      },
+      "footer": {
+        "x": 60,
+        "y": 996,
+        "width": 708,
+        "height": 28,
+        "right": 768,
+        "bottom": 1024,
+        "scroll": 708,
+        "client": 708
+      },
+      "issues": []
+    },
+    {
+      "name": "chromium-signals-1024x768",
+      "viewport": [
+        1024,
+        768
+      ],
+      "documentWidth": 1024,
+      "bodyWidth": 1024,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1024,
+        "height": 68,
+        "right": 1024,
+        "bottom": 68,
+        "scroll": 1024,
+        "client": 1024
+      },
+      "workspace": {
+        "x": 60,
+        "y": 68,
+        "width": 964,
+        "height": 700,
+        "right": 1024,
+        "bottom": 768,
+        "scroll": 964,
+        "client": 964
+      },
+      "page": {
+        "x": 60,
+        "y": 68,
+        "width": 964,
+        "height": 672,
+        "right": 1024,
+        "bottom": 740,
+        "scroll": 960,
+        "client": 960
+      },
+      "content": {
+        "x": 89,
+        "y": 217.25,
+        "width": 902,
+        "height": 5940.640625,
+        "right": 991,
+        "bottom": 6157.890625,
+        "scroll": 902,
+        "client": 902
+      },
+      "map": null,
+      "canvas": null,
+      "label": null,
+      "chart": {
+        "x": 89,
+        "y": 925.828125,
+        "width": 902,
+        "height": 500.296875,
+        "right": 991,
+        "bottom": 1426.125,
+        "scroll": 900,
+        "client": 900
+      },
+      "footer": {
+        "x": 60,
+        "y": 740,
+        "width": 964,
+        "height": 28,
+        "right": 1024,
+        "bottom": 768,
+        "scroll": 964,
+        "client": 964
+      },
+      "issues": []
+    },
+    {
+      "name": "chromium-signals-1280x800",
+      "viewport": [
+        1280,
+        800
+      ],
+      "documentWidth": 1280,
+      "bodyWidth": 1280,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 68,
+        "right": 1280,
+        "bottom": 68,
+        "scroll": 1280,
+        "client": 1280
+      },
+      "workspace": {
+        "x": 280,
+        "y": 68,
+        "width": 1000,
+        "height": 732,
+        "right": 1280,
+        "bottom": 800,
+        "scroll": 1000,
+        "client": 1000
+      },
+      "page": {
+        "x": 280,
+        "y": 68,
+        "width": 1000,
+        "height": 704,
+        "right": 1280,
+        "bottom": 772,
+        "scroll": 996,
+        "client": 996
+      },
+      "content": {
+        "x": 305,
+        "y": 214.25,
+        "width": 946,
+        "height": 3068.984375,
+        "right": 1251,
+        "bottom": 3283.234375,
+        "scroll": 946,
+        "client": 946
+      },
+      "map": null,
+      "canvas": null,
+      "label": null,
+      "chart": {
+        "x": 305,
+        "y": 928.03125,
+        "width": 464,
+        "height": 354.734375,
+        "right": 769,
+        "bottom": 1282.765625,
+        "scroll": 462,
+        "client": 462
+      },
+      "footer": {
+        "x": 280,
+        "y": 772,
+        "width": 1000,
+        "height": 28,
+        "right": 1280,
+        "bottom": 800,
+        "scroll": 1000,
+        "client": 1000
+      },
+      "issues": []
+    },
+    {
+      "name": "chromium-signals-1440x960",
+      "viewport": [
+        1440,
+        960
+      ],
+      "documentWidth": 1440,
+      "bodyWidth": 1440,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 68,
+        "right": 1440,
+        "bottom": 68,
+        "scroll": 1440,
+        "client": 1440
+      },
+      "workspace": {
+        "x": 324,
+        "y": 68,
+        "width": 1116,
+        "height": 892,
+        "right": 1440,
+        "bottom": 960,
+        "scroll": 1116,
+        "client": 1116
+      },
+      "page": {
+        "x": 324,
+        "y": 68,
+        "width": 1116,
+        "height": 864,
+        "right": 1440,
+        "bottom": 932,
+        "scroll": 1112,
+        "client": 1112
+      },
+      "content": {
+        "x": 360,
+        "y": 220.25,
+        "width": 1040,
+        "height": 2917.203125,
+        "right": 1400,
+        "bottom": 3137.453125,
+        "scroll": 1040,
+        "client": 1040
+      },
+      "map": null,
+      "canvas": null,
+      "label": null,
+      "chart": {
+        "x": 360,
+        "y": 754.21875,
+        "width": 511,
+        "height": 370.34375,
+        "right": 871,
+        "bottom": 1124.5625,
+        "scroll": 509,
+        "client": 509
+      },
+      "footer": {
+        "x": 324,
+        "y": 932,
+        "width": 1116,
+        "height": 28,
+        "right": 1440,
+        "bottom": 960,
+        "scroll": 1116,
+        "client": 1116
+      },
+      "issues": []
+    },
+    {
+      "name": "chromium-signals-1920x1080",
+      "viewport": [
+        1920,
+        1080
+      ],
+      "documentWidth": 1920,
+      "bodyWidth": 1920,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1920,
+        "height": 68,
+        "right": 1920,
+        "bottom": 68,
+        "scroll": 1920,
+        "client": 1920
+      },
+      "workspace": {
+        "x": 334,
+        "y": 68,
+        "width": 1586,
+        "height": 1012,
+        "right": 1920,
+        "bottom": 1080,
+        "scroll": 1586,
+        "client": 1586
+      },
+      "page": {
+        "x": 334,
+        "y": 68,
+        "width": 1586,
+        "height": 984,
+        "right": 1920,
+        "bottom": 1052,
+        "scroll": 1582,
+        "client": 1582
+      },
+      "content": {
+        "x": 391.59375,
+        "y": 223.25,
+        "width": 1466.8125,
+        "height": 3028.6875,
+        "right": 1858.40625,
+        "bottom": 3251.9375,
+        "scroll": 1467,
+        "client": 1467
+      },
+      "map": null,
+      "canvas": null,
+      "label": null,
+      "chart": {
+        "x": 391.59375,
+        "y": 757.03125,
+        "width": 724.40625,
+        "height": 441.28125,
+        "right": 1116,
+        "bottom": 1198.3125,
+        "scroll": 722,
+        "client": 722
+      },
+      "footer": {
+        "x": 334,
+        "y": 1052,
+        "width": 1586,
+        "height": 28,
+        "right": 1920,
+        "bottom": 1080,
+        "scroll": 1586,
+        "client": 1586
+      },
+      "issues": []
+    },
+    {
+      "name": "chromium-signals-2560x1440",
+      "viewport": [
+        2560,
+        1440
+      ],
+      "documentWidth": 2560,
+      "bodyWidth": 2560,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 2560,
+        "height": 68,
+        "right": 2560,
+        "bottom": 68,
+        "scroll": 2560,
+        "client": 2560
+      },
+      "workspace": {
+        "x": 334,
+        "y": 68,
+        "width": 2226,
+        "height": 1372,
+        "right": 2560,
+        "bottom": 1440,
+        "scroll": 2226,
+        "client": 2226
+      },
+      "page": {
+        "x": 334,
+        "y": 68,
+        "width": 2226,
+        "height": 1344,
+        "right": 2560,
+        "bottom": 1412,
+        "scroll": 2222,
+        "client": 2222
+      },
+      "content": {
+        "x": 575,
+        "y": 223.25,
+        "width": 1740,
+        "height": 3182.15625,
+        "right": 2315,
+        "bottom": 3405.40625,
+        "scroll": 1740,
+        "client": 1740
+      },
+      "map": null,
+      "canvas": null,
+      "label": null,
+      "chart": {
+        "x": 575,
+        "y": 757.03125,
+        "width": 861,
+        "height": 486.671875,
+        "right": 1436,
+        "bottom": 1243.703125,
+        "scroll": 859,
+        "client": 859
+      },
+      "footer": {
+        "x": 334,
+        "y": 1412,
+        "width": 2226,
+        "height": 28,
+        "right": 2560,
+        "bottom": 1440,
+        "scroll": 2226,
+        "client": 2226
+      },
+      "issues": []
+    },
+    {
+      "name": "chromium-signals-844x390",
+      "viewport": [
+        844,
+        390
+      ],
+      "documentWidth": 844,
+      "bodyWidth": 844,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 844,
+        "height": 54,
+        "right": 844,
+        "bottom": 54,
+        "scroll": 844,
+        "client": 844
+      },
+      "workspace": {
+        "x": 60,
+        "y": 54,
+        "width": 784,
+        "height": 336,
+        "right": 844,
+        "bottom": 390,
+        "scroll": 784,
+        "client": 784
+      },
+      "page": {
+        "x": 60,
+        "y": 54,
+        "width": 784,
+        "height": 308,
+        "right": 844,
+        "bottom": 362,
+        "scroll": 780,
+        "client": 780
+      },
+      "content": {
+        "x": 89,
+        "y": 203.25,
+        "width": 722,
+        "height": 5546.515625,
+        "right": 811,
+        "bottom": 5749.765625,
+        "scroll": 722,
+        "client": 722
+      },
+      "map": null,
+      "canvas": null,
+      "label": null,
+      "chart": {
+        "x": 89,
+        "y": 965.828125,
+        "width": 722,
+        "height": 440.484375,
+        "right": 811,
+        "bottom": 1406.3125,
+        "scroll": 720,
+        "client": 720
+      },
+      "footer": {
+        "x": 60,
+        "y": 362,
+        "width": 784,
+        "height": 28,
+        "right": 844,
+        "bottom": 390,
+        "scroll": 784,
+        "client": 784
+      },
+      "issues": []
+    },
+    {
+      "name": "chromium-signals-1024x600",
+      "viewport": [
+        1024,
+        600
+      ],
+      "documentWidth": 1024,
+      "bodyWidth": 1024,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1024,
+        "height": 68,
+        "right": 1024,
+        "bottom": 68,
+        "scroll": 1024,
+        "client": 1024
+      },
+      "workspace": {
+        "x": 60,
+        "y": 68,
+        "width": 964,
+        "height": 532,
+        "right": 1024,
+        "bottom": 600,
+        "scroll": 964,
+        "client": 964
+      },
+      "page": {
+        "x": 60,
+        "y": 68,
+        "width": 964,
+        "height": 504,
+        "right": 1024,
+        "bottom": 572,
+        "scroll": 960,
+        "client": 960
+      },
+      "content": {
+        "x": 89,
+        "y": 217.25,
+        "width": 902,
+        "height": 5940.640625,
+        "right": 991,
+        "bottom": 6157.890625,
+        "scroll": 902,
+        "client": 902
+      },
+      "map": null,
+      "canvas": null,
+      "label": null,
+      "chart": {
+        "x": 89,
+        "y": 925.828125,
+        "width": 902,
+        "height": 500.296875,
+        "right": 991,
+        "bottom": 1426.125,
+        "scroll": 900,
+        "client": 900
+      },
+      "footer": {
+        "x": 60,
+        "y": 572,
+        "width": 964,
+        "height": 28,
+        "right": 1024,
+        "bottom": 600,
+        "scroll": 964,
+        "client": 964
+      },
+      "issues": []
+    },
+    {
+      "name": "firefox-overview-320x568",
+      "viewport": [
+        320,
+        568
+      ],
+      "documentWidth": 320,
+      "bodyWidth": 320,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 320,
+        "height": 104,
+        "right": 320,
+        "bottom": 104,
+        "scroll": 320,
+        "client": 320
+      },
+      "workspace": {
+        "x": 0,
+        "y": 104,
+        "width": 320,
+        "height": 408,
+        "right": 320,
+        "bottom": 512,
+        "scroll": 320,
+        "client": 320
+      },
+      "page": null,
+      "content": null,
+      "map": {
+        "x": 0,
+        "y": 201,
+        "width": 320,
+        "height": 180,
+        "right": 320,
+        "bottom": 381,
+        "scroll": 320,
+        "client": 320
+      },
+      "canvas": {
+        "x": 0,
+        "y": 201,
+        "width": 320,
+        "height": 180,
+        "right": 320,
+        "bottom": 381,
+        "scroll": 320,
+        "client": 320
+      },
+      "label": {
+        "x": 12,
+        "y": 214,
+        "width": 240.8333282470703,
+        "height": 34.5,
+        "right": 252.8333282470703,
+        "bottom": 248.5,
+        "scroll": 239,
+        "client": 239
+      },
+      "chart": null,
+      "footer": {
+        "x": 0,
+        "y": 485,
+        "width": 320,
+        "height": 27,
+        "right": 320,
+        "bottom": 512,
+        "scroll": 320,
+        "client": 320
+      },
+      "issues": []
+    },
+    {
+      "name": "firefox-overview-360x800",
+      "viewport": [
+        360,
+        800
+      ],
+      "documentWidth": 360,
+      "bodyWidth": 360,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 360,
+        "height": 104,
+        "right": 360,
+        "bottom": 104,
+        "scroll": 360,
+        "client": 360
+      },
+      "workspace": {
+        "x": 0,
+        "y": 104,
+        "width": 360,
+        "height": 640,
+        "right": 360,
+        "bottom": 744,
+        "scroll": 360,
+        "client": 360
+      },
+      "page": null,
+      "content": null,
+      "map": {
+        "x": 0,
+        "y": 201,
+        "width": 360,
+        "height": 403,
+        "right": 360,
+        "bottom": 604,
+        "scroll": 360,
+        "client": 360
+      },
+      "canvas": {
+        "x": 0,
+        "y": 201,
+        "width": 360,
+        "height": 403,
+        "right": 360,
+        "bottom": 604,
+        "scroll": 360,
+        "client": 360
+      },
+      "label": {
+        "x": 12,
+        "y": 214,
+        "width": 240.8333282470703,
+        "height": 34.5,
+        "right": 252.8333282470703,
+        "bottom": 248.5,
+        "scroll": 239,
+        "client": 239
+      },
+      "chart": null,
+      "footer": {
+        "x": 0,
+        "y": 717,
+        "width": 360,
+        "height": 27,
+        "right": 360,
+        "bottom": 744,
+        "scroll": 360,
+        "client": 360
+      },
+      "issues": []
+    },
+    {
+      "name": "firefox-overview-390x844",
+      "viewport": [
+        390,
+        844
+      ],
+      "documentWidth": 390,
+      "bodyWidth": 390,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 104,
+        "right": 390,
+        "bottom": 104,
+        "scroll": 390,
+        "client": 390
+      },
+      "workspace": {
+        "x": 0,
+        "y": 104,
+        "width": 390,
+        "height": 684,
+        "right": 390,
+        "bottom": 788,
+        "scroll": 390,
+        "client": 390
+      },
+      "page": null,
+      "content": null,
+      "map": {
+        "x": 0,
+        "y": 201,
+        "width": 390,
+        "height": 447,
+        "right": 390,
+        "bottom": 648,
+        "scroll": 390,
+        "client": 390
+      },
+      "canvas": {
+        "x": 0,
+        "y": 201,
+        "width": 390,
+        "height": 447,
+        "right": 390,
+        "bottom": 648,
+        "scroll": 390,
+        "client": 390
+      },
+      "label": {
+        "x": 12,
+        "y": 214,
+        "width": 240.8333282470703,
+        "height": 34.5,
+        "right": 252.8333282470703,
+        "bottom": 248.5,
+        "scroll": 239,
+        "client": 239
+      },
+      "chart": null,
+      "footer": {
+        "x": 0,
+        "y": 761,
+        "width": 390,
+        "height": 27,
+        "right": 390,
+        "bottom": 788,
+        "scroll": 390,
+        "client": 390
+      },
+      "issues": []
+    },
+    {
+      "name": "firefox-overview-430x932",
+      "viewport": [
+        430,
+        932
+      ],
+      "documentWidth": 430,
+      "bodyWidth": 430,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 430,
+        "height": 104,
+        "right": 430,
+        "bottom": 104,
+        "scroll": 430,
+        "client": 430
+      },
+      "workspace": {
+        "x": 0,
+        "y": 104,
+        "width": 430,
+        "height": 772,
+        "right": 430,
+        "bottom": 876,
+        "scroll": 430,
+        "client": 430
+      },
+      "page": null,
+      "content": null,
+      "map": {
+        "x": 0,
+        "y": 201,
+        "width": 430,
+        "height": 535,
+        "right": 430,
+        "bottom": 736,
+        "scroll": 430,
+        "client": 430
+      },
+      "canvas": {
+        "x": 0,
+        "y": 201,
+        "width": 430,
+        "height": 535,
+        "right": 430,
+        "bottom": 736,
+        "scroll": 430,
+        "client": 430
+      },
+      "label": {
+        "x": 12,
+        "y": 214,
+        "width": 240.8333282470703,
+        "height": 34.5,
+        "right": 252.8333282470703,
+        "bottom": 248.5,
+        "scroll": 239,
+        "client": 239
+      },
+      "chart": null,
+      "footer": {
+        "x": 0,
+        "y": 849,
+        "width": 430,
+        "height": 27,
+        "right": 430,
+        "bottom": 876,
+        "scroll": 430,
+        "client": 430
+      },
+      "issues": []
+    },
+    {
+      "name": "firefox-overview-768x1024",
+      "viewport": [
+        768,
+        1024
+      ],
+      "documentWidth": 768,
+      "bodyWidth": 768,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 768,
+        "height": 68,
+        "right": 768,
+        "bottom": 68,
+        "scroll": 768,
+        "client": 768
+      },
+      "workspace": {
+        "x": 60,
+        "y": 68,
+        "width": 708,
+        "height": 956,
+        "right": 768,
+        "bottom": 1024,
+        "scroll": 708,
+        "client": 708
+      },
+      "page": null,
+      "content": null,
+      "map": {
+        "x": 60,
+        "y": 163,
+        "width": 430,
+        "height": 725,
+        "right": 490,
+        "bottom": 888,
+        "scroll": 430,
+        "client": 430
+      },
+      "canvas": {
+        "x": 60,
+        "y": 163,
+        "width": 430,
+        "height": 725,
+        "right": 490,
+        "bottom": 888,
+        "scroll": 430,
+        "client": 430
+      },
+      "label": {
+        "x": 72,
+        "y": 178,
+        "width": 240.8333282470703,
+        "height": 32,
+        "right": 312.8333282470703,
+        "bottom": 210,
+        "scroll": 239,
+        "client": 239
+      },
+      "chart": null,
+      "footer": {
+        "x": 60,
+        "y": 996,
+        "width": 708,
+        "height": 28,
+        "right": 768,
+        "bottom": 1024,
+        "scroll": 708,
+        "client": 708
+      },
+      "issues": []
+    },
+    {
+      "name": "firefox-overview-1024x768",
+      "viewport": [
+        1024,
+        768
+      ],
+      "documentWidth": 1024,
+      "bodyWidth": 1024,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1024,
+        "height": 68,
+        "right": 1024,
+        "bottom": 68,
+        "scroll": 1024,
+        "client": 1024
+      },
+      "workspace": {
+        "x": 60,
+        "y": 68,
+        "width": 964,
+        "height": 700,
+        "right": 1024,
+        "bottom": 768,
+        "scroll": 964,
+        "client": 964
+      },
+      "page": null,
+      "content": null,
+      "map": {
+        "x": 60,
+        "y": 163,
+        "width": 672,
+        "height": 469,
+        "right": 732,
+        "bottom": 632,
+        "scroll": 672,
+        "client": 672
+      },
+      "canvas": {
+        "x": 60,
+        "y": 163,
+        "width": 672,
+        "height": 469,
+        "right": 732,
+        "bottom": 632,
+        "scroll": 672,
+        "client": 672
+      },
+      "label": {
+        "x": 81,
+        "y": 533,
+        "width": 244.8333282470703,
+        "height": 32,
+        "right": 325.8333282470703,
+        "bottom": 565,
+        "scroll": 243,
+        "client": 243
+      },
+      "chart": null,
+      "footer": {
+        "x": 60,
+        "y": 740,
+        "width": 964,
+        "height": 28,
+        "right": 1024,
+        "bottom": 768,
+        "scroll": 964,
+        "client": 964
+      },
+      "issues": []
+    },
+    {
+      "name": "firefox-overview-1280x800",
+      "viewport": [
+        1280,
+        800
+      ],
+      "documentWidth": 1280,
+      "bodyWidth": 1280,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 68,
+        "right": 1280,
+        "bottom": 68,
+        "scroll": 1280,
+        "client": 1280
+      },
+      "workspace": {
+        "x": 280,
+        "y": 68,
+        "width": 1000,
+        "height": 732,
+        "right": 1280,
+        "bottom": 800,
+        "scroll": 1000,
+        "client": 1000
+      },
+      "page": null,
+      "content": null,
+      "map": {
+        "x": 280,
+        "y": 163,
+        "width": 720,
+        "height": 501,
+        "right": 1000,
+        "bottom": 664,
+        "scroll": 720,
+        "client": 720
+      },
+      "canvas": {
+        "x": 280,
+        "y": 163,
+        "width": 720,
+        "height": 501,
+        "right": 1000,
+        "bottom": 664,
+        "scroll": 720,
+        "client": 720
+      },
+      "label": {
+        "x": 301,
+        "y": 565,
+        "width": 244.8333282470703,
+        "height": 32,
+        "right": 545.8333282470703,
+        "bottom": 597,
+        "scroll": 243,
+        "client": 243
+      },
+      "chart": null,
+      "footer": {
+        "x": 280,
+        "y": 772,
+        "width": 1000,
+        "height": 28,
+        "right": 1280,
+        "bottom": 800,
+        "scroll": 1000,
+        "client": 1000
+      },
+      "issues": []
+    },
+    {
+      "name": "firefox-overview-1440x960",
+      "viewport": [
+        1440,
+        960
+      ],
+      "documentWidth": 1440,
+      "bodyWidth": 1440,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 68,
+        "right": 1440,
+        "bottom": 68,
+        "scroll": 1440,
+        "client": 1440
+      },
+      "workspace": {
+        "x": 324,
+        "y": 68,
+        "width": 1116,
+        "height": 892,
+        "right": 1440,
+        "bottom": 960,
+        "scroll": 1116,
+        "client": 1116
+      },
+      "page": null,
+      "content": null,
+      "map": {
+        "x": 324,
+        "y": 163,
+        "width": 812,
+        "height": 661,
+        "right": 1136,
+        "bottom": 824,
+        "scroll": 812,
+        "client": 812
+      },
+      "canvas": {
+        "x": 324,
+        "y": 163,
+        "width": 812,
+        "height": 661,
+        "right": 1136,
+        "bottom": 824,
+        "scroll": 812,
+        "client": 812
+      },
+      "label": {
+        "x": 345,
+        "y": 725,
+        "width": 244.8333282470703,
+        "height": 32,
+        "right": 589.8333282470703,
+        "bottom": 757,
+        "scroll": 243,
+        "client": 243
+      },
+      "chart": null,
+      "footer": {
+        "x": 324,
+        "y": 932,
+        "width": 1116,
+        "height": 28,
+        "right": 1440,
+        "bottom": 960,
+        "scroll": 1116,
+        "client": 1116
+      },
+      "issues": []
+    },
+    {
+      "name": "firefox-overview-1920x1080",
+      "viewport": [
+        1920,
+        1080
+      ],
+      "documentWidth": 1920,
+      "bodyWidth": 1920,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1920,
+        "height": 68,
+        "right": 1920,
+        "bottom": 68,
+        "scroll": 1920,
+        "client": 1920
+      },
+      "workspace": {
+        "x": 334,
+        "y": 68,
+        "width": 1586,
+        "height": 1012,
+        "right": 1920,
+        "bottom": 1080,
+        "scroll": 1586,
+        "client": 1586
+      },
+      "page": null,
+      "content": null,
+      "map": {
+        "x": 334,
+        "y": 165,
+        "width": 1246,
+        "height": 776,
+        "right": 1580,
+        "bottom": 941,
+        "scroll": 1246,
+        "client": 1246
+      },
+      "canvas": {
+        "x": 334,
+        "y": 165,
+        "width": 1246,
+        "height": 776,
+        "right": 1580,
+        "bottom": 941,
+        "scroll": 1246,
+        "client": 1246
+      },
+      "label": {
+        "x": 355,
+        "y": 840,
+        "width": 248.8333282470703,
+        "height": 34,
+        "right": 603.8333282470703,
+        "bottom": 874,
+        "scroll": 247,
+        "client": 247
+      },
+      "chart": null,
+      "footer": {
+        "x": 334,
+        "y": 1052,
+        "width": 1586,
+        "height": 28,
+        "right": 1920,
+        "bottom": 1080,
+        "scroll": 1586,
+        "client": 1586
+      },
+      "issues": []
+    },
+    {
+      "name": "firefox-overview-2560x1440",
+      "viewport": [
+        2560,
+        1440
+      ],
+      "documentWidth": 2560,
+      "bodyWidth": 2560,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 2560,
+        "height": 68,
+        "right": 2560,
+        "bottom": 68,
+        "scroll": 2560,
+        "client": 2560
+      },
+      "workspace": {
+        "x": 334,
+        "y": 68,
+        "width": 2226,
+        "height": 1372,
+        "right": 2560,
+        "bottom": 1440,
+        "scroll": 2226,
+        "client": 2226
+      },
+      "page": null,
+      "content": null,
+      "map": {
+        "x": 334,
+        "y": 165,
+        "width": 1886,
+        "height": 1136,
+        "right": 2220,
+        "bottom": 1301,
+        "scroll": 1886,
+        "client": 1886
+      },
+      "canvas": {
+        "x": 334,
+        "y": 165,
+        "width": 1886,
+        "height": 1136,
+        "right": 2220,
+        "bottom": 1301,
+        "scroll": 1886,
+        "client": 1886
+      },
+      "label": {
+        "x": 355,
+        "y": 1200,
+        "width": 248.8333282470703,
+        "height": 34,
+        "right": 603.8333282470703,
+        "bottom": 1234,
+        "scroll": 247,
+        "client": 247
+      },
+      "chart": null,
+      "footer": {
+        "x": 334,
+        "y": 1412,
+        "width": 2226,
+        "height": 28,
+        "right": 2560,
+        "bottom": 1440,
+        "scroll": 2226,
+        "client": 2226
+      },
+      "issues": []
+    },
+    {
+      "name": "firefox-overview-844x390",
+      "viewport": [
+        844,
+        390
+      ],
+      "documentWidth": 844,
+      "bodyWidth": 844,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 844,
+        "height": 54,
+        "right": 844,
+        "bottom": 54,
+        "scroll": 844,
+        "client": 844
+      },
+      "workspace": {
+        "x": 60,
+        "y": 54,
+        "width": 784,
+        "height": 336,
+        "right": 844,
+        "bottom": 390,
+        "scroll": 784,
+        "client": 784
+      },
+      "page": null,
+      "content": null,
+      "map": {
+        "x": 60,
+        "y": 127,
+        "width": 506,
+        "height": 180,
+        "right": 566,
+        "bottom": 307,
+        "scroll": 506,
+        "client": 506
+      },
+      "canvas": {
+        "x": 60,
+        "y": 127,
+        "width": 506,
+        "height": 180,
+        "right": 566,
+        "bottom": 307,
+        "scroll": 506,
+        "client": 506
+      },
+      "label": null,
+      "chart": null,
+      "footer": {
+        "x": 60,
+        "y": 362,
+        "width": 784,
+        "height": 28,
+        "right": 844,
+        "bottom": 390,
+        "scroll": 784,
+        "client": 784
+      },
+      "issues": []
+    },
+    {
+      "name": "firefox-overview-1024x600",
+      "viewport": [
+        1024,
+        600
+      ],
+      "documentWidth": 1024,
+      "bodyWidth": 1024,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1024,
+        "height": 68,
+        "right": 1024,
+        "bottom": 68,
+        "scroll": 1024,
+        "client": 1024
+      },
+      "workspace": {
+        "x": 60,
+        "y": 68,
+        "width": 964,
+        "height": 532,
+        "right": 1024,
+        "bottom": 600,
+        "scroll": 964,
+        "client": 964
+      },
+      "page": null,
+      "content": null,
+      "map": {
+        "x": 60,
+        "y": 163,
+        "width": 672,
+        "height": 301,
+        "right": 732,
+        "bottom": 464,
+        "scroll": 672,
+        "client": 672
+      },
+      "canvas": {
+        "x": 60,
+        "y": 163,
+        "width": 672,
+        "height": 301,
+        "right": 732,
+        "bottom": 464,
+        "scroll": 672,
+        "client": 672
+      },
+      "label": {
+        "x": 81,
+        "y": 365,
+        "width": 244.8333282470703,
+        "height": 32,
+        "right": 325.8333282470703,
+        "bottom": 397,
+        "scroll": 243,
+        "client": 243
+      },
+      "chart": null,
+      "footer": {
+        "x": 60,
+        "y": 572,
+        "width": 964,
+        "height": 28,
+        "right": 1024,
+        "bottom": 600,
+        "scroll": 964,
+        "client": 964
+      },
+      "issues": []
+    },
+    {
+      "name": "firefox-signals-320x568",
+      "viewport": [
+        320,
+        568
+      ],
+      "documentWidth": 320,
+      "bodyWidth": 320,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 320,
+        "height": 104,
+        "right": 320,
+        "bottom": 104,
+        "scroll": 320,
+        "client": 320
+      },
+      "workspace": {
+        "x": 0,
+        "y": 104,
+        "width": 320,
+        "height": 408,
+        "right": 320,
+        "bottom": 512,
+        "scroll": 320,
+        "client": 320
+      },
+      "page": {
+        "x": 0,
+        "y": 104,
+        "width": 320,
+        "height": 381,
+        "right": 320,
+        "bottom": 485,
+        "scroll": 320,
+        "client": 320
+      },
+      "content": {
+        "x": 12,
+        "y": 239.25,
+        "width": 296,
+        "height": 6112.13330078125,
+        "right": 308,
+        "bottom": 6351.38330078125,
+        "scroll": 296,
+        "client": 296
+      },
+      "map": null,
+      "canvas": null,
+      "label": null,
+      "chart": {
+        "x": 12,
+        "y": 1484.75,
+        "width": 296,
+        "height": 326.26666259765625,
+        "right": 308,
+        "bottom": 1811.0166625976562,
+        "scroll": 294,
+        "client": 294
+      },
+      "footer": {
+        "x": 0,
+        "y": 485,
+        "width": 320,
+        "height": 27,
+        "right": 320,
+        "bottom": 512,
+        "scroll": 320,
+        "client": 320
+      },
+      "issues": []
+    },
+    {
+      "name": "firefox-signals-360x800",
+      "viewport": [
+        360,
+        800
+      ],
+      "documentWidth": 360,
+      "bodyWidth": 360,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 360,
+        "height": 104,
+        "right": 360,
+        "bottom": 104,
+        "scroll": 360,
+        "client": 360
+      },
+      "workspace": {
+        "x": 0,
+        "y": 104,
+        "width": 360,
+        "height": 640,
+        "right": 360,
+        "bottom": 744,
+        "scroll": 360,
+        "client": 360
+      },
+      "page": {
+        "x": 0,
+        "y": 104,
+        "width": 360,
+        "height": 613,
+        "right": 360,
+        "bottom": 717,
+        "scroll": 360,
+        "client": 360
+      },
+      "content": {
+        "x": 12,
+        "y": 239.25,
+        "width": 336,
+        "height": 5894.63330078125,
+        "right": 348,
+        "bottom": 6133.88330078125,
+        "scroll": 336,
+        "client": 336
+      },
+      "map": null,
+      "canvas": null,
+      "label": null,
+      "chart": {
+        "x": 12,
+        "y": 1412.050048828125,
+        "width": 336,
+        "height": 320.8666687011719,
+        "right": 348,
+        "bottom": 1732.9167175292969,
+        "scroll": 334,
+        "client": 334
+      },
+      "footer": {
+        "x": 0,
+        "y": 717,
+        "width": 360,
+        "height": 27,
+        "right": 360,
+        "bottom": 744,
+        "scroll": 360,
+        "client": 360
+      },
+      "issues": []
+    },
+    {
+      "name": "firefox-signals-390x844",
+      "viewport": [
+        390,
+        844
+      ],
+      "documentWidth": 390,
+      "bodyWidth": 390,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 104,
+        "right": 390,
+        "bottom": 104,
+        "scroll": 390,
+        "client": 390
+      },
+      "workspace": {
+        "x": 0,
+        "y": 104,
+        "width": 390,
+        "height": 684,
+        "right": 390,
+        "bottom": 788,
+        "scroll": 390,
+        "client": 390
+      },
+      "page": {
+        "x": 0,
+        "y": 104,
+        "width": 390,
+        "height": 657,
+        "right": 390,
+        "bottom": 761,
+        "scroll": 390,
+        "client": 390
+      },
+      "content": {
+        "x": 12,
+        "y": 239.25,
+        "width": 366,
+        "height": 5627.93310546875,
+        "right": 378,
+        "bottom": 5867.18310546875,
+        "scroll": 366,
+        "client": 366
+      },
+      "map": null,
+      "canvas": null,
+      "label": null,
+      "chart": {
+        "x": 12,
+        "y": 1376.1500244140625,
+        "width": 366,
+        "height": 319.433349609375,
+        "right": 378,
+        "bottom": 1695.5833740234375,
+        "scroll": 364,
+        "client": 364
+      },
+      "footer": {
+        "x": 0,
+        "y": 761,
+        "width": 390,
+        "height": 27,
+        "right": 390,
+        "bottom": 788,
+        "scroll": 390,
+        "client": 390
+      },
+      "issues": []
+    },
+    {
+      "name": "firefox-signals-430x932",
+      "viewport": [
+        430,
+        932
+      ],
+      "documentWidth": 430,
+      "bodyWidth": 430,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 430,
+        "height": 104,
+        "right": 430,
+        "bottom": 104,
+        "scroll": 430,
+        "client": 430
+      },
+      "workspace": {
+        "x": 0,
+        "y": 104,
+        "width": 430,
+        "height": 772,
+        "right": 430,
+        "bottom": 876,
+        "scroll": 430,
+        "client": 430
+      },
+      "page": {
+        "x": 0,
+        "y": 104,
+        "width": 430,
+        "height": 745,
+        "right": 430,
+        "bottom": 849,
+        "scroll": 430,
+        "client": 430
+      },
+      "content": {
+        "x": 16,
+        "y": 239.25,
+        "width": 398,
+        "height": 5361.2001953125,
+        "right": 414,
+        "bottom": 5600.4501953125,
+        "scroll": 398,
+        "client": 398
+      },
+      "map": null,
+      "canvas": null,
+      "label": null,
+      "chart": {
+        "x": 16,
+        "y": 1294.75,
+        "width": 398,
+        "height": 328.73333740234375,
+        "right": 414,
+        "bottom": 1623.4833374023438,
+        "scroll": 396,
+        "client": 396
+      },
+      "footer": {
+        "x": 0,
+        "y": 849,
+        "width": 430,
+        "height": 27,
+        "right": 430,
+        "bottom": 876,
+        "scroll": 430,
+        "client": 430
+      },
+      "issues": []
+    },
+    {
+      "name": "firefox-signals-768x1024",
+      "viewport": [
+        768,
+        1024
+      ],
+      "documentWidth": 768,
+      "bodyWidth": 768,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 768,
+        "height": 68,
+        "right": 768,
+        "bottom": 68,
+        "scroll": 768,
+        "client": 768
+      },
+      "workspace": {
+        "x": 60,
+        "y": 68,
+        "width": 708,
+        "height": 956,
+        "right": 768,
+        "bottom": 1024,
+        "scroll": 708,
+        "client": 708
+      },
+      "page": {
+        "x": 60,
+        "y": 68,
+        "width": 708,
+        "height": 928,
+        "right": 768,
+        "bottom": 996,
+        "scroll": 708,
+        "client": 708
+      },
+      "content": {
+        "x": 89,
+        "y": 217.25,
+        "width": 650,
+        "height": 5473.64990234375,
+        "right": 739,
+        "bottom": 5690.89990234375,
+        "scroll": 650,
+        "client": 650
+      },
+      "map": null,
+      "canvas": null,
+      "label": null,
+      "chart": {
+        "x": 89,
+        "y": 998.5499877929688,
+        "width": 650,
+        "height": 416.566650390625,
+        "right": 739,
+        "bottom": 1415.1166381835938,
+        "scroll": 648,
+        "client": 648
+      },
+      "footer": {
+        "x": 60,
+        "y": 996,
+        "width": 708,
+        "height": 28,
+        "right": 768,
+        "bottom": 1024,
+        "scroll": 708,
+        "client": 708
+      },
+      "issues": []
+    },
+    {
+      "name": "firefox-signals-1024x768",
+      "viewport": [
+        1024,
+        768
+      ],
+      "documentWidth": 1024,
+      "bodyWidth": 1024,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1024,
+        "height": 68,
+        "right": 1024,
+        "bottom": 68,
+        "scroll": 1024,
+        "client": 1024
+      },
+      "workspace": {
+        "x": 60,
+        "y": 68,
+        "width": 964,
+        "height": 700,
+        "right": 1024,
+        "bottom": 768,
+        "scroll": 964,
+        "client": 964
+      },
+      "page": {
+        "x": 60,
+        "y": 68,
+        "width": 964,
+        "height": 672,
+        "right": 1024,
+        "bottom": 740,
+        "scroll": 964,
+        "client": 964
+      },
+      "content": {
+        "x": 89,
+        "y": 217.25,
+        "width": 906,
+        "height": 5953,
+        "right": 995,
+        "bottom": 6170.25,
+        "scroll": 906,
+        "client": 906
+      },
+      "map": null,
+      "canvas": null,
+      "label": null,
+      "chart": {
+        "x": 89,
+        "y": 925.8499755859375,
+        "width": 906,
+        "height": 501.6499938964844,
+        "right": 995,
+        "bottom": 1427.4999694824219,
+        "scroll": 904,
+        "client": 904
+      },
+      "footer": {
+        "x": 60,
+        "y": 740,
+        "width": 964,
+        "height": 28,
+        "right": 1024,
+        "bottom": 768,
+        "scroll": 964,
+        "client": 964
+      },
+      "issues": []
+    },
+    {
+      "name": "firefox-signals-1280x800",
+      "viewport": [
+        1280,
+        800
+      ],
+      "documentWidth": 1280,
+      "bodyWidth": 1280,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 68,
+        "right": 1280,
+        "bottom": 68,
+        "scroll": 1280,
+        "client": 1280
+      },
+      "workspace": {
+        "x": 280,
+        "y": 68,
+        "width": 1000,
+        "height": 732,
+        "right": 1280,
+        "bottom": 800,
+        "scroll": 1000,
+        "client": 1000
+      },
+      "page": {
+        "x": 280,
+        "y": 68,
+        "width": 1000,
+        "height": 704,
+        "right": 1280,
+        "bottom": 772,
+        "scroll": 1000,
+        "client": 1000
+      },
+      "content": {
+        "x": 305,
+        "y": 214.25,
+        "width": 950,
+        "height": 3073.25,
+        "right": 1255,
+        "bottom": 3287.5,
+        "scroll": 950,
+        "client": 950
+      },
+      "map": null,
+      "canvas": null,
+      "label": null,
+      "chart": {
+        "x": 305,
+        "y": 928.0499877929688,
+        "width": 466,
+        "height": 355.4166564941406,
+        "right": 771,
+        "bottom": 1283.4666442871094,
+        "scroll": 464,
+        "client": 464
+      },
+      "footer": {
+        "x": 280,
+        "y": 772,
+        "width": 1000,
+        "height": 28,
+        "right": 1280,
+        "bottom": 800,
+        "scroll": 1000,
+        "client": 1000
+      },
+      "issues": []
+    },
+    {
+      "name": "firefox-signals-1440x960",
+      "viewport": [
+        1440,
+        960
+      ],
+      "documentWidth": 1440,
+      "bodyWidth": 1440,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 68,
+        "right": 1440,
+        "bottom": 68,
+        "scroll": 1440,
+        "client": 1440
+      },
+      "workspace": {
+        "x": 324,
+        "y": 68,
+        "width": 1116,
+        "height": 892,
+        "right": 1440,
+        "bottom": 960,
+        "scroll": 1116,
+        "client": 1116
+      },
+      "page": {
+        "x": 324,
+        "y": 68,
+        "width": 1116,
+        "height": 864,
+        "right": 1440,
+        "bottom": 932,
+        "scroll": 1116,
+        "client": 1116
+      },
+      "content": {
+        "x": 360,
+        "y": 220.25,
+        "width": 1044,
+        "height": 2919.5,
+        "right": 1404,
+        "bottom": 3139.75,
+        "scroll": 1044,
+        "client": 1044
+      },
+      "map": null,
+      "canvas": null,
+      "label": null,
+      "chart": {
+        "x": 360,
+        "y": 754.25,
+        "width": 513,
+        "height": 371.0333251953125,
+        "right": 873,
+        "bottom": 1125.2833251953125,
+        "scroll": 511,
+        "client": 511
+      },
+      "footer": {
+        "x": 324,
+        "y": 932,
+        "width": 1116,
+        "height": 28,
+        "right": 1440,
+        "bottom": 960,
+        "scroll": 1116,
+        "client": 1116
+      },
+      "issues": []
+    },
+    {
+      "name": "firefox-signals-1920x1080",
+      "viewport": [
+        1920,
+        1080
+      ],
+      "documentWidth": 1920,
+      "bodyWidth": 1920,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1920,
+        "height": 68,
+        "right": 1920,
+        "bottom": 68,
+        "scroll": 1920,
+        "client": 1920
+      },
+      "workspace": {
+        "x": 334,
+        "y": 68,
+        "width": 1586,
+        "height": 1012,
+        "right": 1920,
+        "bottom": 1080,
+        "scroll": 1586,
+        "client": 1586
+      },
+      "page": {
+        "x": 334,
+        "y": 68,
+        "width": 1586,
+        "height": 984,
+        "right": 1920,
+        "bottom": 1052,
+        "scroll": 1586,
+        "client": 1586
+      },
+      "content": {
+        "x": 391.6000061035156,
+        "y": 223.25,
+        "width": 1470.800048828125,
+        "height": 3030.89990234375,
+        "right": 1862.4000549316406,
+        "bottom": 3254.14990234375,
+        "scroll": 1471,
+        "client": 1471
+      },
+      "map": null,
+      "canvas": null,
+      "label": null,
+      "chart": {
+        "x": 391.6000061035156,
+        "y": 757.0499877929688,
+        "width": 726.4000244140625,
+        "height": 441.9666748046875,
+        "right": 1118.0000305175781,
+        "bottom": 1199.0166625976562,
+        "scroll": 724,
+        "client": 724
+      },
+      "footer": {
+        "x": 334,
+        "y": 1052,
+        "width": 1586,
+        "height": 28,
+        "right": 1920,
+        "bottom": 1080,
+        "scroll": 1586,
+        "client": 1586
+      },
+      "issues": []
+    },
+    {
+      "name": "firefox-signals-2560x1440",
+      "viewport": [
+        2560,
+        1440
+      ],
+      "documentWidth": 2560,
+      "bodyWidth": 2560,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 2560,
+        "height": 68,
+        "right": 2560,
+        "bottom": 68,
+        "scroll": 2560,
+        "client": 2560
+      },
+      "workspace": {
+        "x": 334,
+        "y": 68,
+        "width": 2226,
+        "height": 1372,
+        "right": 2560,
+        "bottom": 1440,
+        "scroll": 2226,
+        "client": 2226
+      },
+      "page": {
+        "x": 334,
+        "y": 68,
+        "width": 2226,
+        "height": 1344,
+        "right": 2560,
+        "bottom": 1412,
+        "scroll": 2226,
+        "client": 2226
+      },
+      "content": {
+        "x": 577,
+        "y": 223.25,
+        "width": 1740,
+        "height": 3182.38330078125,
+        "right": 2317,
+        "bottom": 3405.63330078125,
+        "scroll": 1740,
+        "client": 1740
+      },
+      "map": null,
+      "canvas": null,
+      "label": null,
+      "chart": {
+        "x": 577,
+        "y": 757.0499877929688,
+        "width": 861,
+        "height": 486.70001220703125,
+        "right": 1438,
+        "bottom": 1243.75,
+        "scroll": 859,
+        "client": 859
+      },
+      "footer": {
+        "x": 334,
+        "y": 1412,
+        "width": 2226,
+        "height": 28,
+        "right": 2560,
+        "bottom": 1440,
+        "scroll": 2226,
+        "client": 2226
+      },
+      "issues": []
+    },
+    {
+      "name": "firefox-signals-844x390",
+      "viewport": [
+        844,
+        390
+      ],
+      "documentWidth": 844,
+      "bodyWidth": 844,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 844,
+        "height": 54,
+        "right": 844,
+        "bottom": 54,
+        "scroll": 844,
+        "client": 844
+      },
+      "workspace": {
+        "x": 60,
+        "y": 54,
+        "width": 784,
+        "height": 336,
+        "right": 844,
+        "bottom": 390,
+        "scroll": 784,
+        "client": 784
+      },
+      "page": {
+        "x": 60,
+        "y": 54,
+        "width": 784,
+        "height": 308,
+        "right": 844,
+        "bottom": 362,
+        "scroll": 784,
+        "client": 784
+      },
+      "content": {
+        "x": 89,
+        "y": 203.25,
+        "width": 726,
+        "height": 5558.85009765625,
+        "right": 815,
+        "bottom": 5762.10009765625,
+        "scroll": 726,
+        "client": 726
+      },
+      "map": null,
+      "canvas": null,
+      "label": null,
+      "chart": {
+        "x": 89,
+        "y": 965.8499755859375,
+        "width": 726,
+        "height": 441.83331298828125,
+        "right": 815,
+        "bottom": 1407.6832885742188,
+        "scroll": 724,
+        "client": 724
+      },
+      "footer": {
+        "x": 60,
+        "y": 362,
+        "width": 784,
+        "height": 28,
+        "right": 844,
+        "bottom": 390,
+        "scroll": 784,
+        "client": 784
+      },
+      "issues": []
+    },
+    {
+      "name": "firefox-signals-1024x600",
+      "viewport": [
+        1024,
+        600
+      ],
+      "documentWidth": 1024,
+      "bodyWidth": 1024,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1024,
+        "height": 68,
+        "right": 1024,
+        "bottom": 68,
+        "scroll": 1024,
+        "client": 1024
+      },
+      "workspace": {
+        "x": 60,
+        "y": 68,
+        "width": 964,
+        "height": 532,
+        "right": 1024,
+        "bottom": 600,
+        "scroll": 964,
+        "client": 964
+      },
+      "page": {
+        "x": 60,
+        "y": 68,
+        "width": 964,
+        "height": 504,
+        "right": 1024,
+        "bottom": 572,
+        "scroll": 964,
+        "client": 964
+      },
+      "content": {
+        "x": 89,
+        "y": 217.25,
+        "width": 906,
+        "height": 5953,
+        "right": 995,
+        "bottom": 6170.25,
+        "scroll": 906,
+        "client": 906
+      },
+      "map": null,
+      "canvas": null,
+      "label": null,
+      "chart": {
+        "x": 89,
+        "y": 925.8499755859375,
+        "width": 906,
+        "height": 501.6499938964844,
+        "right": 995,
+        "bottom": 1427.4999694824219,
+        "scroll": 904,
+        "client": 904
+      },
+      "footer": {
+        "x": 60,
+        "y": 572,
+        "width": 964,
+        "height": 28,
+        "right": 1024,
+        "bottom": 600,
+        "scroll": 964,
+        "client": 964
+      },
+      "issues": []
+    },
+    {
+      "name": "webkit-overview-320x568",
+      "viewport": [
+        320,
+        568
+      ],
+      "documentWidth": 320,
+      "bodyWidth": 320,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 320,
+        "height": 104,
+        "right": 320,
+        "bottom": 104,
+        "scroll": 320,
+        "client": 320
+      },
+      "workspace": {
+        "x": 0,
+        "y": 104,
+        "width": 320,
+        "height": 408,
+        "right": 320,
+        "bottom": 512,
+        "scroll": 320,
+        "client": 320
+      },
+      "page": null,
+      "content": null,
+      "map": {
+        "x": 0,
+        "y": 201,
+        "width": 320,
+        "height": 180,
+        "right": 320,
+        "bottom": 381,
+        "scroll": 320,
+        "client": 320
+      },
+      "canvas": {
+        "x": 0,
+        "y": 201,
+        "width": 320,
+        "height": 180,
+        "right": 320,
+        "bottom": 381,
+        "scroll": 320,
+        "client": 320
+      },
+      "label": {
+        "x": 12,
+        "y": 214,
+        "width": 240.84375,
+        "height": 34.5,
+        "right": 252.84375,
+        "bottom": 248.5,
+        "scroll": 239,
+        "client": 239
+      },
+      "chart": null,
+      "footer": {
+        "x": 0,
+        "y": 485,
+        "width": 320,
+        "height": 27,
+        "right": 320,
+        "bottom": 512,
+        "scroll": 320,
+        "client": 320
+      },
+      "issues": []
+    },
+    {
+      "name": "webkit-overview-360x800",
+      "viewport": [
+        360,
+        800
+      ],
+      "documentWidth": 360,
+      "bodyWidth": 360,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 360,
+        "height": 104,
+        "right": 360,
+        "bottom": 104,
+        "scroll": 360,
+        "client": 360
+      },
+      "workspace": {
+        "x": 0,
+        "y": 104,
+        "width": 360,
+        "height": 640,
+        "right": 360,
+        "bottom": 744,
+        "scroll": 360,
+        "client": 360
+      },
+      "page": null,
+      "content": null,
+      "map": {
+        "x": 0,
+        "y": 201,
+        "width": 360,
+        "height": 403,
+        "right": 360,
+        "bottom": 604,
+        "scroll": 360,
+        "client": 360
+      },
+      "canvas": {
+        "x": 0,
+        "y": 201,
+        "width": 360,
+        "height": 403,
+        "right": 360,
+        "bottom": 604,
+        "scroll": 360,
+        "client": 360
+      },
+      "label": {
+        "x": 12,
+        "y": 214,
+        "width": 240.84375,
+        "height": 34.5,
+        "right": 252.84375,
+        "bottom": 248.5,
+        "scroll": 239,
+        "client": 239
+      },
+      "chart": null,
+      "footer": {
+        "x": 0,
+        "y": 717,
+        "width": 360,
+        "height": 27,
+        "right": 360,
+        "bottom": 744,
+        "scroll": 360,
+        "client": 360
+      },
+      "issues": []
+    },
+    {
+      "name": "webkit-overview-390x844",
+      "viewport": [
+        390,
+        844
+      ],
+      "documentWidth": 390,
+      "bodyWidth": 390,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 104,
+        "right": 390,
+        "bottom": 104,
+        "scroll": 390,
+        "client": 390
+      },
+      "workspace": {
+        "x": 0,
+        "y": 104,
+        "width": 390,
+        "height": 684,
+        "right": 390,
+        "bottom": 788,
+        "scroll": 390,
+        "client": 390
+      },
+      "page": null,
+      "content": null,
+      "map": {
+        "x": 0,
+        "y": 201,
+        "width": 390,
+        "height": 447,
+        "right": 390,
+        "bottom": 648,
+        "scroll": 390,
+        "client": 390
+      },
+      "canvas": {
+        "x": 0,
+        "y": 201,
+        "width": 390,
+        "height": 447,
+        "right": 390,
+        "bottom": 648,
+        "scroll": 390,
+        "client": 390
+      },
+      "label": {
+        "x": 12,
+        "y": 214,
+        "width": 240.84375,
+        "height": 34.5,
+        "right": 252.84375,
+        "bottom": 248.5,
+        "scroll": 239,
+        "client": 239
+      },
+      "chart": null,
+      "footer": {
+        "x": 0,
+        "y": 761,
+        "width": 390,
+        "height": 27,
+        "right": 390,
+        "bottom": 788,
+        "scroll": 390,
+        "client": 390
+      },
+      "issues": []
+    },
+    {
+      "name": "webkit-overview-430x932",
+      "viewport": [
+        430,
+        932
+      ],
+      "documentWidth": 430,
+      "bodyWidth": 430,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 430,
+        "height": 104,
+        "right": 430,
+        "bottom": 104,
+        "scroll": 430,
+        "client": 430
+      },
+      "workspace": {
+        "x": 0,
+        "y": 104,
+        "width": 430,
+        "height": 772,
+        "right": 430,
+        "bottom": 876,
+        "scroll": 430,
+        "client": 430
+      },
+      "page": null,
+      "content": null,
+      "map": {
+        "x": 0,
+        "y": 201,
+        "width": 430,
+        "height": 535,
+        "right": 430,
+        "bottom": 736,
+        "scroll": 430,
+        "client": 430
+      },
+      "canvas": {
+        "x": 0,
+        "y": 201,
+        "width": 430,
+        "height": 535,
+        "right": 430,
+        "bottom": 736,
+        "scroll": 430,
+        "client": 430
+      },
+      "label": {
+        "x": 12,
+        "y": 214,
+        "width": 240.84375,
+        "height": 34.5,
+        "right": 252.84375,
+        "bottom": 248.5,
+        "scroll": 239,
+        "client": 239
+      },
+      "chart": null,
+      "footer": {
+        "x": 0,
+        "y": 849,
+        "width": 430,
+        "height": 27,
+        "right": 430,
+        "bottom": 876,
+        "scroll": 430,
+        "client": 430
+      },
+      "issues": []
+    },
+    {
+      "name": "webkit-overview-768x1024",
+      "viewport": [
+        768,
+        1024
+      ],
+      "documentWidth": 768,
+      "bodyWidth": 768,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 768,
+        "height": 68,
+        "right": 768,
+        "bottom": 68,
+        "scroll": 768,
+        "client": 768
+      },
+      "workspace": {
+        "x": 60,
+        "y": 68,
+        "width": 708,
+        "height": 956,
+        "right": 768,
+        "bottom": 1024,
+        "scroll": 708,
+        "client": 708
+      },
+      "page": null,
+      "content": null,
+      "map": {
+        "x": 60,
+        "y": 163,
+        "width": 430,
+        "height": 725,
+        "right": 490,
+        "bottom": 888,
+        "scroll": 430,
+        "client": 430
+      },
+      "canvas": {
+        "x": 60,
+        "y": 163,
+        "width": 430,
+        "height": 725,
+        "right": 490,
+        "bottom": 888,
+        "scroll": 430,
+        "client": 430
+      },
+      "label": {
+        "x": 72,
+        "y": 178,
+        "width": 240.84375,
+        "height": 32,
+        "right": 312.84375,
+        "bottom": 210,
+        "scroll": 239,
+        "client": 239
+      },
+      "chart": null,
+      "footer": {
+        "x": 60,
+        "y": 996,
+        "width": 708,
+        "height": 28,
+        "right": 768,
+        "bottom": 1024,
+        "scroll": 708,
+        "client": 708
+      },
+      "issues": []
+    },
+    {
+      "name": "webkit-overview-1024x768",
+      "viewport": [
+        1024,
+        768
+      ],
+      "documentWidth": 1024,
+      "bodyWidth": 1024,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1024,
+        "height": 68,
+        "right": 1024,
+        "bottom": 68,
+        "scroll": 1024,
+        "client": 1024
+      },
+      "workspace": {
+        "x": 60,
+        "y": 68,
+        "width": 964,
+        "height": 700,
+        "right": 1024,
+        "bottom": 768,
+        "scroll": 964,
+        "client": 964
+      },
+      "page": null,
+      "content": null,
+      "map": {
+        "x": 60,
+        "y": 163,
+        "width": 672,
+        "height": 469,
+        "right": 732,
+        "bottom": 632,
+        "scroll": 672,
+        "client": 672
+      },
+      "canvas": {
+        "x": 60,
+        "y": 163,
+        "width": 672,
+        "height": 469,
+        "right": 732,
+        "bottom": 632,
+        "scroll": 672,
+        "client": 672
+      },
+      "label": {
+        "x": 81,
+        "y": 533,
+        "width": 244.84375,
+        "height": 32,
+        "right": 325.84375,
+        "bottom": 565,
+        "scroll": 243,
+        "client": 243
+      },
+      "chart": null,
+      "footer": {
+        "x": 60,
+        "y": 740,
+        "width": 964,
+        "height": 28,
+        "right": 1024,
+        "bottom": 768,
+        "scroll": 964,
+        "client": 964
+      },
+      "issues": []
+    },
+    {
+      "name": "webkit-overview-1280x800",
+      "viewport": [
+        1280,
+        800
+      ],
+      "documentWidth": 1280,
+      "bodyWidth": 1280,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 68,
+        "right": 1280,
+        "bottom": 68,
+        "scroll": 1280,
+        "client": 1280
+      },
+      "workspace": {
+        "x": 280,
+        "y": 68,
+        "width": 1000,
+        "height": 732,
+        "right": 1280,
+        "bottom": 800,
+        "scroll": 1000,
+        "client": 1000
+      },
+      "page": null,
+      "content": null,
+      "map": {
+        "x": 280,
+        "y": 163,
+        "width": 720,
+        "height": 501,
+        "right": 1000,
+        "bottom": 664,
+        "scroll": 720,
+        "client": 720
+      },
+      "canvas": {
+        "x": 280,
+        "y": 163,
+        "width": 720,
+        "height": 501,
+        "right": 1000,
+        "bottom": 664,
+        "scroll": 720,
+        "client": 720
+      },
+      "label": {
+        "x": 301,
+        "y": 565,
+        "width": 244.84375,
+        "height": 32,
+        "right": 545.84375,
+        "bottom": 597,
+        "scroll": 243,
+        "client": 243
+      },
+      "chart": null,
+      "footer": {
+        "x": 280,
+        "y": 772,
+        "width": 1000,
+        "height": 28,
+        "right": 1280,
+        "bottom": 800,
+        "scroll": 1000,
+        "client": 1000
+      },
+      "issues": []
+    },
+    {
+      "name": "webkit-overview-1440x960",
+      "viewport": [
+        1440,
+        960
+      ],
+      "documentWidth": 1440,
+      "bodyWidth": 1440,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 68,
+        "right": 1440,
+        "bottom": 68,
+        "scroll": 1440,
+        "client": 1440
+      },
+      "workspace": {
+        "x": 324,
+        "y": 68,
+        "width": 1116,
+        "height": 892,
+        "right": 1440,
+        "bottom": 960,
+        "scroll": 1116,
+        "client": 1116
+      },
+      "page": null,
+      "content": null,
+      "map": {
+        "x": 324,
+        "y": 163,
+        "width": 812,
+        "height": 661,
+        "right": 1136,
+        "bottom": 824,
+        "scroll": 812,
+        "client": 812
+      },
+      "canvas": {
+        "x": 324,
+        "y": 163,
+        "width": 812,
+        "height": 661,
+        "right": 1136,
+        "bottom": 824,
+        "scroll": 812,
+        "client": 812
+      },
+      "label": {
+        "x": 345,
+        "y": 725,
+        "width": 244.84375,
+        "height": 32,
+        "right": 589.84375,
+        "bottom": 757,
+        "scroll": 243,
+        "client": 243
+      },
+      "chart": null,
+      "footer": {
+        "x": 324,
+        "y": 932,
+        "width": 1116,
+        "height": 28,
+        "right": 1440,
+        "bottom": 960,
+        "scroll": 1116,
+        "client": 1116
+      },
+      "issues": []
+    },
+    {
+      "name": "webkit-overview-1920x1080",
+      "viewport": [
+        1920,
+        1080
+      ],
+      "documentWidth": 1920,
+      "bodyWidth": 1920,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1920,
+        "height": 68,
+        "right": 1920,
+        "bottom": 68,
+        "scroll": 1920,
+        "client": 1920
+      },
+      "workspace": {
+        "x": 334,
+        "y": 68,
+        "width": 1586,
+        "height": 1012,
+        "right": 1920,
+        "bottom": 1080,
+        "scroll": 1586,
+        "client": 1586
+      },
+      "page": null,
+      "content": null,
+      "map": {
+        "x": 334,
+        "y": 165,
+        "width": 1246,
+        "height": 776,
+        "right": 1580,
+        "bottom": 941,
+        "scroll": 1246,
+        "client": 1246
+      },
+      "canvas": {
+        "x": 334,
+        "y": 165,
+        "width": 1246,
+        "height": 776,
+        "right": 1580,
+        "bottom": 941,
+        "scroll": 1246,
+        "client": 1246
+      },
+      "label": {
+        "x": 355,
+        "y": 840,
+        "width": 248.84375,
+        "height": 34,
+        "right": 603.84375,
+        "bottom": 874,
+        "scroll": 247,
+        "client": 247
+      },
+      "chart": null,
+      "footer": {
+        "x": 334,
+        "y": 1052,
+        "width": 1586,
+        "height": 28,
+        "right": 1920,
+        "bottom": 1080,
+        "scroll": 1586,
+        "client": 1586
+      },
+      "issues": []
+    },
+    {
+      "name": "webkit-overview-2560x1440",
+      "viewport": [
+        2560,
+        1440
+      ],
+      "documentWidth": 2560,
+      "bodyWidth": 2560,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 2560,
+        "height": 68,
+        "right": 2560,
+        "bottom": 68,
+        "scroll": 2560,
+        "client": 2560
+      },
+      "workspace": {
+        "x": 334,
+        "y": 68,
+        "width": 2226,
+        "height": 1372,
+        "right": 2560,
+        "bottom": 1440,
+        "scroll": 2226,
+        "client": 2226
+      },
+      "page": null,
+      "content": null,
+      "map": {
+        "x": 334,
+        "y": 165,
+        "width": 1886,
+        "height": 1136,
+        "right": 2220,
+        "bottom": 1301,
+        "scroll": 1886,
+        "client": 1886
+      },
+      "canvas": {
+        "x": 334,
+        "y": 165,
+        "width": 1886,
+        "height": 1136,
+        "right": 2220,
+        "bottom": 1301,
+        "scroll": 1886,
+        "client": 1886
+      },
+      "label": {
+        "x": 355,
+        "y": 1200,
+        "width": 248.84375,
+        "height": 34,
+        "right": 603.84375,
+        "bottom": 1234,
+        "scroll": 247,
+        "client": 247
+      },
+      "chart": null,
+      "footer": {
+        "x": 334,
+        "y": 1412,
+        "width": 2226,
+        "height": 28,
+        "right": 2560,
+        "bottom": 1440,
+        "scroll": 2226,
+        "client": 2226
+      },
+      "issues": []
+    },
+    {
+      "name": "webkit-overview-844x390",
+      "viewport": [
+        844,
+        390
+      ],
+      "documentWidth": 844,
+      "bodyWidth": 844,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 844,
+        "height": 54,
+        "right": 844,
+        "bottom": 54,
+        "scroll": 844,
+        "client": 844
+      },
+      "workspace": {
+        "x": 60,
+        "y": 54,
+        "width": 784,
+        "height": 336,
+        "right": 844,
+        "bottom": 390,
+        "scroll": 784,
+        "client": 784
+      },
+      "page": null,
+      "content": null,
+      "map": {
+        "x": 60,
+        "y": 127,
+        "width": 506,
+        "height": 180,
+        "right": 566,
+        "bottom": 307,
+        "scroll": 506,
+        "client": 506
+      },
+      "canvas": {
+        "x": 60,
+        "y": 127,
+        "width": 506,
+        "height": 180,
+        "right": 566,
+        "bottom": 307,
+        "scroll": 506,
+        "client": 506
+      },
+      "label": null,
+      "chart": null,
+      "footer": {
+        "x": 60,
+        "y": 362,
+        "width": 784,
+        "height": 28,
+        "right": 844,
+        "bottom": 390,
+        "scroll": 784,
+        "client": 784
+      },
+      "issues": []
+    },
+    {
+      "name": "webkit-overview-1024x600",
+      "viewport": [
+        1024,
+        600
+      ],
+      "documentWidth": 1024,
+      "bodyWidth": 1024,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1024,
+        "height": 68,
+        "right": 1024,
+        "bottom": 68,
+        "scroll": 1024,
+        "client": 1024
+      },
+      "workspace": {
+        "x": 60,
+        "y": 68,
+        "width": 964,
+        "height": 532,
+        "right": 1024,
+        "bottom": 600,
+        "scroll": 964,
+        "client": 964
+      },
+      "page": null,
+      "content": null,
+      "map": {
+        "x": 60,
+        "y": 163,
+        "width": 672,
+        "height": 301,
+        "right": 732,
+        "bottom": 464,
+        "scroll": 672,
+        "client": 672
+      },
+      "canvas": {
+        "x": 60,
+        "y": 163,
+        "width": 672,
+        "height": 301,
+        "right": 732,
+        "bottom": 464,
+        "scroll": 672,
+        "client": 672
+      },
+      "label": {
+        "x": 81,
+        "y": 365,
+        "width": 244.84375,
+        "height": 32,
+        "right": 325.84375,
+        "bottom": 397,
+        "scroll": 243,
+        "client": 243
+      },
+      "chart": null,
+      "footer": {
+        "x": 60,
+        "y": 572,
+        "width": 964,
+        "height": 28,
+        "right": 1024,
+        "bottom": 600,
+        "scroll": 964,
+        "client": 964
+      },
+      "issues": []
+    },
+    {
+      "name": "webkit-signals-320x568",
+      "viewport": [
+        320,
+        568
+      ],
+      "documentWidth": 320,
+      "bodyWidth": 320,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 320,
+        "height": 104,
+        "right": 320,
+        "bottom": 104,
+        "scroll": 320,
+        "client": 320
+      },
+      "workspace": {
+        "x": 0,
+        "y": 104,
+        "width": 320,
+        "height": 408,
+        "right": 320,
+        "bottom": 512,
+        "scroll": 320,
+        "client": 320
+      },
+      "page": {
+        "x": 0,
+        "y": 104,
+        "width": 320,
+        "height": 381,
+        "right": 320,
+        "bottom": 485,
+        "scroll": 316,
+        "client": 316
+      },
+      "content": {
+        "x": 12,
+        "y": 239.25,
+        "width": 292,
+        "height": 6128.84375,
+        "right": 304,
+        "bottom": 6368.09375,
+        "scroll": 292,
+        "client": 292
+      },
+      "map": null,
+      "canvas": null,
+      "label": null,
+      "chart": {
+        "x": 12,
+        "y": 1505.84375,
+        "width": 292,
+        "height": 324.875,
+        "right": 304,
+        "bottom": 1830.71875,
+        "scroll": 290,
+        "client": 290
+      },
+      "footer": {
+        "x": 0,
+        "y": 485,
+        "width": 320,
+        "height": 27,
+        "right": 320,
+        "bottom": 512,
+        "scroll": 320,
+        "client": 320
+      },
+      "issues": []
+    },
+    {
+      "name": "webkit-signals-360x800",
+      "viewport": [
+        360,
+        800
+      ],
+      "documentWidth": 360,
+      "bodyWidth": 360,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 360,
+        "height": 104,
+        "right": 360,
+        "bottom": 104,
+        "scroll": 360,
+        "client": 360
+      },
+      "workspace": {
+        "x": 0,
+        "y": 104,
+        "width": 360,
+        "height": 640,
+        "right": 360,
+        "bottom": 744,
+        "scroll": 360,
+        "client": 360
+      },
+      "page": {
+        "x": 0,
+        "y": 104,
+        "width": 360,
+        "height": 613,
+        "right": 360,
+        "bottom": 717,
+        "scroll": 356,
+        "client": 356
+      },
+      "content": {
+        "x": 12,
+        "y": 239.25,
+        "width": 332,
+        "height": 5894.15625,
+        "right": 344,
+        "bottom": 6133.40625,
+        "scroll": 332,
+        "client": 332
+      },
+      "map": null,
+      "canvas": null,
+      "label": null,
+      "chart": {
+        "x": 12,
+        "y": 1415.953125,
+        "width": 332,
+        "height": 319.46875,
+        "right": 344,
+        "bottom": 1735.421875,
+        "scroll": 330,
+        "client": 330
+      },
+      "footer": {
+        "x": 0,
+        "y": 717,
+        "width": 360,
+        "height": 27,
+        "right": 360,
+        "bottom": 744,
+        "scroll": 360,
+        "client": 360
+      },
+      "issues": []
+    },
+    {
+      "name": "webkit-signals-390x844",
+      "viewport": [
+        390,
+        844
+      ],
+      "documentWidth": 390,
+      "bodyWidth": 390,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 104,
+        "right": 390,
+        "bottom": 104,
+        "scroll": 390,
+        "client": 390
+      },
+      "workspace": {
+        "x": 0,
+        "y": 104,
+        "width": 390,
+        "height": 684,
+        "right": 390,
+        "bottom": 788,
+        "scroll": 390,
+        "client": 390
+      },
+      "page": {
+        "x": 0,
+        "y": 104,
+        "width": 390,
+        "height": 657,
+        "right": 390,
+        "bottom": 761,
+        "scroll": 386,
+        "client": 386
+      },
+      "content": {
+        "x": 12,
+        "y": 239.25,
+        "width": 362,
+        "height": 5688.34375,
+        "right": 374,
+        "bottom": 5927.59375,
+        "scroll": 362,
+        "client": 362
+      },
+      "map": null,
+      "canvas": null,
+      "label": null,
+      "chart": {
+        "x": 12,
+        "y": 1415.953125,
+        "width": 362,
+        "height": 318.078125,
+        "right": 374,
+        "bottom": 1734.03125,
+        "scroll": 360,
+        "client": 360
+      },
+      "footer": {
+        "x": 0,
+        "y": 761,
+        "width": 390,
+        "height": 27,
+        "right": 390,
+        "bottom": 788,
+        "scroll": 390,
+        "client": 390
+      },
+      "issues": []
+    },
+    {
+      "name": "webkit-signals-430x932",
+      "viewport": [
+        430,
+        932
+      ],
+      "documentWidth": 430,
+      "bodyWidth": 430,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 430,
+        "height": 104,
+        "right": 430,
+        "bottom": 104,
+        "scroll": 430,
+        "client": 430
+      },
+      "workspace": {
+        "x": 0,
+        "y": 104,
+        "width": 430,
+        "height": 772,
+        "right": 430,
+        "bottom": 876,
+        "scroll": 430,
+        "client": 430
+      },
+      "page": {
+        "x": 0,
+        "y": 104,
+        "width": 430,
+        "height": 745,
+        "right": 430,
+        "bottom": 849,
+        "scroll": 426,
+        "client": 426
+      },
+      "content": {
+        "x": 16,
+        "y": 239.25,
+        "width": 394,
+        "height": 5378.296875,
+        "right": 410,
+        "bottom": 5617.546875,
+        "scroll": 394,
+        "client": 394
+      },
+      "map": null,
+      "canvas": null,
+      "label": null,
+      "chart": {
+        "x": 16,
+        "y": 1315.890625,
+        "width": 394,
+        "height": 327.375,
+        "right": 410,
+        "bottom": 1643.265625,
+        "scroll": 392,
+        "client": 392
+      },
+      "footer": {
+        "x": 0,
+        "y": 849,
+        "width": 430,
+        "height": 27,
+        "right": 430,
+        "bottom": 876,
+        "scroll": 430,
+        "client": 430
+      },
+      "issues": []
+    },
+    {
+      "name": "webkit-signals-768x1024",
+      "viewport": [
+        768,
+        1024
+      ],
+      "documentWidth": 768,
+      "bodyWidth": 768,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 768,
+        "height": 68,
+        "right": 768,
+        "bottom": 68,
+        "scroll": 768,
+        "client": 768
+      },
+      "workspace": {
+        "x": 60,
+        "y": 68,
+        "width": 708,
+        "height": 956,
+        "right": 768,
+        "bottom": 1024,
+        "scroll": 708,
+        "client": 708
+      },
+      "page": {
+        "x": 60,
+        "y": 68,
+        "width": 708,
+        "height": 928,
+        "right": 768,
+        "bottom": 996,
+        "scroll": 704,
+        "client": 704
+      },
+      "content": {
+        "x": 89,
+        "y": 217.25,
+        "width": 646,
+        "height": 5461.765625,
+        "right": 735,
+        "bottom": 5679.015625,
+        "scroll": 646,
+        "client": 646
+      },
+      "map": null,
+      "canvas": null,
+      "label": null,
+      "chart": {
+        "x": 89,
+        "y": 998.515625,
+        "width": 646,
+        "height": 415.21875,
+        "right": 735,
+        "bottom": 1413.734375,
+        "scroll": 644,
+        "client": 644
+      },
+      "footer": {
+        "x": 60,
+        "y": 996,
+        "width": 708,
+        "height": 28,
+        "right": 768,
+        "bottom": 1024,
+        "scroll": 708,
+        "client": 708
+      },
+      "issues": []
+    },
+    {
+      "name": "webkit-signals-1024x768",
+      "viewport": [
+        1024,
+        768
+      ],
+      "documentWidth": 1024,
+      "bodyWidth": 1024,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1024,
+        "height": 68,
+        "right": 1024,
+        "bottom": 68,
+        "scroll": 1024,
+        "client": 1024
+      },
+      "workspace": {
+        "x": 60,
+        "y": 68,
+        "width": 964,
+        "height": 700,
+        "right": 1024,
+        "bottom": 768,
+        "scroll": 964,
+        "client": 964
+      },
+      "page": {
+        "x": 60,
+        "y": 68,
+        "width": 964,
+        "height": 672,
+        "right": 1024,
+        "bottom": 740,
+        "scroll": 960,
+        "client": 960
+      },
+      "content": {
+        "x": 89,
+        "y": 217.25,
+        "width": 902,
+        "height": 5941.140625,
+        "right": 991,
+        "bottom": 6158.390625,
+        "scroll": 902,
+        "client": 902
+      },
+      "map": null,
+      "canvas": null,
+      "label": null,
+      "chart": {
+        "x": 89,
+        "y": 925.828125,
+        "width": 902,
+        "height": 500.296875,
+        "right": 991,
+        "bottom": 1426.125,
+        "scroll": 900,
+        "client": 900
+      },
+      "footer": {
+        "x": 60,
+        "y": 740,
+        "width": 964,
+        "height": 28,
+        "right": 1024,
+        "bottom": 768,
+        "scroll": 964,
+        "client": 964
+      },
+      "issues": []
+    },
+    {
+      "name": "webkit-signals-1280x800",
+      "viewport": [
+        1280,
+        800
+      ],
+      "documentWidth": 1280,
+      "bodyWidth": 1280,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 68,
+        "right": 1280,
+        "bottom": 68,
+        "scroll": 1280,
+        "client": 1280
+      },
+      "workspace": {
+        "x": 280,
+        "y": 68,
+        "width": 1000,
+        "height": 732,
+        "right": 1280,
+        "bottom": 800,
+        "scroll": 1000,
+        "client": 1000
+      },
+      "page": {
+        "x": 280,
+        "y": 68,
+        "width": 1000,
+        "height": 704,
+        "right": 1280,
+        "bottom": 772,
+        "scroll": 996,
+        "client": 996
+      },
+      "content": {
+        "x": 305,
+        "y": 214.25,
+        "width": 946,
+        "height": 3069.484375,
+        "right": 1251,
+        "bottom": 3283.734375,
+        "scroll": 946,
+        "client": 946
+      },
+      "map": null,
+      "canvas": null,
+      "label": null,
+      "chart": {
+        "x": 305,
+        "y": 928.03125,
+        "width": 464,
+        "height": 354.734375,
+        "right": 769,
+        "bottom": 1282.765625,
+        "scroll": 462,
+        "client": 462
+      },
+      "footer": {
+        "x": 280,
+        "y": 772,
+        "width": 1000,
+        "height": 28,
+        "right": 1280,
+        "bottom": 800,
+        "scroll": 1000,
+        "client": 1000
+      },
+      "issues": []
+    },
+    {
+      "name": "webkit-signals-1440x960",
+      "viewport": [
+        1440,
+        960
+      ],
+      "documentWidth": 1440,
+      "bodyWidth": 1440,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 68,
+        "right": 1440,
+        "bottom": 68,
+        "scroll": 1440,
+        "client": 1440
+      },
+      "workspace": {
+        "x": 324,
+        "y": 68,
+        "width": 1116,
+        "height": 892,
+        "right": 1440,
+        "bottom": 960,
+        "scroll": 1116,
+        "client": 1116
+      },
+      "page": {
+        "x": 324,
+        "y": 68,
+        "width": 1116,
+        "height": 864,
+        "right": 1440,
+        "bottom": 932,
+        "scroll": 1112,
+        "client": 1112
+      },
+      "content": {
+        "x": 360,
+        "y": 220.25,
+        "width": 1040,
+        "height": 2917.703125,
+        "right": 1400,
+        "bottom": 3137.953125,
+        "scroll": 1040,
+        "client": 1040
+      },
+      "map": null,
+      "canvas": null,
+      "label": null,
+      "chart": {
+        "x": 360,
+        "y": 754.21875,
+        "width": 511,
+        "height": 370.34375,
+        "right": 871,
+        "bottom": 1124.5625,
+        "scroll": 509,
+        "client": 509
+      },
+      "footer": {
+        "x": 324,
+        "y": 932,
+        "width": 1116,
+        "height": 28,
+        "right": 1440,
+        "bottom": 960,
+        "scroll": 1116,
+        "client": 1116
+      },
+      "issues": []
+    },
+    {
+      "name": "webkit-signals-1920x1080",
+      "viewport": [
+        1920,
+        1080
+      ],
+      "documentWidth": 1920,
+      "bodyWidth": 1920,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1920,
+        "height": 68,
+        "right": 1920,
+        "bottom": 68,
+        "scroll": 1920,
+        "client": 1920
+      },
+      "workspace": {
+        "x": 334,
+        "y": 68,
+        "width": 1586,
+        "height": 1012,
+        "right": 1920,
+        "bottom": 1080,
+        "scroll": 1586,
+        "client": 1586
+      },
+      "page": {
+        "x": 334,
+        "y": 68,
+        "width": 1586,
+        "height": 984,
+        "right": 1920,
+        "bottom": 1052,
+        "scroll": 1582,
+        "client": 1582
+      },
+      "content": {
+        "x": 391.59375,
+        "y": 223.25,
+        "width": 1466.8125,
+        "height": 3029.1875,
+        "right": 1858.40625,
+        "bottom": 3252.4375,
+        "scroll": 1467,
+        "client": 1467
+      },
+      "map": null,
+      "canvas": null,
+      "label": null,
+      "chart": {
+        "x": 391.59375,
+        "y": 757.03125,
+        "width": 724.40625,
+        "height": 441.28125,
+        "right": 1116,
+        "bottom": 1198.3125,
+        "scroll": 722,
+        "client": 722
+      },
+      "footer": {
+        "x": 334,
+        "y": 1052,
+        "width": 1586,
+        "height": 28,
+        "right": 1920,
+        "bottom": 1080,
+        "scroll": 1586,
+        "client": 1586
+      },
+      "issues": []
+    },
+    {
+      "name": "webkit-signals-2560x1440",
+      "viewport": [
+        2560,
+        1440
+      ],
+      "documentWidth": 2560,
+      "bodyWidth": 2560,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 2560,
+        "height": 68,
+        "right": 2560,
+        "bottom": 68,
+        "scroll": 2560,
+        "client": 2560
+      },
+      "workspace": {
+        "x": 334,
+        "y": 68,
+        "width": 2226,
+        "height": 1372,
+        "right": 2560,
+        "bottom": 1440,
+        "scroll": 2226,
+        "client": 2226
+      },
+      "page": {
+        "x": 334,
+        "y": 68,
+        "width": 2226,
+        "height": 1344,
+        "right": 2560,
+        "bottom": 1412,
+        "scroll": 2222,
+        "client": 2222
+      },
+      "content": {
+        "x": 575,
+        "y": 223.25,
+        "width": 1740,
+        "height": 3182.65625,
+        "right": 2315,
+        "bottom": 3405.90625,
+        "scroll": 1740,
+        "client": 1740
+      },
+      "map": null,
+      "canvas": null,
+      "label": null,
+      "chart": {
+        "x": 575,
+        "y": 757.03125,
+        "width": 861,
+        "height": 486.671875,
+        "right": 1436,
+        "bottom": 1243.703125,
+        "scroll": 859,
+        "client": 859
+      },
+      "footer": {
+        "x": 334,
+        "y": 1412,
+        "width": 2226,
+        "height": 28,
+        "right": 2560,
+        "bottom": 1440,
+        "scroll": 2226,
+        "client": 2226
+      },
+      "issues": []
+    },
+    {
+      "name": "webkit-signals-844x390",
+      "viewport": [
+        844,
+        390
+      ],
+      "documentWidth": 844,
+      "bodyWidth": 844,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 844,
+        "height": 54,
+        "right": 844,
+        "bottom": 54,
+        "scroll": 844,
+        "client": 844
+      },
+      "workspace": {
+        "x": 60,
+        "y": 54,
+        "width": 784,
+        "height": 336,
+        "right": 844,
+        "bottom": 390,
+        "scroll": 784,
+        "client": 784
+      },
+      "page": {
+        "x": 60,
+        "y": 54,
+        "width": 784,
+        "height": 308,
+        "right": 844,
+        "bottom": 362,
+        "scroll": 780,
+        "client": 780
+      },
+      "content": {
+        "x": 89,
+        "y": 203.25,
+        "width": 722,
+        "height": 5551.015625,
+        "right": 811,
+        "bottom": 5754.265625,
+        "scroll": 722,
+        "client": 722
+      },
+      "map": null,
+      "canvas": null,
+      "label": null,
+      "chart": {
+        "x": 89,
+        "y": 965.828125,
+        "width": 722,
+        "height": 440.484375,
+        "right": 811,
+        "bottom": 1406.3125,
+        "scroll": 720,
+        "client": 720
+      },
+      "footer": {
+        "x": 60,
+        "y": 362,
+        "width": 784,
+        "height": 28,
+        "right": 844,
+        "bottom": 390,
+        "scroll": 784,
+        "client": 784
+      },
+      "issues": []
+    },
+    {
+      "name": "webkit-signals-1024x600",
+      "viewport": [
+        1024,
+        600
+      ],
+      "documentWidth": 1024,
+      "bodyWidth": 1024,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1024,
+        "height": 68,
+        "right": 1024,
+        "bottom": 68,
+        "scroll": 1024,
+        "client": 1024
+      },
+      "workspace": {
+        "x": 60,
+        "y": 68,
+        "width": 964,
+        "height": 532,
+        "right": 1024,
+        "bottom": 600,
+        "scroll": 964,
+        "client": 964
+      },
+      "page": {
+        "x": 60,
+        "y": 68,
+        "width": 964,
+        "height": 504,
+        "right": 1024,
+        "bottom": 572,
+        "scroll": 960,
+        "client": 960
+      },
+      "content": {
+        "x": 89,
+        "y": 217.25,
+        "width": 902,
+        "height": 5941.140625,
+        "right": 991,
+        "bottom": 6158.390625,
+        "scroll": 902,
+        "client": 902
+      },
+      "map": null,
+      "canvas": null,
+      "label": null,
+      "chart": {
+        "x": 89,
+        "y": 925.828125,
+        "width": 902,
+        "height": 500.296875,
+        "right": 991,
+        "bottom": 1426.125,
+        "scroll": 900,
+        "client": 900
+      },
+      "footer": {
+        "x": 60,
+        "y": 572,
+        "width": 964,
+        "height": 28,
+        "right": 1024,
+        "bottom": 600,
+        "scroll": 964,
+        "client": 964
+      },
+      "issues": []
+    }
+  ],
+  "accessibility": [
+    {
+      "name": "chromium overview",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 11
+        }
+      ]
+    },
+    {
+      "name": "chromium Signal Lab",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "aria-prohibited-attr",
+          "nodes": 4
+        },
+        {
+          "id": "color-contrast",
+          "nodes": 70
+        }
+      ]
+    },
+    {
+      "name": "chromium comparison",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "aria-prohibited-attr",
+          "nodes": 2
+        },
+        {
+          "id": "color-contrast",
+          "nodes": 61
+        }
+      ]
+    },
+    {
+      "name": "chromium record explorer",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "aria-prohibited-attr",
+          "nodes": 2
+        },
+        {
+          "id": "color-contrast",
+          "nodes": 72
+        }
+      ]
+    },
+    {
+      "name": "chromium source registry",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 21
+        }
+      ]
+    },
+    {
+      "name": "chromium settings",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "name": "chromium phone overview",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 11
+        }
+      ]
+    },
+    {
+      "name": "chromium phone Signal Lab",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "aria-prohibited-attr",
+          "nodes": 4
+        },
+        {
+          "id": "color-contrast",
+          "nodes": 15
+        }
+      ]
+    }
+  ],
+  "finished": "2026-10-10T11:33:18.970Z"
+}

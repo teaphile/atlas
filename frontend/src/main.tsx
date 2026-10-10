@@ -4,7 +4,9 @@ import { createRoot } from "react-dom/client";
 import "@fontsource-variable/inter";
 import "@fontsource/ibm-plex-mono/400.css";
 import App from "./App";
+import { PreferencesProvider } from "./components/Preferences";
 import "./styles.css";
+import "./v2.css";
 class ErrorBoundary extends Component<
   { children: ReactNode },
   { failed: boolean }
@@ -34,7 +36,9 @@ class ErrorBoundary extends Component<
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ErrorBoundary>
-      <App />
+      <PreferencesProvider>
+        <App />
+      </PreferencesProvider>
     </ErrorBoundary>
   </StrictMode>,
 );

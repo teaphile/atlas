@@ -141,3 +141,31 @@ No paid API, hosting plan or account purchase was made. Production resource and 
 ISRIC states a public beta REST fair-use limit of **5 API calls per minute** and advises against local/farm-level interpretation of SoilGrids. ATLAS now spaces ISRIC calls by at least 12.1 seconds per process and uses one longer bounded attempt, not duplicate cold-query retries. Two soil subqueries consume two calls; cached queries consume none. Shared deployments/replicas need a shared quota, and busy/cold queries can legitimately produce partial or unavailable results. [1](https://docs.isric.org/globaldata/soilgrids/SoilGrids_faqs_04.html)
 
 The ATLAS carbon stock is a physical conversion applied to predicted component means; it is **not** the official separately trained SoilGrids carbon-stock product and need not agree with it. Product-of-means and mean-of-products differ when inputs covary. Treat the displayed point lookup as regional modeled context, never parcel/farm-level precision. [1](https://docs.isric.org/globaldata/soilgrids/SoilGrids_faqs_04.html)
+
+
+## ATLAS 2 analysis and portable geometry endpoints
+
+### `GET /api/v1/insights`
+
+Required `lat`, `lon`; optional `base_c=10`, `cap_c=30`. `−10 ≤ base < cap ≤ 50°C`. A timezone-aware `as_of` is accepted only within the bounded near-current window (at most 600 seconds past / 60 seconds future); this is not historical replay. Response includes model/method version, requested point, 241 canonical hourly rows, 24/48/72-hour windows, complete-input counts, wind distribution, tiny novelty model diagnostics, trends, rank associations, clocks and attribution/license metadata. Source failures remain explicit and can yield an unavailable analysis with null fields rather than an HTTP 500. No soil request is made.
+
+### `POST /api/v1/compare`
+
+```json
+{"points":[{"lat":27.1,"lon":78.15},{"lat":28.6139,"lon":77.209}],"base_c":10,"cap_c":30}
+```
+
+Two or three points only, input order preserved. Captures one server `as_of` and applies the same complete forecast windows to each report. No location safety ranking or crop forecast is computed. Boolean/non-finite scientific inputs are rejected. Both endpoints use the same optional `X-Atlas-Key` protection as the rest of `/api/`.
+
+### `POST /api/v1/aoi`
+
+Alongside a WGS84 Polygon and `hours`, v2 accepts `minimum_priority` (0–5), aware `end`, and `kinds`. Omitted/null kinds means no kind restriction; **an empty array means no selected kinds**. Source filters/position lifetimes match the map and are echoed in the result. ≤200 total ring vertices, ≤3 holes and <180° longitude span; topology/hole validity is checked on the server. Drawing/import/saved camera fitting do not alter this scientific geometry.
+
+### Other boundary changes
+
+- `/api/v1/ready` uses HTTP 503 before ready, rather than returning success with a false body.
+- Proximity responses disclose eligible/candidate counts and candidate/group/comparison truncation. They do not imply corroboration.
+- Weather/AQI cache keys are versioned to avoid restored short v1 windows. Time strings are normalized timezone-aware UTC; consumers must not append a second `Z`.
+- Workspace JSON is a client-side portable configuration, not a backend-data import endpoint. It contains selected point, active/saved polygons, filters and display preferences; no keys or historical provider snapshots. Server topology checks still apply when an imported polygon is analyzed.
+
+See [model cards](v2/MODEL_CARDS.md) for definitions and `/api/openapi.json` for the running input schema.

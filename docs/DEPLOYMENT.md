@@ -1,3 +1,11 @@
+# ATLAS 2 local-first deployment note
+
+Start with [Local run](LOCAL_RUN.md) for Linux/macOS/Windows and [GitHub publication](GITHUB_PUBLISH.md) for account-owned source publishing. `scripts/run.sh` and `run.ps1` now bind to **127.0.0.1 by default**. Explicitly set the launcher environment `ATLAS_HOST=0.0.0.0` for trusted LAN/preview use, with appropriate auth/ingress controls. The current Arena preview uses an explicit all-interface bind; browser API URLs remain same-origin.
+
+The v2 Linux setup/build/run path was executed. The delivered multi-OS CI and Docker job must still be run in the user's repository/environment; native Windows/macOS/Docker execution is not asserted. Windows development requirements use `requirements-dev-windows.txt` to include pytest's conditional colorama dependency. Runtime production requirements are shared.
+
+The original detailed operations guidance follows; wherever a launcher bind is discussed, the v2 local-first default above takes precedence.
+
 # Running and deploying ATLAS
 
 ## Current delivered demonstration

@@ -1,4 +1,12 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  lazy,
+  Suspense,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import {
   Globe2,
   Search,
@@ -28,12 +36,14 @@ import type {
   Envelope,
   GeoPolygon,
   Kind,
-  LocationData,
   Place,
   SavedArea,
-  Snapshot,
 } from "./types";
-import { api, hasDeploymentKey, isAbort, setDeploymentKey } from "./api";
+import { api, isAbort, setDeploymentKey } from "./api";
+import { useSnapshot } from "./hooks/useSnapshot";
+import { useLocation } from "./hooks/useLocation";
+import { readSaved, parseWorkspace } from "./workspace";
+import { PreferenceControls, usePreferences } from "./components/Preferences";
 import {
   COLORS,
   filteredEvents,
@@ -45,11 +55,17 @@ import {
 } from "./utils";
 import { Sidebar } from "./components/Sidebar";
 import { RightPanel } from "./components/RightPanel";
-import { MapView } from "./components/MapView";
+const MapView = lazy(() =>
+  import("./components/MapView").then((m) => ({ default: m.MapView })),
+);
 import type { MapPreset } from "./components/MapView";
 import { Timeline } from "./components/Timeline";
 import { SearchModal } from "./components/Search";
-import { Intelligence } from "./components/Intelligence";
+const Intelligence = lazy(() =>
+  import("./components/Intelligence").then((m) => ({
+    default: m.Intelligence,
+  })),
+);
 import type { IntelligenceTab } from "./components/Intelligence";
 import { Sources, SourceModal } from "./components/Sources";
 import {
@@ -78,31 +94,6 @@ const DEFAULT_PLACE: Place = {
   country: "India",
   countryCode: "IN",
 };
-function loadSaved(): SavedArea[] {
-  try {
-    const rows = JSON.parse(localStorage.getItem("atlas.views.v1") || "[]");
-    return Array.isArray(rows)
-      ? rows
-          .filter(
-            (x) =>
-              typeof x.name === "string" &&
-              Array.isArray(x.center) &&
-              x.center.length === 2 &&
-              x.center.every(
-                (n: unknown) => typeof n === "number" && Number.isFinite(n),
-              ) &&
-              Math.abs(x.center[0]) <= 180 &&
-              Math.abs(x.center[1]) <= 90 &&
-              typeof x.zoom === "number" &&
-              x.zoom >= 0 &&
-              x.zoom <= 15,
-          )
-          .slice(0, 6)
-      : [];
-  } catch {
-    return [];
-  }
-}
 function Logo() {
   return (
     <svg viewBox="0 0 40 40" width="35" height="35" aria-hidden="true">
@@ -115,13 +106,8 @@ export default function App() {
   const [view, setView] = useState<"overview" | "intelligence" | "sources">(
     "overview",
   );
-  const [tab, setTab] = useState<IntelligenceTab>("brief");
-  const [snapshot, setSnapshot] = useState<Snapshot | null>(null);
-  const [snapshotError, setSnapshotError] = useState("");
+  const [tab, setTab] = useState<IntelligenceTab>("signals");
   const [place, setPlace] = useState<Place>(DEFAULT_PLACE);
-  const [location, setLocation] = useState<LocationData | null>(null);
-  const [locationLoading, setLocationLoading] = useState(true);
-  const [locationError, setLocationError] = useState("");
   const [enabled, setEnabled] = useState(new Set<Kind>(NATURAL));
   const [minimum, setMinimum] = useState(0);
   const [hours, setHours] = useState(24);
@@ -136,10 +122,11 @@ export default function App() {
   const [accessKey, setAccessKey] = useState("");
   const [authVersion, setAuthVersion] = useState(0);
   const [sourceId, setSourceId] = useState<string | null>(null);
-  const [saved, setSaved] = useState<SavedArea[]>(loadSaved);
+  const [saved, setSaved] = useState<SavedArea[]>(readSaved);
   const [saveModal, setSaveModal] = useState(false);
   const [viewName, setViewName] = useState("");
   const [area, setArea] = useState<AreaReport | null>(null);
+  const [geometry, setGeometry] = useState<GeoPolygon | null>(null);
   const [areaModal, setAreaModal] = useState(false);
   const [areaLoading, setAreaLoading] = useState(false);
   const [areaError, setAreaError] = useState("");
@@ -147,10 +134,18 @@ export default function App() {
   const [toast, setToast] = useState("");
   const [now, setNow] = useState(Date.now());
   const [mobileLayers, setMobileLayers] = useState(false);
-  const inRefresh = useRef(false);
+  const areaController = useRef<AbortController | null>(null);
+  const { preferences, setPreferences } = usePreferences();
+  const [workspaceError, setWorkspaceError] = useState("");
   const toastTimer = useRef<number | null>(null);
   const wantCameras = enabled.has("camera");
   const wantAircraft = enabled.has("aircraft");
+  const { snapshot, snapshotError, refresh } = useSnapshot(
+    wantCameras,
+    authVersion,
+  );
+  const { location, locationLoading, locationError, retryLocation } =
+    useLocation(place, authVersion);
   const message = useCallback((s: string) => {
     setToast(s);
     if (toastTimer.current) clearTimeout(toastTimer.current);
@@ -167,138 +162,16 @@ export default function App() {
       /* Private mode remains usable. */
     }
   }, [saved]);
-  const refresh = useCallback(async () => {
-    if (inRefresh.current) return;
-    inRefresh.current = true;
-    try {
-      const d = await api<Snapshot>(
-        `/api/v1/snapshot?include_cameras=${wantCameras}`,
-      );
-      setSnapshot(d);
-      setSnapshotError("");
-    } catch (e) {
-      if (!isAbort(e))
-        setSnapshotError(
-          e instanceof Error ? e.message : "Connection unavailable",
-        );
-    } finally {
-      inRefresh.current = false;
-    }
-  }, [wantCameras]);
   useEffect(() => {
-    void refresh();
-    const t = window.setInterval(refresh, 30000);
-    let debounce: number | undefined;
-    let stream: EventSource | undefined;
-    if (!hasDeploymentKey()) {
-      stream = new EventSource("/api/v1/stream");
-      stream.addEventListener("sync", () => {
-        if (debounce) clearTimeout(debounce);
-        debounce = window.setTimeout(refresh, 500);
-      });
-    }
-    return () => {
-      clearInterval(t);
-      if (debounce) clearTimeout(debounce);
-      stream?.close();
-    };
-  }, [refresh, authVersion]);
-  useEffect(() => {
-    const ac = new AbortController();
-    setLocation(null);
-    setLocationError("");
-    setLocationLoading(true);
     setAviation(null);
-    const soilTask = api<Envelope>(
-      `/api/v1/sources/soil?lat=${place.lat}&lon=${place.lon}`,
-      { signal: ac.signal },
-    );
-    // Absorb failure immediately; it must not become an unhandled rejection while current conditions load.
-    const settledSoil = soilTask
-      .then((value) => ({ value }))
-      .catch(() => ({ value: null }));
-    void api<LocationData>(
-      `/api/v1/location?lat=${place.lat}&lon=${place.lon}`,
-      { signal: ac.signal },
-    )
-      .then(async (d) => {
-        if (ac.signal.aborted) return;
-        d.sources.soil = { ...d.sources.soil, status: "refreshing" };
-        setLocation(d);
-        setLocationLoading(false);
-        const { value: soil } = await settledSoil;
-        if (ac.signal.aborted) return;
-        if (soil) {
-          setLocation((v) =>
-            v
-              ? {
-                  ...v,
-                  sources: { ...v.sources, soil },
-                  soil_summary: soil.analysis ?? v.soil_summary,
-                }
-              : v,
-          );
-        } else
-          setLocation((v) =>
-            v
-              ? {
-                  ...v,
-                  sources: {
-                    ...v.sources,
-                    soil: {
-                      ...v.sources.soil,
-                      status: "unavailable",
-                      error_code: "request_failed",
-                      warnings: [
-                        "Soil query unavailable. No estimated values were substituted.",
-                      ],
-                    },
-                  },
-                }
-              : v,
-          );
-      })
-      .catch((e) => {
-        if (!isAbort(e))
-          setLocationError(
-            "Environmental sources could not be reached. Try again or inspect source health.",
-          );
-      })
-      .finally(() => {
-        if (!ac.signal.aborted) setLocationLoading(false);
-      });
-    let refreshing = false;
-    const timer = window.setInterval(async () => {
-      if (refreshing || document.hidden) return;
-      refreshing = true;
-      try {
-        const d = await api<LocationData>(
-          `/api/v1/location?lat=${place.lat}&lon=${place.lon}`,
-          { signal: ac.signal },
-        );
-        if (!ac.signal.aborted)
-          setLocation((old) => ({
-            ...d,
-            sources: {
-              ...d.sources,
-              soil: old?.sources.soil ?? d.sources.soil,
-            },
-            soil_summary: old?.soil_summary ?? d.soil_summary,
-          }));
-      } catch (e) {
-        if (!isAbort(e))
-          setLocationError(
-            "Environmental refresh failed. Check the source timestamps.",
-          );
-      } finally {
-        refreshing = false;
-      }
-    }, 600000);
-    return () => {
-      ac.abort();
-      clearInterval(timer);
-    };
   }, [place.lat, place.lon, authVersion]);
+  useEffect(
+    () => () => {
+      if (toastTimer.current) clearTimeout(toastTimer.current);
+      areaController.current?.abort();
+    },
+    [],
+  );
   useEffect(() => {
     if (!wantAircraft) return;
     const ac = new AbortController();
@@ -502,6 +375,9 @@ export default function App() {
     setMobileLayers(false);
   }
   async function analyzeArea(geometry: GeoPolygon) {
+    areaController.current?.abort();
+    const ac = new AbortController();
+    areaController.current = ac;
     setAreaModal(true);
     setAreaLoading(true);
     setAreaError("");
@@ -509,13 +385,21 @@ export default function App() {
     try {
       const result = await api<AreaReport>("/api/v1/aoi", {
         method: "POST",
-        body: JSON.stringify({ geometry, hours, kinds: [...enabled] }),
+        body: JSON.stringify({
+          geometry,
+          hours,
+          kinds: [...enabled],
+          minimum_priority: minimum,
+          end: end ? new Date(end).toISOString() : null,
+        }),
+        signal: ac.signal,
       });
-      setArea(result);
+      if (!ac.signal.aborted) setArea(result);
     } catch (e) {
-      setAreaError(e instanceof Error ? e.message : "Area analysis failed");
+      if (!ac.signal.aborted)
+        setAreaError(e instanceof Error ? e.message : "Area analysis failed");
     } finally {
-      setAreaLoading(false);
+      if (!ac.signal.aborted) setAreaLoading(false);
     }
   }
   function saveView() {
@@ -532,7 +416,7 @@ export default function App() {
         name: viewName.trim().slice(0, 60),
         center: [place.lon, place.lat],
         zoom: 7,
-        geometry: {
+        geometry: geometry ?? {
           type: "Polygon",
           coordinates: [
             [
@@ -553,6 +437,7 @@ export default function App() {
     exportEvents(filtered, format, {
       generated_at: new Date().toISOString(),
       snapshot_at: snapshot?.generated_at,
+      event_time_cutoff: end ? new Date(end).toISOString() : null,
       hours,
       selected_layers: [...enabled],
       minimum_priority: minimum,
@@ -565,6 +450,54 @@ export default function App() {
       `Exported ${filtered.length} filtered observations as ${format.toUpperCase()}.`,
     );
   }
+  function exportWorkspace() {
+    download(
+      "atlas-workspace.json",
+      JSON.stringify(
+        {
+          schema: "atlas-workspace",
+          version: 2,
+          exported_at: new Date().toISOString(),
+          place,
+          saved,
+          geometry,
+          filters: { kinds: [...enabled], hours, minimum },
+          preferences,
+        },
+        null,
+        2,
+      ),
+    );
+  }
+  async function importWorkspace(file: File | undefined) {
+    if (!file) return;
+    setWorkspaceError("");
+    try {
+      if (file.size > 65536) throw new Error("Workspace file exceeds 64 KiB");
+      const w = parseWorkspace(await file.text());
+      setSaved(w.saved);
+      setGeometry(w.geometry);
+      setPlace(w.place);
+      setEnabled(new Set(w.filters.kinds));
+      setHours(w.filters.hours);
+      setMinimum(w.filters.minimum);
+      setPreferences(w.preferences);
+      setEnd(null);
+      setQuick("custom");
+      setFocus(null);
+      setPreset({
+        center: [w.place.lon, w.place.lat],
+        geometry: w.geometry,
+        zoom: 7,
+        id: Date.now(),
+      });
+      message(
+        "Workspace imported. Access keys and historical snapshots are never imported.",
+      );
+    } catch (e) {
+      setWorkspaceError(e instanceof Error ? e.message : "Invalid workspace");
+    }
+  }
   const source = snapshot?.sources.find((s) => s.id === sourceId);
   const healthy =
     snapshot?.sources.filter((s) =>
@@ -572,6 +505,9 @@ export default function App() {
     ).length ?? 0;
   return (
     <div className="app-shell">
+      <a className="skip-link" href="#main-workspace">
+        Skip to workspace
+      </a>
       <header className="topbar">
         <button
           className="brand"
@@ -593,7 +529,11 @@ export default function App() {
             <button
               key={id}
               className={view === id ? "active" : ""}
-              onClick={() => setView(id as typeof view)}
+              aria-current={view === id ? "page" : undefined}
+              onClick={() => {
+                setView(id as typeof view);
+                setMobileLayers(false);
+              }}
             >
               {label}
               {id === "sources" && (
@@ -691,9 +631,16 @@ export default function App() {
             >
               <Settings2 size={19} />
             </IconButton>
-            <span className="rail-version">v1.0</span>
+            <span className="rail-version">v2.0</span>
           </div>
         </nav>
+        {mobileLayers && (
+          <button
+            className="layer-backdrop"
+            aria-label="Close layer panel"
+            onClick={() => setMobileLayers(false)}
+          />
+        )}
         <div className={`sidebar-wrapper ${mobileLayers ? "mobile-open" : ""}`}>
           <Sidebar
             snapshot={snapshot}
@@ -717,7 +664,13 @@ export default function App() {
                 },
                 false,
               );
-              setPreset({ center: s.center, zoom: s.zoom, id: Date.now() });
+              setGeometry(s.geometry);
+              setPreset({
+                center: s.center,
+                zoom: s.zoom,
+                geometry: s.geometry,
+                id: Date.now(),
+              });
             }}
             onSave={() => {
               setViewName(place.name);
@@ -728,7 +681,7 @@ export default function App() {
             view={view}
           />
         </div>
-        <div className="workspace-main">
+        <div className="workspace-main" id="main-workspace" tabIndex={-1}>
           {snapshotError && (
             <div className="connection-banner">
               <Radio size={13} />
@@ -841,17 +794,27 @@ export default function App() {
                       PUBLIC DATA
                     </span>
                   </div>
-                  <MapView
-                    key={authVersion}
-                    events={filtered}
-                    place={place}
-                    focus={focus}
-                    preset={preset}
-                    onPoint={onMapPoint}
-                    onEvent={setFocus}
-                    onArea={analyzeArea}
-                    onMessage={message}
-                  />
+                  <Suspense
+                    fallback={
+                      <div className="map-stage map-loading">
+                        <Spinner label="Loading the geospatial renderer…" />
+                      </div>
+                    }
+                  >
+                    <MapView
+                      aoi={geometry}
+                      onAoiChange={setGeometry}
+                      key={authVersion}
+                      events={filtered}
+                      place={place}
+                      focus={focus}
+                      preset={preset}
+                      onPoint={onMapPoint}
+                      onEvent={setFocus}
+                      onArea={analyzeArea}
+                      onMessage={message}
+                    />
+                  </Suspense>
                   <Timeline
                     events={allEvents}
                     hours={hours}
@@ -865,6 +828,7 @@ export default function App() {
                   location={location}
                   loading={locationLoading}
                   error={locationError}
+                  onRetry={retryLocation}
                   events={feed}
                   focus={focus}
                   onEvent={setFocus}
@@ -881,17 +845,33 @@ export default function App() {
           ) : view === "sources" ? (
             <Sources sources={snapshot?.sources ?? []} onInspect={inspect} />
           ) : (
-            <Intelligence
-              key={`${place.lat},${place.lon}`}
-              tab={tab}
-              onTab={setTab}
-              snapshot={snapshot}
-              location={location}
-              place={place}
-              onLocation={() => setSearch(true)}
-              onSource={inspect}
-              onMessage={message}
-            />
+            <Suspense
+              fallback={
+                <main className="workspace-page">
+                  <Spinner label="Loading the analytical workspace…" />
+                </main>
+              }
+            >
+              <Intelligence
+                key={`${place.lat},${place.lon},${authVersion}`}
+                tab={tab}
+                onTab={setTab}
+                snapshot={snapshot}
+                location={location}
+                place={place}
+                saved={saved}
+                filteredEvents={filtered}
+                hours={hours}
+                now={now}
+                onEvent={(e) => {
+                  setFocus(e);
+                  setView("overview");
+                }}
+                onLocation={() => setSearch(true)}
+                onSource={inspect}
+                onMessage={message}
+              />
+            </Suspense>
           )}
           <footer className="statusbar">
             <span>
@@ -1008,6 +988,47 @@ export default function App() {
         >
           <div className="settings-section">
             <h3>
+              <SlidersHorizontal size={17} />
+              Display & accessibility
+            </h3>
+            <PreferenceControls />
+          </div>
+          <div className="settings-section">
+            <h3>
+              <FileText size={17} />
+              Portable workspace
+            </h3>
+            <p className="muted">
+              Export your selected place, up to six saved views, layer filters
+              and display preferences. No credentials, cached provider data or
+              visitor identifiers are included.
+            </p>
+            <div className="button-row">
+              <button className="button" onClick={exportWorkspace}>
+                <Download size={14} />
+                Export workspace
+              </button>
+              <label className="button file-button">
+                Import workspace
+                <input
+                  type="file"
+                  accept=".json,application/json"
+                  aria-label="Import workspace JSON"
+                  onChange={(e) => {
+                    void importWorkspace(e.target.files?.[0]);
+                    e.target.value = "";
+                  }}
+                />
+              </label>
+            </div>
+            {workspaceError && <Note tone="warning">{workspaceError}</Note>}
+            <p className="muted small">
+              Import replaces these settings atomically. Live data is fetched
+              again; the timeline cutoff resets to now. Limit: 64 KiB.
+            </p>
+          </div>
+          <div className="settings-section">
+            <h3>
               <KeyRound size={17} />
               Private deployment access
             </h3>
@@ -1018,8 +1039,10 @@ export default function App() {
             </p>
             <input
               className="text-input"
+              aria-label="Deployment access key"
               type="password"
               autoComplete="off"
+              maxLength={256}
               placeholder="Deployment access key (optional)"
               value={accessKey}
               onChange={(e) => setAccessKey(e.target.value)}
@@ -1027,6 +1050,12 @@ export default function App() {
             <button
               className="button"
               onClick={() => {
+                if (accessKey && !/^[\x21-\x7e]{32,256}$/.test(accessKey)) {
+                  message(
+                    "Use a 32–256 character visible ASCII key, without whitespace; blank clears access.",
+                  );
+                  return;
+                }
                 setDeploymentKey(accessKey);
                 setAuthVersion((v) => v + 1);
                 message("Deployment access updated for this page session.");
@@ -1084,7 +1113,7 @@ export default function App() {
       )}
       {source && (
         <SourceModal
-          key={source.id}
+          key={`${source.id},${authVersion}`}
           source={source}
           place={place}
           onClose={() => setSourceId(null)}
@@ -1122,14 +1151,18 @@ export default function App() {
             Save location view
           </button>
           <p className="modal-footnote">
-            Up to six views are retained locally. Oldest is replaced when full.
+            Up to six views are retained locally. The current analysis polygon,
+            if any, is included. Oldest is replaced when full.
           </p>
         </Modal>
       )}
       {areaModal && (
         <Modal
           title="Your area, in evidence."
-          onClose={() => setAreaModal(false)}
+          onClose={() => {
+            areaController.current?.abort();
+            setAreaModal(false);
+          }}
           wide
         >
           {areaLoading ? (

@@ -41,10 +41,10 @@ class SnapshotStore:
 
     async def save(self, key: str, body: str, lifetime: int):
         if len(body.encode()) > 2_000_000:
-            return
+            return False
 
         def work():
-            with self.lock:
+            with self.lock, self.db:
                 now = time.time()
                 self.db.execute(
                     "INSERT INTO snapshots VALUES(?,?,?,?) ON CONFLICT(key) DO UPDATE SET body=excluded.body,saved=excluded.saved,expires=excluded.expires",
@@ -64,9 +64,9 @@ class SnapshotStore:
                     ).fetchone()
                     self.db.execute("DELETE FROM snapshots WHERE key=?", (row[0],))
                     total -= row[1]
-                self.db.commit()
+                return True
 
-        await asyncio.to_thread(work)
+        return await asyncio.to_thread(work)
 
     async def close(self):
         def work():

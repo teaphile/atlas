@@ -1,124 +1,134 @@
-# ATLAS — Earth Intelligence
+# ATLAS 2.0 — Earth Intelligence
 
-### TerraWatch × OSIRIS, rebuilt around evidence.
+### Public-source geospatial evidence. Small, transparent models. No false certainty.
 
-**Working application + live demonstration + complete source handover.**
+A complete **local-first Python + React application** combining environmental analysis and multi-source mapping. Inspired by a deep, read-only review of TerraWatch and OSIRIS; an original integration, not an official port or endorsement. Neither upstream repository, dataset nor model collection was cloned.
 
-Dono repositories ko **read-only** inspect kiya gaya—git clone, unke datasets/weights copy ya upstream applications execute nahi kiye gaye. Environmental analysis aur multi-source geospatial workspace ko ek original, cohesive project mein combine kiya gaya hai. Ye sirf blueprint nahi: actual backend, frontend, API adapters, calculations, exports aur tests included hain.
+![ATLAS 2 Signal Lab — actual browser, real modeled data](docs/v2/screenshots/chromium-signals-1440x960.png)
 
-**Live:** Arena ka **“ATLAS — Earth Intelligence”** preview kholo. Service port **7860** par chalti hai. Preview temporary workspace hosting hai; apne server par deploy karne ke liye source, compiled frontend aur setup instructions saath hain.
+## What is new in 2.0
 
-![ATLAS desktop, actual browser and actual public-source data](docs/previews/desktop.png)
+- **Signal Lab:** 24/48/72-hour precipitation/reference ET₀ balance, dew point, vapour-pressure deficit, configurable capped thermal accumulation, wind rose and source-completeness counts.
+- **Small interpretable models:** seven-day diurnal/MAD/shrinkage novelty analysis, Theil–Sen trend descriptors and timestamp-aligned Spearman associations. No downloaded weights, GPU or LLM oracle.
+- **Compare two or three places:** one shared UTC clock, comparable model windows, four curves and canonical exports—no invented “safest city” ranking.
+- **Record explorer:** time/type/source/priority distributions, bounded USGS magnitude–depth plot, searchable/paginated records and CSV.
+- **Area authoring:** draw, undo, finish or import a bounded WGS84 GeoJSON polygon; filtered membership reports, camera fitting, saved polygons and portable workspace JSON.
+- **Responsive controls:** smartphone bottom tool rail, dismissible layer drawer, container-sized charts, table alternatives, unit/density/reduced-motion preferences and keyboard inspection.
+- **Hardening:** cancellation-owned requests, recovered-error cleanup, schema/unit/UTC validation, null-preserving science, stronger cache/SQLite boundaries and lazy map/analysis bundles.
 
-## At a glance
+Existing features remain: vector map/3D globe, NASA imagery, soil predictions/quantiles, explicit erosion scenarios, event-time filtering, public TfL camera snapshots, regional aircraft, CISA reference advisories and a source/attribution registry.
 
-| Deliverable | What is included |
-|---|---|
-| Read-only upstream review | 552 selected text files / 102,621 lines triaged, pinned revisions, focused source-level findings |
-| Source integrations | **23 implemented adapters**; 10 default collectors, others on demand |
-| Keyless access | 22 keyless adapter paths; 21 returned usable responses across live checks; GDELT was unavailable |
-| Optional credentials | NASA FIRMS Area MAP_KEY, server-side; no account/key was invented |
-| Offline verification | **132 backend tests + 27 frontend tests passed** |
-| Browser verification | **19 browser checks passed**: 13 desktop/mobile flow checks + 6 private-access/restore/image checks |
-| Dependency audits | No known production vulnerabilities reported at check time—not a security guarantee |
-| Handover | Code, hash/lock files, built frontend, reports, OpenAPI, Docker/Compose and CI definitions |
+## Run on your own system
 
-Counts are different kinds of records/adapters, not independent sensor networks or unique disasters. The application does not claim continuous availability of every provider.
-
-## Explore the live application
-
-1. **Overview:** real vector map, optional 3D globe, observation layers, display-priority filters and event-time windows. Click a record to inspect its original source.
-2. **Location:** search a named place or type `latitude, longitude`. Current modeled conditions load independently of the slower soil service. The default is explicitly **Agra district · rural east**, not an inferred precise user location.
-3. **Intelligence:** evidence brief, soil properties and prediction quantiles, weather/river context, environmental datasets, explicit RUSLE scenarios, and CISA reference advisories.
-4. **Regional layers:** enable aircraft for the selected region; choose Greater London to explore the official TfL public-camera catalog. Snapshots are not live video; capture time is unknown.
-5. **Area analysis:** zoom into a region, then choose **Analyze visible area**. Arbitrary bounded polygons/holes are also supported by the API.
-6. **Exports:** download the current filtered view as GeoJSON, JSON or spreadsheet-safe CSV. Save named location views locally in this browser.
-7. **Data sources:** inspect coverage, fetch age, observation/model nature, licensing, optional credentials and real errors. No synthetic live fallback data is displayed.
-
-## What makes this more than a feed dashboard
-
-- A shared `Event / Payload / Envelope` contract across providers, with distinct fetch, attempt, upstream and record times.
-- Valid-empty responses replace old records; error fallback retains the original successful timestamp and expires.
-- Per-query single-flight, bounded memory/SQLite caches, negative caching, provider-family quotas, circuit breakers and cancellation isolation.
-- ECEF spatial cells + time buckets + haversine checks + union-find for **bounded proximity grouping**, rather than an unrestricted all-pairs join. Proximity is not corroboration.
-- Date-line-aware, boundary-inclusive polygon membership with validated holes/topology and workload caps.
-- Completed-hour rainfall, unit-correct FFWI, explicitly derived soil stock and a separately labeled assumption-driven erosion calculator.
-- Same-origin provider access, no arbitrary-URL proxy, header-only optional auth, memory-only browser key, body/inflight limits, safe exports and bundled local UI assets.
-- Honest gaps: no fabricated NDVI, soil nutrients, flood/landslide probability, return period, aircraft track, camera feed or historical replay.
-
-![Implemented architecture](docs/architecture.svg)
-
-## Read the full breakdown
-
-| Document | Contents |
-|---|---|
-| [Upstream audit](docs/UPSTREAM_AUDIT.md) | Pinned revisions, actual scope, file/line evidence, strengths, defects and merger decisions |
-| [Architecture](docs/ARCHITECTURE.md) | Modules, dataflow, contracts, budgets, spatial algorithms, cache/SSE lifecycle and scaling boundary |
-| [Scientific methods](docs/SCIENTIFIC_METHODS.md) | Exact formulas, weights, units, uncertainty, model limitations and validation requirements |
-| [API/account guide](docs/API_GUIDE.md) | All 23 adapters, quotas/coverage, licensing, free MAP_KEY instructions and explicitly unimplemented extensions |
-| [Security/privacy](docs/SECURITY.md) | Controls, threat model, credentials, query privacy and residual risks |
-| [Deployment](docs/DEPLOYMENT.md) | Run scripts, Docker, ingress, configuration, backups, tests, monitoring and release gates |
-| [Validation](docs/VALIDATION.md) | Executed checks, live successes/failures, artifacts and untested boundaries |
-| [Third-party notices](THIRD_PARTY_NOTICES.md) | Software, map/style/font and provider attribution |
-
-## Run it on your chosen server
-
-Recommended/verified build environment: **Python 3.13 + Node 24 LTS**.
+**Recommended: Python 3.13 + Node 24 LTS.**
 
 ```sh
-# From the extracted project root:
+cd atlas
 ./scripts/setup.sh
 ./scripts/run.sh
-# Then open http://localhost:7860 on that machine.
+# Open http://127.0.0.1:7860
 ```
 
-For the included prebuilt frontend, Node is not needed just to run the Python server:
+If an extractor loses executable permissions, use `bash scripts/setup.sh` and `bash scripts/run.sh`.
+
+Windows PowerShell:
+
+```powershell
+.\scripts\setup.ps1
+.\scripts\run.ps1
+```
+
+A **release ZIP includes the built frontend**. For runtime-only use, Node is unnecessary:
 
 ```sh
-python3 -m venv .venv
+python3.13 -m venv .venv
 .venv/bin/python -m pip install --require-hashes -r backend/requirements.txt
 ./scripts/run.sh
 ```
 
-Optional Docker workflow: `docker compose up --build -d`. The container configuration is delivered but **was not built here** because this workspace had no Docker daemon. Review [deployment instructions](docs/DEPLOYMENT.md) before exposing it publicly.
+Full platform instructions, developer workflow, Docker alternative and troubleshooting: **[Local run guide](docs/LOCAL_RUN.md)**. Scripts bind to loopback by default. Fresh data/maps need internet access; this is not a fully offline archive.
 
-### Optional NASA credential
+## Evidence, not adjectives
 
-The default NOAA-20 South Asia detections work without an account. For the additional area-query adapter, obtain a free NASA MAP_KEY, set `ATLAS_FIRMS_MAP_KEY` on the server and restart. See [API/account guide](docs/API_GUIDE.md). Other account-based services in that guide are labeled future extensions, not already connected integrations.
+| Gate | Recorded v2 result |
+|---|---|
+| Offline tests | **225 backend + 78 frontend = 303 passed** |
+| Browser flows | **36 passed**: 13 v2, 13 retained-feature, 7 private-access and 3 controlled failure/recovery checks |
+| Responsive matrix | **72 viewport/view/browser samples**: 12 sizes × 2 views × Chromium, Firefox and WebKit |
+| Viewports | 320–2560 CSS px wide, portrait/tablet/desktop and short landscape |
+| Automated accessibility | **Zero axe violations** in 8 sampled Chromium page states; not a WCAG certification |
+| Map engines | Real map rendering in all 3 tested engines; Firefox used a headed virtual display for software WebGL |
+| Real model probe | 288 hourly rows/provider; complete 72-hour windows and a usable short baseline at the tested point |
+| Linux setup/build | Actual setup script and production build executed; Python 3.13.16 / Node 24.21.0 |
+| Production dependency audits | No known vulnerabilities reported at check time; not a security guarantee |
 
-### Verify
+See **[Validation](docs/VALIDATION.md)** for artifacts, versions and exclusions. Browser viewport emulation is not physical-device/GPU testing. Native Windows/macOS execution, Docker execution, production load/soak testing and scientific forecast-skill calibration are not claimed.
+
+## Sources and account requirements
+
+**23 adapters**, with 10 default collectors and others on demand. Counts represent provider records, not unique disasters or independent sensor networks. Empty, unknown, stale, unavailable, modeled and observed states are distinguished; **no synthetic live fallback records** are displayed.
+
+- Default public/keyless paths work without creating an ATLAS account.
+- NASA FIRMS **Area API** optionally needs a free server-side MAP_KEY; the default South Asia feed is keyless.
+- The free hosted **Open-Meteo APIs are non-commercial**. MIT code licensing does not override provider terms or quotas.
+- ISRIC can be slow, incomplete or return valid no-data. SoilGrids is regional model context, not a laboratory/farm diagnosis.
+- GDELT was unavailable during recorded sampling; optional keyed FIRMS was not tested with a real key. Provider availability can change.
+
+Details: **[API/account guide](docs/API_GUIDE.md)** and **[third-party notices](THIRD_PARTY_NOTICES.md)**.
+
+## Scientific boundaries
+
+ATLAS derives quantities from available provider data; it does not invent missing values. P−ET₀ is an atmospheric reference balance, **not irrigation need or soil-water storage**. Thermal accumulation is assumption-dependent, **not a crop-stage/yield forecast**. Short-baseline novelty is **not disaster probability, climate anomaly or independent validation**. Proximity groups and cross-source record counts are **not corroboration**. Event-time filtering is **not archived historical replay**.
+
+Every new method has an explicit contract, formula, coverage rule, test scope and limitation in **[Model cards](docs/v2/MODEL_CARDS.md)**. Existing soil, fire-weather and erosion assumptions remain in [Scientific methods](docs/SCIENTIFIC_METHODS.md).
+
+## Architecture and engineering
+
+- FastAPI + shared typed event/envelope contracts; bounded HTTP gateways, per-query single-flight, negative caches and quota/circuit-breaker policies.
+- Byte/entry-bounded memory + SQLite persistence, original last-good clocks, transactional rollback and no arbitrary-URL proxy.
+- Bounded spatial/time candidate indexing, date-line-aware polygons and position lifetimes.
+- NumPy for small transparent calculations; independent fast weather/AQI and slower soil loading.
+- React/TypeScript + MapLibre + local fonts; same-origin requests, worker bundling, accessible data tables and portable allowlisted workspace settings.
+- Optional header-only private deployment access; key stays in page memory and out of local storage/workspace exports. One application worker until shared collector/quota state is implemented.
+
+![ATLAS map overview — actual provider records](docs/v2/screenshots/chromium-overview-1440x960.png)
+
+## GitHub publication
+
+**Source is publication-ready locally; no remote push is claimed in this handover.** An authenticated GitHub destination was unavailable in the build environment.
+
+On your own computer, authenticate with the official CLI and publish the reviewed project:
 
 ```sh
-./scripts/check.sh
-# With the live application already running:
-cd frontend
-npx playwright install --with-deps chromium
-node scripts/verify-browser.mjs
+gh auth login
+python scripts/publish_github.py YOUR_ACCOUNT/atlas-earth-intelligence --public
 ```
 
-Open `/docs` on the running application for the local API reference; `/api/openapi.json` provides its schema. Unit fixtures are deliberately offline and never imported by production code.
+The helper asks for confirmation and refuses an unrelated Git root/existing origin. Never paste tokens into chat. Full instructions: **[Publish to GitHub](docs/GITHUB_PUBLISH.md)**. GitHub Pages cannot run the Python backend; source publication and application hosting are different actions.
 
-## Important, honest boundaries
+## Documentation
 
-- **Production-oriented implementation, not a production-readiness certificate.** Public hosting still needs TLS/ingress/identity/egress setup, a real container build, workload/soak/restore testing and proportionate security/accessibility review. Run one application worker until shared collector/quota/bus state is implemented.
-- **Scientific screening is not a disaster probability.** Soil is a regional-context static model; ISRIC advises against farm-level interpretation. Derived stock is not its separately trained stock product. Confirm consequential decisions with appropriate authorities/domain evidence.
-- **Free does not always mean commercial.** The free hosted Open-Meteo service is non-commercial. ISRIC beta REST is limited to five calls/minute; ATLAS applies conservative per-process pacing. Camera, news and map reuse have their own terms. See [API guide](docs/API_GUIDE.md).
-- **Outages remain visible.** GDELT was unavailable in live checks. Some uncached SoilGrids requests can be slow, partial or unavailable; a valid no-data urban cell remains null rather than borrowing a rural value. The keyed FIRMS path remains unverified without a real key.
-- **Not a literal full port of two monorepos.** Maritime AIS, global orbital fleets/CCTV catalogs, trained crop-health pipelines, autonomous predictive agents, historical data lakes and multi-tenant identity are explicitly outside this delivered version. No disabled feature is padded with mock “live” records.
-
-## Project layout
+| Guide | Contents |
+|---|---|
+| [V2 ground-level audit](docs/v2/AUDIT_REPORT.md) | Actual defects, fixes, evidence and deliberate non-features |
+| [Upstream review](docs/UPSTREAM_AUDIT.md) | 552 selected text files / 102,621 lines triaged, pinned revisions and read-only review boundaries |
+| [Architecture](docs/ARCHITECTURE.md) | Contracts, modules, ingestion and scaling limits |
+| [Model cards](docs/v2/MODEL_CARDS.md) | New transparent calculations and statistical methods |
+| [API guide](docs/API_GUIDE.md) | Providers, quotas, accounts and analysis endpoints |
+| [Local run](docs/LOCAL_RUN.md) / [Deployment](docs/DEPLOYMENT.md) | Local-first launch and production responsibilities |
+| [Security](docs/SECURITY.md) | Threat model, controls and residual risks |
+| [Validation](docs/VALIDATION.md) | Executed checks versus untested boundaries |
+| [GitHub publication](docs/GITHUB_PUBLISH.md) | Safe account-owned publication workflow |
 
 ```text
-backend/atlas_app/      API, adapters, ingestion, storage, spatial and scientific code
-backend/tests/         offline regression suite
-frontend/src/          complete React/TypeScript workspace
-frontend/public/       local geographic/style assets and licenses
-frontend/dist/         compiled frontend in the release archive (regenerable)
-frontend/scripts/      actual browser review / verification scripts
-docs/                  audit, architecture, methods, guides and verification evidence
-scripts/               setup, run, checks, packaging and read-only review utility
-deploy/                example HTTPS ingress
-.github/workflows/     CI definitions (not run in a user account)
+backend/atlas_app/     API, providers, ingestion, cache, geometry and numerical methods
+backend/tests/        offline regression suite
+frontend/src/         React/TypeScript application, hooks, charts and tests
+frontend/scripts/     reproducible browser checks
+frontend/dist/        built UI in the release ZIP (ignored in Git)
+docs/                 method/audit guides and recorded evidence
+scripts/              setup, run, check, publication and packaging helpers
+.github/workflows/    CI definitions; run them in your own repository
 ```
 
-The release excludes `.env`, `.runtime`, dependency folders, downloaded model/data collections and original repository trees. MIT applies to the original ATLAS code; dependencies, basemap designs and provider data retain their own licenses.
+Original ATLAS code: **MIT**. Dependencies, map assets and provider data retain their own licenses. The distribution excludes real credentials, runtime databases, dependency folders, bulk datasets and both upstream source trees.

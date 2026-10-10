@@ -47,3 +47,14 @@ This document describes implemented controls, not a penetration-test certificate
 Before external launch: choose a non-commercial or appropriately licensed API plan; deploy HTTPS; protect private use with identity/key controls; set trusted ingress limits; restrict egress; configure secrets outside source control; retain one worker until distributed state is implemented; test backup/restore and graceful shutdown; test expected concurrent traffic; rerun dependency audits; arrange alerts on source failures/quota use; verify camera/news/map redistribution terms; and commission security/accessibility/domain review proportionate to the use case.
 
 For a vulnerability report, send a minimal reproduction to the operator you deploy this with. Do not include real provider or deployment keys in public issues, screenshots or examples.
+
+
+## V2 additions
+
+- Header keys must be 32–256 visible ASCII characters without whitespace/control characters. Client-side settings use the same constraint; server validation remains authoritative.
+- Workspace import is byte/version/type bounded and allowlisted, including active/saved polygons; unknown fields/keys are not exported. It is not a provider-data or arbitrary-URL import.
+- JSON fetches refuse redirects, verify media types, bound streamed bytes/error text and distinguish timeout from intentional cancellation. Image fetches remain MIME/size checked.
+- Comparison is limited to three points; scientific booleans/non-finite values are rejected. Numerical methods are bounded in history/dimensions and run off the event loop.
+- Restored cache timestamps/statuses are validated; SQLite writes rollback on failure. AOI filters and expiring positions match map semantics.
+- Launchers bind to loopback unless explicitly overridden. Publication helper refuses unrelated Git roots/existing origins and common runtime/credential paths, but is **not a secret scanner**. Review content and history yourself before publication.
+- No remote GitHub publication has occurred in this environment. Authenticate locally using the official CLI/credential helper; never send credentials in chat.

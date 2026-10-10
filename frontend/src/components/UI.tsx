@@ -1,6 +1,20 @@
 import { useEffect, useId, useRef } from "react";
 import type { ReactNode } from "react";
-import { X, LoaderCircle, ArrowUpRight, Info } from "lucide-react";
+import {
+  X,
+  LoaderCircle,
+  ArrowUpRight,
+  Info,
+  Cloud,
+  Sun,
+  CloudSun,
+  CloudRain,
+  CloudDrizzle,
+  CloudFog,
+  CloudLightning,
+  Snowflake,
+  CircleHelp,
+} from "lucide-react";
 import type { Health } from "../types";
 export function IconButton({
   label,
@@ -216,4 +230,25 @@ export function Sparkline({
       ))}
     </svg>
   );
+}
+
+export function WeatherGlyph({
+  code,
+  size = 25,
+}: {
+  code: unknown;
+  size?: number;
+}) {
+  let Icon = CircleHelp;
+  if (typeof code === "number") {
+    if (code === 0) Icon = Sun;
+    else if ([1, 2].includes(code)) Icon = CloudSun;
+    else if (code === 3) Icon = Cloud;
+    else if ([45, 48].includes(code)) Icon = CloudFog;
+    else if ([51, 53, 55, 56, 57].includes(code)) Icon = CloudDrizzle;
+    else if ([61, 63, 65, 66, 67, 80, 81, 82].includes(code)) Icon = CloudRain;
+    else if ([71, 73, 75, 77, 85, 86].includes(code)) Icon = Snowflake;
+    else if ([95, 96, 99].includes(code)) Icon = CloudLightning;
+  }
+  return <Icon size={size} strokeWidth={1.4} aria-hidden="true" />;
 }
