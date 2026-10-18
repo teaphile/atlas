@@ -33,6 +33,7 @@ This review targets **the original ATLAS integration**, not a clone of TerraWatc
 | Local installation | Launch scripts were not executable, and the Linux development lock omitted Windows pytest colorama | Executable modes corrected; actual Linux setup/run checked; a hash-locked Windows overlay supplied |
 | Startup weight | Map and analysis code were loaded with the shell | Separate lazy map/analysis bundles; final build log records their actual sizes |
 | Scientific communication | Old computed screening could look continuously current | Explicit computation-age label and preserved source/model clocks |
+| Cross-Python lock & lint | `numpy==2.5.3` restricted lockfile to Python ≥3.12; `__init__.__version__` lagged at `1.0.0`; Signal Lab CSV omitted formula prefix escaping; default Ruff rules reported lint issues | Locked `numpy==2.4.6` (Python 3.11–3.13 wheels), aligned `__version__ = "2.0.0"`, neutralized formula prefixes in Signal Lab CSV, and resolved all Ruff lint findings across `backend` and `scripts` |
 
 ## What was added
 

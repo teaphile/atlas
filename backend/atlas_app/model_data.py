@@ -4,6 +4,7 @@ The provider endpoints are requested in UTC and metric units; no silent conversi
 """
 
 from __future__ import annotations
+
 from .parsers import number, timestamp
 from .transport import UpstreamError
 
@@ -96,11 +97,11 @@ def normalize_model(raw: dict, source: str) -> tuple[dict, list[str]]:
             if not valid_unit:
                 counts["missing_or_mismatched_units"].append(name)
 
-            def norm(v):
-                n = number(v) if valid_unit else None
-                if n is not None and not lo <= n <= hi:
+            def norm(v, _valid_unit=valid_unit, _lo=lo, _hi=hi, _name=name):
+                n = number(v) if _valid_unit else None
+                if n is not None and not _lo <= n <= _hi:
                     n = None
-                if name == "weather_code" and n not in WMO_CODES:
+                if _name == "weather_code" and n not in WMO_CODES:
                     n = None
                 if v is not None and n is None:
                     counts["invalid_values"] += 1

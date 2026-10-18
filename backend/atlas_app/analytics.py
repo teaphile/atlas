@@ -3,8 +3,11 @@ No latent variables (groundwater, lithology, NDVI, defenses) are fabricated.
 """
 
 from __future__ import annotations
+
+import itertools
 import math
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
+
 from .parsers import number, timestamp
 from .schemas import Envelope, ErosionScenario, utcnow
 
@@ -31,7 +34,7 @@ def ffwi(temp_c: float, rh: float, wind_kmh: float) -> float:
 def linear(value: float, knots: list[tuple[float, float]]) -> float:
     if value <= knots[0][0]:
         return knots[0][1]
-    for (x0, y0), (x1, y1) in zip(knots, knots[1:]):
+    for (x0, y0), (x1, y1) in itertools.pairwise(knots):
         if value <= x1:
             return y0 + (y1 - y0) * (value - x0) / (x1 - x0)
     return knots[-1][1]
@@ -42,7 +45,7 @@ def rainfall_24h(hourly: dict, now: datetime) -> tuple[float | None, int]:
     Use exactly 24 completed hourly endpoints, excluding forecast future values.
     No addition of `rain` (already a precipitation component).
     """
-    end = now.astimezone(timezone.utc).replace(minute=0, second=0, microsecond=0)
+    end = now.astimezone(UTC).replace(minute=0, second=0, microsecond=0)
     expected = {end - timedelta(hours=i) for i in range(24)}
     values = {}
     for t, v in zip(hourly.get("time", []), hourly.get("precipitation", [])):

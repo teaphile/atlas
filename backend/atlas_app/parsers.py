@@ -1,11 +1,19 @@
 """Schema-checked adapters. Null never becomes zero; source event time never becomes fetch time."""
 
 from __future__ import annotations
-import csv, hashlib, html, io, math, re
-from datetime import datetime, timezone, timedelta
+
+import csv
+import hashlib
+import html
+import io
+import math
+import re
+from datetime import UTC, datetime, timedelta
 from email.utils import parsedate_to_datetime
+
 from defusedxml.ElementTree import fromstring
 from shapely.geometry import shape
+
 from .schemas import Event, Payload, Point
 from .transport import UpstreamError
 
@@ -25,13 +33,13 @@ def timestamp(v):
         return None
     try:
         if isinstance(v, (int, float)):
-            return datetime.fromtimestamp(v / 1000 if abs(v) > 1e11 else v, timezone.utc)
+            return datetime.fromtimestamp(v / 1000 if abs(v) > 1e11 else v, UTC)
         s = str(v).strip()
         try:
-            t = datetime.fromisoformat(s.replace("Z", "+00:00"))
+            t = datetime.fromisoformat(s)
         except ValueError:
             t = parsedate_to_datetime(s)
-        return t.replace(tzinfo=timezone.utc) if t.tzinfo is None else t.astimezone(timezone.utc)
+        return t.replace(tzinfo=UTC) if t.tzinfo is None else t.astimezone(UTC)
     except (ValueError, TypeError, OverflowError, OSError):
         return None
 

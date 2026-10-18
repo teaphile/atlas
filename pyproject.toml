@@ -3,6 +3,11 @@ pythonpath = ["backend"]
 testpaths = ["backend/tests"]
 asyncio_mode = "auto"
 addopts = "-ra"
+filterwarnings = [
+    "ignore:Using `httpx` with `starlette.testclient` is deprecated",
+]
+
 [tool.ruff]
 line-length = 110
-target-version = "py313"
+target-version = "py311"
+

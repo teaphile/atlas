@@ -1,12 +1,18 @@
 from __future__ import annotations
-import asyncio, json, logging, random, time
+
+import asyncio
+import json
+import logging
+import random
+import time
 from collections import OrderedDict, deque
+
 from .config import Settings
-from .schemas import Envelope, utcnow
-from .registry import SOURCES, GLOBAL_SOURCES
-from .transport import HttpGateway, UpstreamError
 from .providers import Providers
+from .registry import GLOBAL_SOURCES, SOURCES
+from .schemas import Envelope, utcnow
 from .storage import SnapshotStore
+from .transport import HttpGateway, UpstreamError
 
 log = logging.getLogger("atlas.ingestion")
 
@@ -170,7 +176,7 @@ class Engine:
         if not cached:
             try:
                 saved = await self.store.load(key)
-            except Exception:
+            except Exception:  # noqa: BLE001
                 saved = None
                 log.warning(json.dumps({"event": "cache_read_failed", "source": id}))
             if saved:
@@ -218,7 +224,7 @@ class Engine:
                     )
                     env.warnings = list(env.payload.warnings)
                     self._remember(key, env)
-            except Exception:
+            except Exception:  # noqa: BLE001
                 env.payload.warnings.append(
                     "Persistent cache unavailable; this result is retained in memory only."
                 )
@@ -241,7 +247,7 @@ class Engine:
             return env
         except asyncio.CancelledError:
             raise
-        except Exception as exc:
+        except Exception as exc:  # noqa: BLE001
             code = (
                 exc.code
                 if isinstance(exc, UpstreamError)

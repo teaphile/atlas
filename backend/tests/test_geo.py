@@ -1,6 +1,7 @@
-import pytest
 from datetime import timedelta
-from atlas_app.geo import haversine, polygon_aoi, in_aoi, aoi_area_km2, proximity_groups, filter_events
+
+import pytest
+from atlas_app.geo import aoi_area_km2, filter_events, haversine, in_aoi, polygon_aoi, proximity_groups
 from atlas_app.schemas import utcnow
 
 

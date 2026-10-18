@@ -1,8 +1,9 @@
 import pytest
-from defusedxml.common import EntitiesForbidden
-from shapely.geometry import shape, Point as SPoint
 from atlas_app import parsers as p
 from atlas_app.transport import UpstreamError
+from defusedxml.common import EntitiesForbidden
+from shapely.geometry import Point as SPoint
+from shapely.geometry import shape
 
 
 @pytest.mark.parametrize(

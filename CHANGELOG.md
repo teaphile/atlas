@@ -17,10 +17,11 @@
 - Restored cache metadata, versioned model caches, SQLite rollback/budgets, readiness HTTP semantics and header-key validation.
 - AOI filter parity, empty selection semantics, moving-position expiry and proximity truncation disclosure.
 - Responsive clipping/contrast/focus, lazy MapLibre CSS host collapse, map drawing during source updates and executable launch-script modes.
-- Windows pytest's conditional colorama dependency is hash-locked in a separate overlay.
+- Windows pytest's conditional colorama dependency is hash-locked in a separate overlay; NumPy 2.4.6 is hash-locked with cross-platform wheels supporting Python 3.11–3.13.
+- Aligned package metadata (`atlas_app.__version__ == "2.0.0"`), full Ruff lint cleanliness across `backend` and `scripts`, and CSV formula-prefix neutralization in Signal Lab derived-series exports.
 
 ### Verification
-225 backend and 78 frontend offline tests; 36 browser flow checks; 72 viewport/view/browser samples; 8 sampled axe states without reported violations. See docs/VALIDATION.md for exact scope and untested boundaries.
+226 backend and 79 frontend offline tests (305 total, zero warnings); full `ruff check backend scripts` and `tsc -b` pass; 36 browser flow checks; 72 viewport/view/browser samples; 8 sampled axe states without reported violations. See docs/VALIDATION.md for exact scope and untested boundaries.
 
 ### Publication
 Local repository and clean distributable prepared. No authenticated GitHub push or production deployment is asserted.

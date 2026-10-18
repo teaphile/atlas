@@ -1,6 +1,6 @@
 import pytest
-from atlas_app.providers import Providers
 from atlas_app.config import Settings
+from atlas_app.providers import Providers
 from atlas_app.transport import UpstreamError
 
 

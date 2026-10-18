@@ -1,17 +1,18 @@
 """Offline integration boundaries for the v2 API and durable cache."""
 
-from datetime import timedelta
 import sqlite3
+from datetime import timedelta
+
 import pytest
-from fastapi.testclient import TestClient
 from atlas_app.config import Settings
 from atlas_app.engine import Engine
 from atlas_app.geo import filter_events, proximity_groups
+from atlas_app.insights import summarize_window
 from atlas_app.main import create_app
+from atlas_app.model_data import normalize_model
 from atlas_app.schemas import Envelope, Payload, utcnow
 from atlas_app.storage import SnapshotStore
-from atlas_app.model_data import normalize_model
-from atlas_app.insights import summarize_window
+from fastapi.testclient import TestClient
 
 
 @pytest.mark.parametrize(
@@ -198,7 +199,7 @@ def test_normalizer_tolerates_independent_short_arrays_and_preserves_zero():
         },
         "hourly_units": {"precipitation": "mm", "temperature_2m": "°C"},
     }
-    data, warnings = normalize_model(raw, "weather")
+    data, _warnings = normalize_model(raw, "weather")
     assert data["hourly"]["precipitation"] == [0, None, None]
     assert data["hourly"]["temperature_2m"] == [None, None, None]
 
@@ -229,3 +230,15 @@ def test_unexpected_provider_timezone_is_not_silently_assumed_utc(offset):
 def test_header_secrets_reject_controls_and_whitespace(key):
     with pytest.raises(ValueError):
         Settings(auth_required=True, api_key=key, _env_file=None)
+
+
+def test_package_and_api_version_align_at_v2(api_client):
+    import atlas_app
+
+    assert atlas_app.__version__ == "2.0.0"
+    health = api_client.get("/api/v1/health").json()
+    assert health["version"] == atlas_app.__version__
+    schema = api_client.get("/api/openapi.json").json()
+    assert schema["info"]["version"] == atlas_app.__version__
+
+

@@ -3,7 +3,11 @@ Only an audit manifest (path, digest, line count, identifiers, URLs) is persiste
 """
 
 import concurrent.futures as cf
-import hashlib, json, re, time, urllib.request
+import hashlib
+import json
+import re
+import time
+import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -88,11 +92,11 @@ def scan():
             )
         ]
 
-        def one(x):
+        def one(x, _base=base):
             p = x["path"]
             row = {"path": p, "bytes": x.get("size", 0), "object": x.get("sha", x.get("oid"))}
             try:
-                body = read(base + p)
+                body = read(_base + p)
                 s = body.decode("utf-8")
                 row.update(
                     status="read_in_memory",
@@ -114,10 +118,10 @@ def scan():
                     "todo": r"TODO|FIXME|NotImplemented",
                 }
                 row["indicators"] = {
-                    k: [i for i, l in enumerate(s.splitlines(), 1) if re.search(v, l, re.I)][:70]
+                    k: [i for i, l in enumerate(s.splitlines(), 1) if re.search(v, l, re.IGNORECASE)][:70]
                     for k, v in patterns.items()
                 }
-            except Exception as e:
+            except Exception as e:  # noqa: BLE001
                 row.update(status="error", error=type(e).__name__)
             return row
 

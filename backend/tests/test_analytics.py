@@ -1,9 +1,10 @@
-import pytest
-from datetime import datetime, timezone, timedelta
-from atlas_app.analytics import ffwi, rainfall_24h, environment_screen, soil_summary, erosion_scenario
-from atlas_app.schemas import Envelope, Payload, ErosionScenario
+from datetime import UTC, datetime, timedelta
 
-NOW = datetime(2026, 10, 10, 6, 30, tzinfo=timezone.utc)
+import pytest
+from atlas_app.analytics import environment_screen, erosion_scenario, ffwi, rainfall_24h, soil_summary
+from atlas_app.schemas import Envelope, ErosionScenario, Payload
+
+NOW = datetime(2026, 10, 10, 6, 30, tzinfo=UTC)
 
 
 def test_precipitation_uses_24_completed_hourly_endpoints():

@@ -3,12 +3,18 @@ Rate limits are deployment-local; horizontal replicas need a shared egress budge
 """
 
 from __future__ import annotations
-import asyncio, json, random, time
+
+import asyncio
+import json
+import random
+import time
 from collections import defaultdict, deque
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from email.utils import parsedate_to_datetime
 from urllib.parse import urlsplit
+
 import httpx
+
 from .config import Settings
 
 ALLOWED_HOSTS = frozenset(
@@ -127,9 +133,9 @@ class HttpGateway:
                                     except ValueError:
                                         try:
                                             delay = (
-                                                parsedate_to_datetime(raw) - datetime.now(timezone.utc)
+                                                parsedate_to_datetime(raw) - datetime.now(UTC)
                                             ).total_seconds()
-                                        except Exception:
+                                        except (ValueError, TypeError, OverflowError):
                                             delay = 60
                                     self._blocked[host] = time.monotonic() + max(1, min(delay, 86400))
                                     raise UpstreamError("upstream_rate_limited")

@@ -4,13 +4,16 @@ No downloaded weights, LLM forecasts, hazard probabilities or causality claims.
 """
 
 from __future__ import annotations
-from datetime import datetime, timedelta, timezone
+
 import math
+from datetime import UTC, datetime, timedelta
 from statistics import median
+
 import numpy as np
+
 from .parsers import number, timestamp
-from .schemas import Envelope, utcnow
 from .registry import SOURCES
+from .schemas import Envelope, utcnow
 
 VERSION = "signal-lab-2.0.0"
 FEATURES = ("temperature_c", "humidity_pct", "wind_kmh", "pressure_hpa")
@@ -337,7 +340,7 @@ def wind_distribution(rows, start, hours=24):
 
 
 def analyze_environment(sources: dict[str, Envelope], now: datetime | None = None, base_c=10.0, cap_c=30.0):
-    now = (now or utcnow()).astimezone(timezone.utc)
+    now = (now or utcnow()).astimezone(UTC)
     if finite(base_c) is None or finite(cap_c) is None or not -10 <= base_c < cap_c <= 50:
         raise ValueError("Thermal base must be below the cap, with −10 ≤ base < cap ≤ 50 °C")
     weather = sources.get("weather")

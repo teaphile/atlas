@@ -1,11 +1,15 @@
 """Antimeridian-aware AOIs and bounded ECEF spacetime candidate indexing."""
 
 from __future__ import annotations
+
 import math
 from collections import defaultdict
-from datetime import datetime, timezone
-from itertools import product
-from shapely.geometry import Polygon, Point as SPoint
+from datetime import UTC, datetime
+from itertools import pairwise, product
+
+from shapely.geometry import Point as SPoint
+from shapely.geometry import Polygon
+
 from .schemas import Event
 
 R = 6371.0088
@@ -74,7 +78,7 @@ def aoi_area_km2(polygon):
     def ring_area(ring):
         cs = list(ring.coords)
         a = 0.0
-        for (x1, y1), (x2, y2) in zip(cs, cs[1:]):
+        for (x1, y1), (x2, y2) in pairwise(cs):
             a += math.radians(x2 - x1) * (2 + math.sin(math.radians(y1)) + math.sin(math.radians(y2)))
         return abs(a) * R * R / 2
 
@@ -90,7 +94,7 @@ def filter_events(
     minimum_priority=0,
     end=None,
 ):
-    now = now or datetime.now(timezone.utc)
+    now = now or datetime.now(UTC)
     cutoff = now.timestamp() - hours * 3600
     out = []
     for e in events:

@@ -1,23 +1,26 @@
 """Mathematical invariants and leakage tests; offline fixtures, never demo data."""
 
-from datetime import datetime, timedelta, timezone
-import copy, json, math
+import copy
+import json
+import math
+from datetime import UTC, datetime, timedelta
+
 import pytest
 from atlas_app.insights import (
-    psychrometrics,
+    _rows,
+    analyze_environment,
     novelty_model,
+    psychrometrics,
+    robust_trend,
+    spearman,
     summarize_window,
     wind_distribution,
-    spearman,
-    robust_trend,
-    analyze_environment,
-    _rows,
 )
 from atlas_app.model_data import normalize_model
-from atlas_app.schemas import Envelope, Payload, Point, ErosionScenario, AOIRequest
+from atlas_app.schemas import AOIRequest, Envelope, ErosionScenario, Payload, Point
 from atlas_app.transport import UpstreamError
 
-NOW = datetime(2026, 10, 10, 6, 30, tzinfo=timezone.utc)
+NOW = datetime(2026, 10, 10, 6, 30, tzinfo=UTC)
 ANCHOR = NOW.replace(minute=0)
 
 
@@ -274,7 +277,7 @@ def test_normalizer_sorts_aligns_and_neutralizes_duplicates():
     raw = model_raw()
     raw["hourly"]["time"] = [(ANCHOR + timedelta(hours=i)).isoformat() for i in [2, 1, 1, 0]]
     raw["hourly"]["temperature_2m"] = [22, 21, 30, 20]
-    r, w = normalize_model(raw, "weather")
+    r, _w = normalize_model(raw, "weather")
     assert r["hourly"]["temperature_2m"] == [20, None, 22]
     assert r["hourly"]["precipitation"] == [None, None, 0]
     assert r["quality"]["duplicate_hours"] == 1
