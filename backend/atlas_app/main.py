@@ -1,21 +1,32 @@
 from __future__ import annotations
-import asyncio, csv, html, io, json, logging, re, time
-from collections import OrderedDict, Counter
+
+import asyncio
+import csv
+import html
+import io
+import json
+import logging
+import re
+import time
+from collections import Counter, OrderedDict
 from contextlib import asynccontextmanager
-from datetime import timedelta, datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Annotated, Literal
-from fastapi import FastAPI, Query, Request, HTTPException
-from fastapi.responses import JSONResponse, Response, StreamingResponse, FileResponse, HTMLResponse
+
+from fastapi import FastAPI, HTTPException, Query, Request
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, Response, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from starlette.middleware.gzip import GZipMiddleware
+
+from . import __version__
+from .analytics import environment_screen, erosion_scenario, soil_summary
 from .config import Settings, settings
 from .engine import Engine
-from .registry import SOURCES
-from .schemas import AOIRequest, ErosionScenario, ComparisonRequest, utcnow
-from .analytics import environment_screen, soil_summary, erosion_scenario
+from .geo import aoi_area_km2, filter_events, haversine, in_aoi, polygon_aoi, proximity_groups
 from .insights import analyze_environment
-from .geo import filter_events, proximity_groups, polygon_aoi, in_aoi, aoi_area_km2, haversine
+from .registry import SOURCES
+from .schemas import AOIRequest, ComparisonRequest, ErosionScenario, utcnow
 from .security import SecurityMiddleware
 from .transport import UpstreamError
 
@@ -46,7 +57,7 @@ def create_app(config: Settings | None = None, engine: Engine | None = None):
 
     app = FastAPI(
         title="ATLAS Earth Intelligence",
-        version="2.0.0",
+        version=__version__,
         description="Provenance-first public geospatial intelligence. Not an emergency warning service.",
         docs_url=None,
         redoc_url=None,
@@ -62,7 +73,7 @@ def create_app(config: Settings | None = None, engine: Engine | None = None):
         return {
             "status": "ok",
             "service": "atlas",
-            "version": "2.0.0",
+            "version": __version__,
             "uptime_seconds": round((utcnow() - eng.started_at).total_seconds()),
             "read_only": True,
         }
@@ -233,7 +244,7 @@ def create_app(config: Settings | None = None, engine: Engine | None = None):
             p, anchor = polygon_aoi(body.geometry)
         except (ValueError, TypeError) as e:
             raise HTTPException(422, str(e)) from None
-        envelopes, events = eng.snapshot(True)
+        _, events = eng.snapshot(True)
         candidates = filter_events(
             events, body.hours, kinds=body.kinds, minimum_priority=body.minimum_priority, end=body.end
         )
@@ -265,7 +276,7 @@ def create_app(config: Settings | None = None, engine: Engine | None = None):
         format: Literal["geojson", "json", "csv"] = "geojson",
         hours: Annotated[int, Query(ge=1, le=720)] = 168,
     ):
-        envelopes, events = eng.snapshot(True)
+        _, events = eng.snapshot(True)
         events = filter_events(events, hours)
         rows = [e.model_dump(mode="json") for e in events]
         meta = {
@@ -359,7 +370,7 @@ def create_app(config: Settings | None = None, engine: Engine | None = None):
                     try:
                         msg = await asyncio.wait_for(q.get(), timeout=15)
                         yield f"event: sync\nid: {msg['revision']}\ndata: {json.dumps(msg)}\n\n"
-                    except asyncio.TimeoutError:
+                    except TimeoutError:
                         yield ": heartbeat\n\n"
             finally:
                 eng.bus.unsubscribe(q)
@@ -380,7 +391,7 @@ def create_app(config: Settings | None = None, engine: Engine | None = None):
 
         async def load():
             b = await eng.http.get_bytes(url, limit=limit)
-            if not (b.startswith(b"\x89PNG") or b.startswith(b"\xff\xd8") or b.startswith(b"RIFF")):
+            if not b.startswith((b"\x89PNG", b"\xff\xd8", b"RIFF")):
                 raise UpstreamError("invalid_image")
             tile_cache[url] = (time.monotonic(), b)
             while len(tile_cache) > 160 or sum(len(v[1]) for v in tile_cache.values()) > 24_000_000:

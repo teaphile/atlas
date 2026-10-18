@@ -4,8 +4,8 @@ ATLAS is a Python server plus a locally served React application. It is **not** 
 
 ## Requirements
 
-- Python **3.13** (tested 3.13.16).
-- Node **24 LTS** (tested 24.21.0) only for building/testing the UI. A release ZIP includes a prebuilt UI, so runtime-only use does not require Node.
+- Python **3.11–3.13** (tested 3.11.2 and 3.13.16).
+- Node **20–24 LTS** (tested 22.22.3 and 24.21.0) only for building/testing the UI. A release ZIP includes a prebuilt UI, so runtime-only use does not require Node.
 - About 1 GB free RAM is a sensible local starting allowance; this is not a capacity guarantee. A WebGL2-capable browser is needed for the interactive map. Other panels/exports remain usable without WebGL.
 - Git is needed only for source checkout/publication, not for running an extracted ZIP.
 

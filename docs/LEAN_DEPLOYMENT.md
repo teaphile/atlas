@@ -47,7 +47,7 @@ The packager verifies the new ZIP before replacing the previous release. The arc
 
 The existing cache was checkpointed through SQLite, **not** by deleting WAL/SHM files. Its 12 logical records were compared before/after, with identical contents and a successful integrity check. No cache records were removed.
 
-The backend regression suite was repeated: **225 passed**, with the same one non-failing Starlette TestClient deprecation warning. Dependency consistency, Ruff F/E9, Python syntax and browser-script syntax checks passed.
+The backend regression suite was repeated: **226 passed** (with zero warnings), plus **79 passed** frontend tests (**305 offline tests total**). Dependency consistency, full Ruff lint (`ruff check backend scripts`), Python syntax, strict TypeScript build and browser-script syntax checks passed.
 
 The full historical frontend/browser matrix was not repeated for this artifact-only cleanup; its results remain dated in `VALIDATION.md`. No new Docker execution, public hosting, scientific calibration or production certification is claimed.
 

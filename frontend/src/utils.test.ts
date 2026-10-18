@@ -185,3 +185,80 @@ it("CSV export neutralizes spreadsheet formulas and keeps negative numeric coord
   expect(text).toContain("'=HYPERLINK");
   expect(text).toContain('"-27"');
 });
+it("Signal Lab CSV export neutralizes formula-prefixed string metadata while preserving negative numbers", async () => {
+  const { exportInsights } = await import("./components/SignalLab");
+  let captured: Blob | undefined;
+  vi.stubGlobal("window", { setTimeout: () => 0 });
+  vi.stubGlobal("URL", {
+    createObjectURL: (b: Blob) => {
+      captured = b;
+      return "blob:test";
+    },
+    revokeObjectURL: () => {},
+  });
+  vi.stubGlobal("document", {
+    createElement: () => ({
+      href: "",
+      download: "",
+      click: () => {},
+      remove: () => {},
+    }),
+    body: { append: () => {} },
+  });
+  exportInsights(
+    {
+      version: '=CMD|"/C calc"!A0',
+      generated_at: "2026-10-18T00:00:00Z",
+      as_of: "2026-10-18T00:00:00Z",
+      status: "ok",
+      nature: "model_derived",
+      point: { lat: -33.8688, lon: 151.2093 },
+      forecast_start: "2026-10-18T01:00:00Z",
+      forecast_end: "2026-10-21T00:00:00Z",
+      current: {
+        dewpoint_c: -2.5,
+        vpd_kpa: 0.8,
+        input_time: "2026-10-18T00:00:00Z",
+      },
+      thermal_parameters: { base_c: 10, cap_c: 30, method: "endpoint" },
+      series: {
+        time: ["2026-10-18T00:00:00Z"],
+        temperature_c: [-4.2],
+      },
+      units: { temperature_c: "°C" },
+      windows: [],
+      wind_rose: {
+        bins: [],
+        calm_hours: 0,
+        missing_hours: 0,
+        expected_hours: 24,
+        meaning: "",
+      },
+      correlations: [],
+      novelty: {
+        status: "insufficient_history",
+        method: "",
+        training_samples: 0,
+        minimum_samples: 72,
+        limitations: [],
+      },
+      trends: {},
+      quality: {
+        history_hours: 1,
+        weather_usable: true,
+        air_usable: true,
+        forecast_coverage: {},
+        normalization: {},
+      },
+      provenance: {},
+      limitations: [],
+    },
+    "csv",
+    { name: "Sydney", country: "Australia", countryCode: "AU", lat: -33.8688, lon: 151.2093 },
+  );
+  const text = await captured!.text();
+  expect(text).toContain("'=CMD");
+  expect(text).toContain('"-33.8688"');
+  expect(text).toContain('"-4.2"');
+});
+

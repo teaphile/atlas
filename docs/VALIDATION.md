@@ -8,10 +8,10 @@ Recorded **10 October 2026**. This is executed evidence plus explicit boundaries
 
 | Gate | Result | Evidence in Git tag `v2.0.0` (relative to `docs/`) |
 |---|---|---|
-| Python offline regression | **225 passed**, one known non-failing Starlette TestClient warning | `v2/backend-tests.txt` / XML |
-| Frontend regression | **78 passed** across API, UTC/export utilities, workspace/geometry and asynchronous hooks | `v2/frontend-tests.json` |
-| Actual setup/build | Linux setup script, dependency install and `npm run build` executed | `v2/local-setup-verification.txt` |
-| Static checks | Ruff F/E9, Python compile, strict TypeScript, shell syntax | `v2/final-checks.txt` |
+| Python offline regression | **226 passed**, zero warnings | `v2/backend-tests.txt` / XML |
+| Frontend regression | **79 passed** across API, UTC/export utilities, workspace/geometry and asynchronous hooks | `v2/frontend-tests.json` |
+| Actual setup/build | Linux setup script, dependency install and `npm run build` executed on Python 3.11 & 3.13 / Node 22 & 24 | `v2/local-setup-verification.txt` |
+| Static checks | Full Ruff (`ruff check backend scripts`), Python compile, strict TypeScript, shell syntax | `v2/final-checks.txt` |
 | Frontend production build | Split shell, map and analytics; bundled worker/fonts | `v2/frontend-build.txt` |
 | Python production advisory audit | No known vulnerabilities reported | `v2/python-production-audit.json` |
 | npm production advisory audit | Zero reported production advisories | `v2/npm-production-audit.json` |
@@ -23,7 +23,7 @@ Recorded **10 October 2026**. This is executed evidence plus explicit boundaries
 | Automated accessibility | **8 Chromium states, zero reported violations** for the selected WCAG A/AA tags | same artifact, `accessibility` |
 | Live scientific input | Actual weather/AQI, 288 hourly rows each, full 72-hour coverage and usable novelty baseline at the sampled point | `v2/live-analytic-probe.json`, `v2/live-api-smoke.json` |
 
-Total offline tests: **303**. Total browser flow checks: **36**. Counts are steps/test cases, not a line-coverage percentage or proof of all states.
+Total offline tests: **305**. Total browser flow checks: **36**. Counts are steps/test cases, not a line-coverage percentage or proof of all states.
 
 ## Browser matrix and visual review
 

@@ -1,9 +1,10 @@
 import asyncio
 import time
+
 import httpx
 import pytest
-from atlas_app.transport import HttpGateway, UpstreamError
 from atlas_app.config import Settings
+from atlas_app.transport import HttpGateway, UpstreamError
 
 
 def gateway(handler):

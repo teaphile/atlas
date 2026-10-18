@@ -1,5 +1,6 @@
 import asyncio
 from datetime import timedelta
+
 import pytest
 from atlas_app.config import Settings
 from atlas_app.engine import Engine, EventBus

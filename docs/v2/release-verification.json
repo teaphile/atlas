@@ -1,7 +1,7 @@
 {
   "release": "2.0.0",
-  "backend_tests": 225,
-  "frontend_tests": 78,
+  "backend_tests": 226,
+  "frontend_tests": 79,
   "browser_flow_checks": 36,
   "viewport_samples": 72,
   "automated_a11y_states": 8,

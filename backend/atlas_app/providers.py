@@ -1,11 +1,14 @@
 from __future__ import annotations
+
+import hashlib
+import re
 from datetime import timedelta
-import hashlib, re
+
 from . import parsers as P
-from .schemas import Payload, utcnow
-from .transport import HttpGateway, UpstreamError
 from .config import Settings
 from .model_data import normalize_model
+from .schemas import Payload, utcnow
+from .transport import HttpGateway, UpstreamError
 
 
 class Providers:

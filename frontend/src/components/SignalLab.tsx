@@ -9,7 +9,7 @@ import {
 import type { Place } from "../types";
 import type { InsightReport } from "../insightTypes";
 import { api, isAbort } from "../api";
-import { dateLabel, download, num } from "../utils";
+import { dateLabel, download, num, utcMillis } from "../utils";
 import { convert, unitFor } from "../workspace";
 import { usePreferences } from "./Preferences";
 import { TimeChart, WindRose, CorrelationMatrix } from "./Charts";
@@ -44,8 +44,11 @@ export function exportInsights(
     return;
   }
   const keys = Object.keys(report.units);
-  const quote = (v: unknown) =>
-    '"' + String(v ?? "").replaceAll('"', '""') + '"';
+  const quote = (v: unknown) => {
+    let s = String(v ?? "");
+    if (typeof v === "string" && /^[\s]*[=+@\-\t\r]/.test(s)) s = "'" + s;
+    return '"' + s.replaceAll('"', '""') + '"';
+  };
   const meta = [
     report.version,
     report.nature,
@@ -137,10 +140,9 @@ export const SignalLab = memo(function SignalLab({ place }: { place: Place }) {
               (i) =>
                 scope === "all" ||
                 (scope === "baseline"
-                  ? Date.parse(report.series.time[i]) <=
-                    Date.parse(report.as_of)
-                  : Date.parse(report.series.time[i]) >
-                    Date.parse(report.forecast_start)),
+                  ? utcMillis(report.series.time[i]) <= utcMillis(report.as_of)
+                  : utcMillis(report.series.time[i]) >
+                    utcMillis(report.forecast_start)),
             )
         : [],
     [report, scope],

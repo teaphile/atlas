@@ -4,12 +4,12 @@ Authenticate with `gh auth login` locally first. No publication occurs before
 an explicit PUBLISH confirmation. This script itself was not used to push this
 handover: no authenticated destination was available in the build workspace.
 """
-from pathlib import Path
 import argparse
 import re
 import shutil
 import subprocess
 import sys
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 BLOCKED = {'.runtime', '.venv', 'node_modules', '__pycache__', '.ssh', '.aws', '.kube'}

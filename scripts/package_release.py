@@ -1,10 +1,10 @@
 """Build a clean distributable, including the compiled frontend but no secrets/cache/dependencies.
 Run from any directory after building: python scripts/package_release.py
 """
-from pathlib import Path
 import hashlib
 import json
 import zipfile
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DEST = ROOT.parent / "ATLAS-2.0-project.zip"

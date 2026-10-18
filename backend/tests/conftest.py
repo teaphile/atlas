@@ -1,8 +1,9 @@
 """Hand-authored offline fixtures. Never loaded into the live application."""
 
 import asyncio
+
 import pytest
-from atlas_app.schemas import Event, Point, Payload, utcnow
+from atlas_app.schemas import Event, Payload, Point, utcnow
 from atlas_app.transport import UpstreamError
 
 

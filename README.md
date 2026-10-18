@@ -20,7 +20,7 @@ Existing features remain: vector map/3D globe, NASA imagery, soil predictions/qu
 
 ## Run on your own system
 
-**Recommended: Python 3.13 + Node 24 LTS.**
+**Supported: Python 3.11–3.13 + Node 20–24 LTS (tested on Python 3.11.2 / 3.13.16 and Node 22.22.3 / 24.21.0).**
 
 ```sh
 cd atlas
@@ -48,18 +48,19 @@ python3.13 -m venv .venv
 
 Full platform instructions, developer workflow, Docker alternative and troubleshooting: **[Local run guide](docs/LOCAL_RUN.md)**. Scripts bind to loopback by default. Fresh data/maps need internet access; this is not a fully offline archive.
 
-## Release verification (recorded 10 October 2026)
+## Release verification (recorded 10 October 2026; updated 18 October 2026)
 
 | Gate | Recorded v2 result |
 |---|---|
-| Offline tests | **225 backend + 78 frontend = 303 passed** |
+| Offline tests | **226 backend + 79 frontend = 305 passed** (zero warnings) |
 | Browser flows | **36 passed**: 13 v2, 13 retained-feature, 7 private-access and 3 controlled failure/recovery checks |
 | Responsive matrix | **72 viewport/view/browser samples**: 12 sizes × 2 views × Chromium, Firefox and WebKit |
 | Viewports | 320–2560 CSS px wide, portrait/tablet/desktop and short landscape |
 | Automated accessibility | **Zero axe violations** in 8 sampled Chromium page states; not a WCAG certification |
 | Map engines | Real map rendering in all 3 tested engines; Firefox used a headed virtual display for software WebGL |
 | Real model probe | 288 hourly rows/provider; complete 72-hour windows and a usable short baseline at the tested point |
-| Linux setup/build | Actual setup script and production build executed; Python 3.13.16 / Node 24.21.0 |
+| Linux setup/build | Actual setup script and production build executed on Python 3.11.2 / 3.13.16 and Node 22.22.3 / 24.21.0 |
+| Static & lint checks | Full Ruff suite (`ruff check backend scripts`), strict TypeScript (`tsc -b`), `pip check` |
 | Production dependency audits | No known vulnerabilities reported at check time; not a security guarantee |
 
 See **[Validation](docs/VALIDATION.md)** for the retained summary, reproduction commands and exclusions. Bulky historical artifacts remain available in Git tag `v2.0.0`, not in this lean working tree. Browser viewport emulation is not physical-device/GPU testing. Native Windows/macOS execution, Docker execution, production load/soak testing and scientific forecast-skill calibration are not claimed.

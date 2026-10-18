@@ -1,12 +1,14 @@
 from __future__ import annotations
-from datetime import datetime, timezone
+
+from datetime import UTC, datetime
 from enum import StrEnum
 from typing import Any, Literal
+
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 
 def utcnow() -> datetime:
-    return datetime.now(timezone.utc)
+    return datetime.now(UTC)
 
 
 class Kind(StrEnum):
@@ -33,7 +35,7 @@ class ScientificInput(BaseModel):
     @classmethod
     def reject_booleans(cls, value):
         if isinstance(value, bool):
-            raise ValueError("Boolean is not a numeric scientific input")
+            raise ValueError("Boolean is not a numeric scientific input")  # noqa: TRY004
         return value
 
 
@@ -78,7 +80,7 @@ class Event(BaseModel):
     @field_validator("occurred_at", "updated_at", "expires_at")
     @classmethod
     def utc_date(cls, v):
-        return v.replace(tzinfo=timezone.utc) if v and v.tzinfo is None else v
+        return v.replace(tzinfo=UTC) if v and v.tzinfo is None else v
 
 
 class Payload(BaseModel):
