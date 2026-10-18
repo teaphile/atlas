@@ -4,7 +4,7 @@
 
 A complete **local-first Python + React application** combining environmental analysis and multi-source mapping. Inspired by a deep, read-only review of TerraWatch and OSIRIS; an original integration, not an official port or endorsement. Neither upstream repository, dataset nor model collection was cloned.
 
-![ATLAS 2 Signal Lab — actual browser, real modeled data](docs/v2/screenshots/chromium-signals-1440x960.png)
+> **Lean deployment edition:** generated screenshots, raw test logs, sample API dumps and duplicate printable handovers have been removed. Application source, build assets, dependency locks, tests, licences and operating/method guides are retained. See [cleanup and deployment notes](docs/LEAN_DEPLOYMENT.md).
 
 ## What is new in 2.0
 
@@ -48,7 +48,7 @@ python3.13 -m venv .venv
 
 Full platform instructions, developer workflow, Docker alternative and troubleshooting: **[Local run guide](docs/LOCAL_RUN.md)**. Scripts bind to loopback by default. Fresh data/maps need internet access; this is not a fully offline archive.
 
-## Evidence, not adjectives
+## Release verification (recorded 10 October 2026)
 
 | Gate | Recorded v2 result |
 |---|---|
@@ -62,7 +62,7 @@ Full platform instructions, developer workflow, Docker alternative and troublesh
 | Linux setup/build | Actual setup script and production build executed; Python 3.13.16 / Node 24.21.0 |
 | Production dependency audits | No known vulnerabilities reported at check time; not a security guarantee |
 
-See **[Validation](docs/VALIDATION.md)** for artifacts, versions and exclusions. Browser viewport emulation is not physical-device/GPU testing. Native Windows/macOS execution, Docker execution, production load/soak testing and scientific forecast-skill calibration are not claimed.
+See **[Validation](docs/VALIDATION.md)** for the retained summary, reproduction commands and exclusions. Bulky historical artifacts remain available in Git tag `v2.0.0`, not in this lean working tree. Browser viewport emulation is not physical-device/GPU testing. Native Windows/macOS execution, Docker execution, production load/soak testing and scientific forecast-skill calibration are not claimed.
 
 ## Sources and account requirements
 
@@ -91,7 +91,7 @@ Every new method has an explicit contract, formula, coverage rule, test scope an
 - React/TypeScript + MapLibre + local fonts; same-origin requests, worker bundling, accessible data tables and portable allowlisted workspace settings.
 - Optional header-only private deployment access; key stays in page memory and out of local storage/workspace exports. One application worker until shared collector/quota state is implemented.
 
-![ATLAS map overview — actual provider records](docs/v2/screenshots/chromium-overview-1440x960.png)
+![ATLAS 2 system architecture](docs/v2/architecture.svg)
 
 ## GitHub publication
 

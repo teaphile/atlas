@@ -3,7 +3,7 @@ import { chromium, expect } from "@playwright/test";
 import fs from "node:fs/promises";
 import path from "node:path";
 const base = process.env.ATLAS_PREVIEW_URL || "http://127.0.0.1:7860";
-const directory = path.resolve("../docs/v2/legacy-regression");
+const directory = path.resolve("../.artifacts/browser/legacy-regression");
 await fs.mkdir(directory, { recursive: true });
 const browser = await chromium.launch({
   headless: true,
@@ -196,7 +196,7 @@ try {
   process.exitCode = 1;
 } finally {
   await fs.writeFile(
-    "../docs/v2/legacy-browser-verification.json",
+    "../.artifacts/browser/legacy-browser-verification.json",
     JSON.stringify(
       {
         checked_at: new Date().toISOString(),

@@ -7,7 +7,7 @@ ATLAS is an original integration, not an official release, endorsement, or liter
 - **TerraWatch AI**, MIT, copyright 2026 TerraWatch AI. Reviewed revision `1f91f9eb521659051ee39fce6a5067ac8b9aec05`: https://huggingface.co/spaces/teaphile/terrawatch
 - **OSIRIS**, MIT, copyright 2026 simplifaisoul. Reviewed revision `83b8cd1be24d0d6134c0c1f775625330fcb87996`: https://github.com/simplifaisoul/osiris
 
-No repository was cloned. Neither upstream source tree, dataset, generated camera catalog, model weights nor git history is in this distribution. `docs/audit-manifest.json` contains review metadata and hashes, not source bodies.
+No repository was cloned. Neither upstream source tree, dataset, generated camera catalog, model weights nor git history is in this distribution. The original `docs/audit-manifest.json` contains review metadata and hashes, not source bodies; it is retained in Git tag `v2.0.0` rather than duplicated in the lean deployment tree.
 
 ## Bundled geographic/design assets
 

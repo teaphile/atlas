@@ -16,7 +16,7 @@ The most valuable improvement is not “more decimals” or an artificial intell
 | OSIRIS | `83b8cd1be24d0d6134c0c1f775625330fcb87996` | 1,088 | 443 | 87,405 |
 | Total | — | 1,208 | **552** | **102,621** |
 
-- Full path/digest/line-count/indicator inventory: `audit-manifest.json`. Zero read errors were recorded for the selected files.
+- Full path/digest/line-count/indicator inventory: `audit-manifest.json` (archived at `v2.0.0:docs/audit-manifest.json` in Git; omitted from the lean deployment tree). Zero read errors were recorded for the selected files.
 - `scripts/read_only_review.py` performs bounded HTTP reads into memory, extracts source identifiers/domains/indicators and saves metadata, not upstream file bodies.
 - The breadth pass is programmatic triage, **not a claim that every line was manually verified**. Focused review examined consequential authentication, API, cache, normalization and scientific paths.
 - Vendor dependencies, binary/model artifacts, public asset collections, generated camera catalogs, static datasets and lockfiles were excluded. No datasets or trained weights from either project were cloned.

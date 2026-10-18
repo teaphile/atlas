@@ -6,7 +6,7 @@
 
 There are **23 implemented adapters**: 22 have keyless request paths; one optional NASA FIRMS Area adapter needs a server-side MAP_KEY. These are adapters, not 23 independent sensor networks. Ten collectors start automatically; location, mobility and contextual services are loaded on demand.
 
-Across the recorded live checks, 21 keyless adapters returned usable responses. GDELT returned an unavailable state (schema/timeout behavior), and keyed FIRMS Area was intentionally disabled because no credential was supplied. This is not a claim that all 23 are always live or that all observations are current. See `live-verification.json`, `browser-verification.json` and `VALIDATION.md`.
+Across the recorded live checks, 21 keyless adapters returned usable responses. GDELT returned an unavailable state (schema/timeout behavior), and keyed FIRMS Area was intentionally disabled because no credential was supplied. This is not a claim that all 23 are always live or that all observations are current. See `VALIDATION.md`; raw historical logs are archived in Git tag `v2.0.0`.
 
 ### Implemented inventory
 

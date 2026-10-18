@@ -1,6 +1,7 @@
 // A dedicated test deployment uses this NON-SECRET sentinel. Never use it for production.
 import { chromium, expect } from "@playwright/test";
 import fs from "node:fs/promises";
+await fs.mkdir("../.artifacts/browser", {recursive:true});
 const base = process.env.ATLAS_PRIVATE_TEST_URL || "http://127.0.0.1:7861";
 const key =
   process.env.ATLAS_PRIVATE_TEST_KEY ||
@@ -186,7 +187,7 @@ try {
         throw Error("Missing image auth header");
     },
   );
-  await page.screenshot({ path: "../docs/v2/screenshots/private-camera.png" });
+  await page.screenshot({ path: "../.artifacts/browser/screenshots/private-camera.png" });
   if (errors.length) throw Error(JSON.stringify(errors));
 } catch (e) {
   checks.push({
@@ -196,10 +197,10 @@ try {
   });
   console.error(e);
   process.exitCode = 1;
-  await page.screenshot({ path: "../docs/v2/private-failure.png" });
+  await page.screenshot({ path: "../.artifacts/browser/private-failure.png" });
 } finally {
   await fs.writeFile(
-    "../docs/v2/private-browser-verification.json",
+    "../.artifacts/browser/private-browser-verification.json",
     JSON.stringify(
       {
         checked_at: new Date().toISOString(),

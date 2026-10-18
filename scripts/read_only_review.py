@@ -147,7 +147,9 @@ def scan():
             sum(x.get("lines", 0) for x in rows),
             flush=True,
         )
-    (ROOT / "docs" / "audit-manifest-rerun.json").write_text(json.dumps(result, indent=2))
+    artifacts = ROOT / ".artifacts" / "audit"
+    artifacts.mkdir(parents=True, exist_ok=True)
+    (artifacts / "audit-manifest-rerun.json").write_text(json.dumps(result, indent=2))
     for r in result:
         errors = [x for x in r["files"] if x["status"] == "error"]
         print(r["repository"], "ERRORS", errors, flush=True)

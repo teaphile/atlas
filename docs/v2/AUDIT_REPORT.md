@@ -2,7 +2,7 @@
 
 ## Scope and honesty
 
-This review targets **the original ATLAS integration**, not a clone of TerraWatch or OSIRIS. The existing read-only upstream audit remains pinned and unchanged. The v2 baseline indexed 47 first-party source/test/script files and 16,838 lines (`baseline-inventory.json`); local baseline commit `e039206` enables a concrete diff. Inventory, focused module review, static checks, invariant tests and real browser/API exercises are not a formal proof of every line.
+This review targets **the original ATLAS integration**, not a clone of TerraWatch or OSIRIS. The existing read-only upstream audit remains pinned and unchanged. The v2 baseline indexed 47 first-party source/test/script files and 16,838 lines (the `baseline-inventory.json` archived in Git tag `v2.0.0`); local baseline commit `e039206` enables a concrete diff. Inventory, focused module review, static checks, invariant tests and real browser/API exercises are not a formal proof of every line.
 
 ## Significant findings and implemented corrections
 
@@ -49,7 +49,7 @@ No earthquake-energy proxy, calibrated hazard probability, farm prescription, in
 
 ## Verification record
 
-The final quantitative evidence lives in `VALIDATION.md`, `browser-verification-v2.json`, `private-browser-verification.json`, unit-test logs and the release manifest. Intermediate diagnostics are not passing evidence. The final browser matrix uses real provider data, not fabricated telemetry. Firefox's software WebGL path was tested with a headed virtual display; its headless environment also showed the intended WebGL-unavailable fallback.
+The compact result summary remains in `release-verification.json` and `../VALIDATION.md`. Raw browser/unit logs and screenshots are archived in Git tag `v2.0.0`; they were removed from this lean working tree because no deployment reads them. The release manifest describes the current packaged files. Intermediate diagnostics are not passing evidence. The final browser matrix uses real provider data, not fabricated telemetry. Firefox's software WebGL path was tested with a headed virtual display; its headless environment also showed the intended WebGL-unavailable fallback.
 
 ## Publication status
 

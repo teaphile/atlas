@@ -1,3 +1,0 @@
-All checks passed!
-No broken requirements found.
-Python compile and shell syntax checks passed.

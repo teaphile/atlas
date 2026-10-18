@@ -3,7 +3,7 @@ import {chromium,firefox,webkit,expect} from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import fs from 'node:fs/promises';
 const base=process.env.ATLAS_PREVIEW_URL||'http://127.0.0.1:7860';
-const dir='../docs/v2';await fs.mkdir(dir+'/screenshots',{recursive:true});
+const dir='../.artifacts/browser';await fs.mkdir(dir+'/screenshots',{recursive:true});
 const requested=process.env.ATLAS_BROWSERS?.split(',')||['chromium','firefox','webkit'];
 const viewportSizes=[[320,568],[360,800],[390,844],[430,932],[768,1024],[1024,768],[1280,800],[1440,960],[1920,1080],[2560,1440],[844,390],[1024,600]];
 const output={started:new Date().toISOString(),base,browsers:[],checks:[],failures:[],screens:[],accessibility:[]};

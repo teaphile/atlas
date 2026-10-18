@@ -8,7 +8,7 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
 DEST = ROOT.parent / "ATLAS-2.0-project.zip"
-EXCLUDED = {".git", "node_modules", ".venv", ".runtime", "__pycache__", ".pytest_cache", ".ruff_cache", ".cache", ".arena"}
+EXCLUDED = {".git", "node_modules", ".venv", ".runtime", "__pycache__", ".pytest_cache", ".ruff_cache", ".cache", ".arena", ".artifacts", "playwright-report", "test-results"}
 
 def included(path):
     rel = path.relative_to(ROOT)
@@ -26,15 +26,17 @@ def main():
     files = sorted(p for p in ROOT.rglob('*') if included(p))
     manifest = [{'path': str(p.relative_to(ROOT)), 'bytes': p.stat().st_size, 'sha256': hashlib.sha256(p.read_bytes()).hexdigest()} for p in files]
     metadata = ROOT / 'docs/release-file-manifest.json'
-    metadata.write_text(json.dumps({'project':'ATLAS 2.0.0','note':'Source + compiled UI; excludes runtime data, secrets, dependencies and the two reviewed source trees.','files':manifest},indent=2))
-    with zipfile.ZipFile(DEST, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
+    metadata.write_text(json.dumps({'project':'ATLAS 2.0.0','note':'Lean source + compiled UI; excludes runtime data, secrets, dependencies, generated verification artifacts and the two reviewed source trees.','files':manifest},indent=2))
+    temporary = DEST.with_suffix('.zip.tmp')
+    with zipfile.ZipFile(temporary, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
         for p in files + [metadata]:
             archive.write(p, 'atlas/' + str(p.relative_to(ROOT)))
-    with zipfile.ZipFile(DEST) as archive:
+    with zipfile.ZipFile(temporary) as archive:
         assert archive.testzip() is None
         assert 'atlas/backend/atlas_app/main.py' in archive.namelist()
         assert 'atlas/frontend/dist/index.html' in archive.namelist()
         assert 'atlas/.env.example' in archive.namelist()
+    temporary.replace(DEST)
     digest = hashlib.sha256(DEST.read_bytes()).hexdigest()
     DEST.with_suffix('.zip.sha256').write_text(f'{digest}  {DEST.name}\n')
     print(f'{DEST}: {len(files)+1} files, {DEST.stat().st_size:,} bytes, SHA256 {digest}')

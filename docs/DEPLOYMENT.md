@@ -136,4 +136,4 @@ Use a separate temporary test server on 7861 with `ATLAS_COLLECT=false`, `ATLAS_
 
 ## Rebuild the portable documentation
 
-Optional documentation-only dependencies: `python -m pip install --require-hashes -r docs/requirements.txt`. Then run `python scripts/create_handover.py`. This creates the self-contained HTML guide; it is not a runtime dependency of the application. `python scripts/package_release.py` produces the clean project archive after the frontend is built.
+`python scripts/package_release.py` produces the lean project archive after the frontend is built. Generated verification output under `.artifacts/` is excluded. The optional printable-handover generator and its image/report dependencies have been removed from the deployment tree; their original versions remain in Git tag `v2.0.0`. See [lean deployment notes](LEAN_DEPLOYMENT.md).

@@ -1,6 +1,7 @@
 // Controlled HTTP error injection only; recovered data comes from real providers.
 import {chromium,expect} from '@playwright/test';
 import fs from 'node:fs/promises';
+await fs.mkdir("../.artifacts/browser", {recursive:true});
 const browser=await chromium.launch({args:['--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader','--disable-dev-shm-usage']});
 const results=[];
 try{
@@ -20,4 +21,4 @@ try{
  results.push({name:'Display-unit switch does not convert canonical scientific exports',status:'passed'});
  expect(errors).toEqual([]);await context.close();
 }catch(e){results.push({name:'Fault/recovery suite',status:'failed',error:String(e)});process.exitCode=1;}
-finally{await browser.close();await fs.writeFile('../docs/v2/fault-browser-verification.json',JSON.stringify({checked_at:new Date().toISOString(),note:'One deliberate 503 injected; no synthetic weather/incident data.',checks:results},null,2));console.log(JSON.stringify(results,null,2));}
+finally{await browser.close();await fs.writeFile('../.artifacts/browser/fault-browser-verification.json',JSON.stringify({checked_at:new Date().toISOString(),note:'One deliberate 503 injected; no synthetic weather/incident data.',checks:results},null,2));console.log(JSON.stringify(results,null,2));}

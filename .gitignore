@@ -13,3 +13,8 @@ __pycache__/
 *.sqlite*
 *.zip
 .DS_Store
+
+# Regenerable verification output, not application inputs
+.artifacts/
+playwright-report/
+test-results/

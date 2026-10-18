@@ -11,4 +11,11 @@
 **/.ruff_cache
 **/*.tsbuildinfo
 *.zip
-docs/previews
+
+# No production COPY step consumes documentation or generated evidence.
+docs
+.artifacts
+.cache
+**/playwright-report
+**/test-results
+*.bundle

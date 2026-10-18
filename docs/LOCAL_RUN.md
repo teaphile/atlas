@@ -129,3 +129,8 @@ The v2 suite also works without Xvfb, but Linux headless Firefox may exercise th
 - **Data not current:** inspect both fetched and model/event times. “Fresh cache” is not a guarantee that a provider observation is recent.
 - **Different model grid:** normal and disclosed. A selected point and a model grid cell are not identical measurements.
 - **Updated installation:** rebuild the UI and restart the server. Weather/AQI v2 cache keys avoid reusing v1's shorter model windows. Browser workspace preferences are separately versioned.
+
+
+## Lean deployment packaging
+
+Generated browser reports now go to `.artifacts/browser/` in the project root, which is ignored by Git, Docker context and release packaging. The scripts create this directory when needed. Source/tests, public map/font/licence assets and the built release UI remain intact. Historical screenshots/logs can be recovered from Git tag `v2.0.0`. See [lean deployment notes](LEAN_DEPLOYMENT.md).

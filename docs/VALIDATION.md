@@ -2,9 +2,11 @@
 
 Recorded **10 October 2026**. This is executed evidence plus explicit boundaries, not a production/scientific/security certificate.
 
-## Current v2 gates
+**Lean cleanup, 18 October 2026:** bulky generated logs and screenshots are no longer duplicated in the working tree/release ZIP. The compact [release summary](v2/release-verification.json) remains. Evidence paths in the table below refer to the preserved Git tag `v2.0.0`, not current files. For example: `git show v2.0.0:docs/v2/browser-verification-v2.json`. A standalone ZIP intentionally has no Git history; retain the local repository if historical evidence is needed.
 
-| Gate | Result | Evidence |
+## Recorded v2 gates (archived evidence)
+
+| Gate | Result | Evidence in Git tag `v2.0.0` (relative to `docs/`) |
 |---|---|---|
 | Python offline regression | **225 passed**, one known non-failing Starlette TestClient warning | `v2/backend-tests.txt` / XML |
 | Frontend regression | **78 passed** across API, UTC/export utilities, workspace/geometry and asynchronous hooks | `v2/frontend-tests.json` |
@@ -37,7 +39,7 @@ Each engine sampled **Overview and Signal Lab** at:
 
 The suite checks outer and content widths plus actual map-canvas/host height agreement. Screenshots of desktop and phone Overview/Signal Lab, comparison and retained features were read and visually inspected. Some data tables intentionally scroll within their bounded region.
 
-The eight automated accessibility states are desktop Overview, Signal Lab, comparison, record explorer, source registry, settings, and phone Overview/Signal Lab. Incomplete axe checks are retained in the artifact. Automated zero-violation samples **do not establish full WCAG conformance**, screen-reader usability, high-zoom behavior, every content combination or physical-device compatibility.
+The eight automated accessibility states are desktop Overview, Signal Lab, comparison, record explorer, source registry, settings, and phone Overview/Signal Lab. Incomplete axe checks are retained in the archived artifact. Automated zero-violation samples **do not establish full WCAG conformance**, screen-reader usability, high-zoom behavior, every content combination or physical-device compatibility.
 
 ## Exercised functionality
 
@@ -80,4 +82,24 @@ GitHub publication itself remains blocked by unavailable authenticated connectiv
 - Penetration test, formal accessibility audit, statistical skill benchmark, calibrated hazard probability or agronomic validation.
 - Optional FIRMS Area access with a real credential; continuous provider uptime/commercial rights.
 
-A provider may be unavailable, slow, schema-changed or genuinely empty. Soil no-data is never replaced with a neighboring point. Earlier v1 logs under `docs/` are historical baseline evidence; this file and `docs/v2/` define the current release assessment.
+A provider may be unavailable, slow, schema-changed or genuinely empty. Soil no-data is never replaced with a neighboring point. Earlier v1/v2 raw logs are preserved in Git history rather than shipped in the lean tree. This document and `v2/release-verification.json` retain the release assessment.
+
+
+## Reproduce verification
+
+After installing the development dependencies using the local-run guide:
+
+```sh
+./scripts/check.sh
+# Start ./scripts/run.sh in another terminal before browser checks.
+cd frontend
+npx playwright install chromium firefox webkit
+# Linux: the full matrix includes headed Firefox and needs Xvfb/system libraries.
+xvfb-run -a node scripts/verify-v2.mjs
+node scripts/verify-browser.mjs
+node scripts/verify-faults-v2.mjs
+```
+
+Browser reports/screenshots are regenerated under `.artifacts/browser/`, ignored by Git, Docker context and release packaging. `verify-private.mjs` requires a **separate test deployment** using its non-secret sentinel, never a production key. Provider/browser versions and live inputs may differ on a later rerun.
+
+For checks actually repeated during the lean cleanup (rather than the historical full release matrix), see [cleanup verification](LEAN_DEPLOYMENT.md).
